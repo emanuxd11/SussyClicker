@@ -1,0 +1,7 @@
+{
+  "helpers": [
+    { "name": "Grandma", "cookiesPerSecond": 10, "cost": 50 },
+    { "name": "Factory", "cookiesPerSecond": 50, "cost": 250 },
+    { "name": "Mine", "cookiesPerSecond": 100, "cost": 1000 }
+  ]
+}

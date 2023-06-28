@@ -1,0 +1,21 @@
+body {
+  text-align: center;
+}
+  
+h1 {
+  color: #333;
+}
+
+#sussyButton {
+  background-color: transparent;
+  border: none;
+}
+
+#sussyButton img {
+  width: 200px;
+}
+
+#score {
+  font-size: 18px;
+}
+  
