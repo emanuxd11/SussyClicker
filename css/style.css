@@ -20,10 +20,11 @@ h1 {
 }
 
 #helper-list {
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
   height: 100%;
   text-align: center;
+  padding: 0px;
 }
 
 #helper-list img {
@@ -39,7 +40,7 @@ h1 {
 
 #helper-list li button {
   width: 120px;
-  height: 140px;
+  height: 170px;
 }
 
 #helpers {
