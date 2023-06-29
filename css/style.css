@@ -18,4 +18,35 @@ h1 {
 #score {
   font-size: 18px;
 }
+
+#helper-list {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  text-align: center;
+}
+
+#helper-list img {
+  width: 100px;
+  height: 50px;
+}
+
+#helper-list li {
+  display: inline-block;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+#helper-list li button {
+  width: 120px;
+  height: 140px;
+}
+
+#helpers {
+  width: 40%;
+  max-height: 400px;
+  margin: auto;
+  border: 3px solid green;
+  padding: 10px;
+}
   

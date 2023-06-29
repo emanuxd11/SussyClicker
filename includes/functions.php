@@ -31,18 +31,24 @@ function displayHelper($helper) {
   $name = $helper['name'];
   $cps = $helper['cps'];
   $cost = $helper['cost'];
-  $img_ref = preg_replace('/\s+/', '', $helper['name']) . ".png";
+  $img_ref = 'images/helpers/' . preg_replace('/\s+/', '', $helper['name']) . '.png';
 
-  // add condition to only show cost and submit to buy.php if bought === false
+  if (!file_exists($img_ref)) {
+    $img_ref = 'images/helpers/' . preg_replace('/\s+/', '', $helper['name']) . '.gif';
+  }
 
-  echo '<button id="' . $name . '">';
-  echo '<img src="../images/' . $img_ref . '" alt="' . $name . '">';
+  echo '<li>';
+  echo '<button id="' . $name . '"  onclick="buy_helper(\'' . $name . '\')">';
+  echo '<img src="' . $img_ref . '" alt="' . $name . '">';
   echo '<p>' . $name . ", " . $cps . " cps" . '</p>';
+  echo '<p>' . $cost . " sussies" . '</p>';
   echo '</button>';
+  echo '<li>';  
 
   if (!$helper['bought']) {
-    // testing
-    echo 'not bought'; 
+    return true;
+  } else {
+    return false;
   }
 }
 

@@ -1,5 +1,26 @@
 [
-  { "name": "Sussy Baka", "description": "something super susssyuyu", "cps": 10, "cost": 50, "bought": false},
-  { "name": "PewDiePie", "description": "what a fucking- (dies)", "cps": 50, "cost": 250, "bought": false },
-  { "name": "John Cena", "description": "good morning, China, now I have ice cream... oh what's that? you can't see me? MY TIME IS NOW", "cps": 100, "cost": 1000, "bought": false }
+    {
+        "name": "Sussy Baka",
+        "description": "something super susssyuyu",
+        "cps": 0.1,
+        "cost": 15,
+        "bought": false,
+        "quantity": 0
+    },
+    {
+        "name": "PewDiePie",
+        "description": "what a fucking- (dies)",
+        "cps": 1,
+        "cost": 100,
+        "bought": false,
+        "quantity": 0
+    },
+    {
+        "name": "John Cena",
+        "description": "good morning, China, now I have ice cream... oh what's that? you can't see me? MY TIME IS NOW",
+        "cps": 8,
+        "cost": 1100,
+        "bought": false,
+        "quantity": 0
+    }
 ]
