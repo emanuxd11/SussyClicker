@@ -6,12 +6,12 @@ h1 {
   color: #333;
 }
 
-#sussyButton {
+#sussy_button {
   background-color: transparent;
   border: none;
 }
 
-#sussyButton img {
+#sussy_button img {
   width: 200px;
 }
 
@@ -19,7 +19,7 @@ h1 {
   font-size: 18px;
 }
 
-#helper-list {
+#helper_list {
   /* overflow-x: hidden;
   overflow-y: auto; */
   height: 100%;
@@ -27,25 +27,25 @@ h1 {
   padding: 0px;
 }
 
-#helper-list img {
+#helper_list img {
   width: 100px;
   height: 50px;
 }
 
-#helper-list li {
+#helper_list li {
   display: inline-block;
   margin-left: 1px;
   margin-right: 1px;
 }
 
-#helper-list li button {
-  width: 120px;
-  height: 170px;
+#helper_list li button {
+  /* width: 120px;
+  height: 230px; */
 }
 
 #helpers {
   width: 40%;
-  max-height: 400px;
+  max-height: auto;
   margin: auto;
   border: 3px solid green;
   padding: 10px;
