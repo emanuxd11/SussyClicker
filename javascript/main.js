@@ -1,7 +1,6 @@
 // sometimes useful to reset the game while testing
 // localStorage.clear();
 
-
 /*
  * Set initial game parameters
  */
@@ -48,7 +47,9 @@ function getHelpers() {
   return JSON.parse(localStorage.getItem("helpers")) || [
     {
       name: "Sussy Baka",
+      base_cost: 15,
       cost: 15,
+      base_sps: 0.1,
       sps: 0.1,
       description: "epic sussy baka super susuyssysysysy",
       icon: "images/helpers/SussyBaka.png",
@@ -56,7 +57,9 @@ function getHelpers() {
     },
     {
       name: "PewDiePie",
+      base_cost: 100,
       cost: 100,
+      base_sps: 1,
       sps: 1,
       description: "what a fucking- (dies)",
       icon: "images/helpers/PewDiePie.gif",
@@ -64,8 +67,10 @@ function getHelpers() {
     },
     {
       name: "John Cena",
-      cost: 1000,
-      sps: 100,
+      base_cost: 1100,
+      cost: 1100,
+      base_sps: 8,
+      sps: 8,
       description: "greetings, china. I have ice cream... YOU CAN'T SEE ME, MY TIME IS NOW111!!!",
       icon: "images/helpers/JohnCena.png",
       quantity: 0
@@ -112,7 +117,9 @@ function generateHelperList() {
 
   helper_list.innerHTML = "";
 
-  for (const helper of helpers) {
+  for (let i = 0; i < helpers.length; i++) {
+    const helper = helpers[i];
+
     const list_item = document.createElement("li");
     
     list_item.innerHTML = `
@@ -120,7 +127,7 @@ function generateHelperList() {
         <img src="${helper.icon}" alt="${helper.name}">
         <p>${helper.name}</p>
         <p>Offers: ${helper.sps} sus/s</p>
-        <p>Cost: ${helper.cost} sussies</p>
+        <p>Cost: ${Math.ceil(helper.cost)} sussies</p>
         <p>Owned: ${helper.quantity}</p>
       </button>`;
 
@@ -134,7 +141,7 @@ function generateHelperList() {
     });
 
     // add the mystery one in case the next isn't owned
-    if (helper.quantity === 0) {
+    if (helper.quantity === 0 && i < helpers.length - 1) {
       const list_item = document.createElement("li");
       list_item.innerHTML = `
         <button id="mistery_helper">
@@ -168,6 +175,10 @@ function updateSingleSPS(helper) {
   displaySPS();
 }
 
+function increaseHelperCost(helper) {
+  helper.cost *= 1.15
+}
+
 function buyHelper(helper) {
   if (score >= helper.cost) {
     score -= helper.cost;
@@ -175,6 +186,8 @@ function buyHelper(helper) {
 
     displayScore();
     updateSingleSPS(helper);
+    increaseHelperCost(helper);
+
     generateHelperList();
   }
 }
