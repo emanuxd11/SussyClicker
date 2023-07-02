@@ -142,6 +142,7 @@ function generateHelperList() {
           <p>Unknown</p>
           <p>Offers: ? sus/s</p>
           <p>Cost: ?</p>
+          <p></p>
         </button>`;
 
       helper_list.appendChild(list_item);
