@@ -1,5 +1,5 @@
 // sometimes useful to reset the game while testing
-// localStorage.clear();
+// localStorage.clear()
 
 /*
  * Set initial game parameters
@@ -53,7 +53,9 @@ function getHelpers() {
       sps: 0.1,
       description: "epic sussy baka super susuyssysysysy",
       icon: "images/helpers/SussyBaka.png",
-      quantity: 0
+      quantity: 0,
+      sound_path: "sound/helpers/SussyBaka/",
+      sfx_quantity: 3
     },
     {
       name: "PewDiePie",
@@ -63,7 +65,9 @@ function getHelpers() {
       sps: 1,
       description: "what a fucking- (dies)",
       icon: "images/helpers/PewDiePie.gif",
-      quantity: 0
+      quantity: 0,
+      sound_path: "sound/helpers/PewDiePie/",
+      sfx_quantity: 1
     },
     {
       name: "John Cena",
@@ -73,7 +77,45 @@ function getHelpers() {
       sps: 8,
       description: "greetings, china. I have ice cream... YOU CAN'T SEE ME, MY TIME IS NOW111!!!",
       icon: "images/helpers/JohnCena.png",
-      quantity: 0
+      quantity: 0,
+      sound_path: "sound/helpers/JohnCena/",
+      sfx_quantity: 1
+    },
+    {
+      name: "Turing Machine",
+      base_cost: 12000,
+      cost: 12000,
+      base_sps: 47,
+      sps: 47,
+      description: "A mathematical model of computation developed by Supicious Turing III with the goal of sussyfying the world",
+      icon: "images/helpers/TuringMachine.jpg",
+      quantity: 0,
+      sound_path: "sound/helpers/TuringMachine/",
+      sfx_quantity: 0
+    },
+    {
+      name: "António Costa and his Son",
+      base_cost: 130000,
+      cost: 130000,
+      base_sps: 260,
+      sps: 260,
+      description: "What's more sus than AC? AC and his son Boss AC",
+      icon: "images/helpers/FilhosACosta.jpg",
+      quantity: 0,
+      sound_path: "sound/helpers/FilhosACosta/",
+      sfx_quantity: 0
+    },
+    {
+      name: "Among Sus",
+      base_cost: 1400000,
+      cost: 1400000,
+      base_sps: 1400,
+      sps: 1400,
+      description: "You can't see them but they're among sus...",
+      icon: "images/helpers/AmongSus.gif",
+      quantity: 0,
+      sound_path: "sound/helpers/AmongSus/",
+      sfx_quantity: 0
     }
   ];
 }
@@ -168,6 +210,7 @@ let sussy_button = document.getElementById("sussy_button");
 sussy_button.addEventListener("click", function() {
   score++;
   displayScore();
+  playAudio('sound/general/clickboom.mp3');
 });
 
 function updateSingleSPS(helper) {
@@ -177,6 +220,18 @@ function updateSingleSPS(helper) {
 
 function increaseHelperCost(helper) {
   helper.cost *= 1.15
+}
+
+function playAudio(path) {
+  let audio = new Audio(path);
+  audio.play();
+}
+
+function playHelperBuySFX(helper) {
+  if (helper.sfx_quantity > 0) {
+    let file_number = Math.floor(Math.random() * helper.sfx_quantity) + 1;
+    playAudio(helper.sound_path + file_number + '.mp3')
+  }
 }
 
 function buyHelper(helper) {
@@ -189,5 +244,7 @@ function buyHelper(helper) {
     increaseHelperCost(helper);
 
     generateHelperList();
+
+    playHelperBuySFX(helper);
   }
 }
