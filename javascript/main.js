@@ -79,7 +79,7 @@ function getHelpers() {
       icon: "images/helpers/JohnCena.png",
       quantity: 0,
       sound_path: "sound/helpers/JohnCena/",
-      sfx_quantity: 1
+      sfx_quantity: 2
     },
     {
       name: "Turing Machine",
@@ -91,19 +91,19 @@ function getHelpers() {
       icon: "images/helpers/TuringMachine.jpg",
       quantity: 0,
       sound_path: "sound/helpers/TuringMachine/",
-      sfx_quantity: 0
+      sfx_quantity: 1
     },
     {
-      name: "António Costa and his Son",
+      name: "António Costa's Sus Son",
       base_cost: 130000,
       cost: 130000,
       base_sps: 260,
       sps: 260,
       description: "What's more sus than AC? AC and his son Boss AC",
-      icon: "images/helpers/FilhosACosta.jpg",
+      icon: "images/helpers/AntonioCosta.gif",
       quantity: 0,
       sound_path: "sound/helpers/FilhosACosta/",
-      sfx_quantity: 0
+      sfx_quantity: 1
     },
     {
       name: "Among Sus",
@@ -115,7 +115,7 @@ function getHelpers() {
       icon: "images/helpers/AmongSus.gif",
       quantity: 0,
       sound_path: "sound/helpers/AmongSus/",
-      sfx_quantity: 0
+      sfx_quantity: 3
     }
   ];
 }
