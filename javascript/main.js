@@ -237,14 +237,12 @@ function playHelperBuySFX(helper) {
 function buyHelper(helper) {
   if (score >= helper.cost) {
     score -= helper.cost;
-    helper.quantity++;
-
     displayScore();
+
+    helper.quantity++;
     updateSingleSPS(helper);
     increaseHelperCost(helper);
-
-    generateHelperList();
-
     playHelperBuySFX(helper);
+    generateHelperList();
   }
 }
