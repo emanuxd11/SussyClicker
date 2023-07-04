@@ -5,9 +5,85 @@
  * Set initial game parameters
  */
 
+const helper_list = [
+  {
+    name: "Sussy Baka",
+    base_cost: 15,
+    cost: 15,
+    base_sps: 0.1,
+    sps: 0.1,
+    description: "epic sussy baka super susuyssysysysy",
+    icon: "images/helpers/SussyBaka.png",
+    quantity: 0,
+    sound_path: "sound/helpers/SussyBaka/",
+    sfx_quantity: 3
+  },
+  {
+    name: "PewDiePie",
+    base_cost: 100,
+    cost: 100,
+    base_sps: 1,
+    sps: 1,
+    description: "what a fucking- (dies)",
+    icon: "images/helpers/PewDiePie.gif",
+    quantity: 0,
+    sound_path: "sound/helpers/PewDiePie/",
+    sfx_quantity: 1
+  },
+  {
+    name: "John Cena",
+    base_cost: 1100,
+    cost: 1100,
+    base_sps: 8,
+    sps: 8,
+    description: "greetings, china. I have ice cream... YOU CAN'T SEE ME, MY TIME IS NOW111!!!",
+    icon: "images/helpers/JohnCena.png",
+    quantity: 0,
+    sound_path: "sound/helpers/JohnCena/",
+    sfx_quantity: 2
+  },
+  {
+    name: "Turing Machine",
+    base_cost: 12000,
+    cost: 12000,
+    base_sps: 47,
+    sps: 47,
+    description: "A mathematical model of computation developed by Supicious Turing III with the goal of sussyfying the world",
+    icon: "images/helpers/TuringMachine.jpg",
+    quantity: 0,
+    sound_path: "sound/helpers/TuringMachine/",
+    sfx_quantity: 1
+  },
+  {
+    name: "António Costa's Sus Son",
+    base_cost: 130000,
+    cost: 130000,
+    base_sps: 260,
+    sps: 260,
+    description: "What's more sus than AC? AC and his son Boss AC",
+    icon: "images/helpers/AntonioCosta.gif",
+    quantity: 0,
+    sound_path: "sound/helpers/FilhosACosta/",
+    sfx_quantity: 1
+  },
+  {
+    name: "Among Sus",
+    base_cost: 1400000,
+    cost: 1400000,
+    base_sps: 1400,
+    sps: 1400,
+    description: "You can't see them but they're among sus...",
+    icon: "images/helpers/AmongSus.gif",
+    quantity: 0,
+    sound_path: "sound/helpers/AmongSus/",
+    sfx_quantity: 3
+  }
+];
+
 let score = getScore();
 let sus_per_second = getSPS();
-const helpers = getHelpers();
+let helpers = getHelpers();
+checkHelperList();
 
 displayScore();
 displaySPS();
@@ -100,80 +176,7 @@ function getSPS() {
 }
 
 function getHelpers() {
-  return JSON.parse(localStorage.getItem("helpers")) || [
-    {
-      name: "Sussy Baka",
-      base_cost: 15,
-      cost: 15,
-      base_sps: 0.1,
-      sps: 0.1,
-      description: "epic sussy baka super susuyssysysysy",
-      icon: "images/helpers/SussyBaka.png",
-      quantity: 0,
-      sound_path: "sound/helpers/SussyBaka/",
-      sfx_quantity: 3
-    },
-    {
-      name: "PewDiePie",
-      base_cost: 100,
-      cost: 100,
-      base_sps: 1,
-      sps: 1,
-      description: "what a fucking- (dies)",
-      icon: "images/helpers/PewDiePie.gif",
-      quantity: 0,
-      sound_path: "sound/helpers/PewDiePie/",
-      sfx_quantity: 1
-    },
-    {
-      name: "John Cena",
-      base_cost: 1100,
-      cost: 1100,
-      base_sps: 8,
-      sps: 8,
-      description: "greetings, china. I have ice cream... YOU CAN'T SEE ME, MY TIME IS NOW111!!!",
-      icon: "images/helpers/JohnCena.png",
-      quantity: 0,
-      sound_path: "sound/helpers/JohnCena/",
-      sfx_quantity: 2
-    },
-    {
-      name: "Turing Machine",
-      base_cost: 12000,
-      cost: 12000,
-      base_sps: 47,
-      sps: 47,
-      description: "A mathematical model of computation developed by Supicious Turing III with the goal of sussyfying the world",
-      icon: "images/helpers/TuringMachine.jpg",
-      quantity: 0,
-      sound_path: "sound/helpers/TuringMachine/",
-      sfx_quantity: 1
-    },
-    {
-      name: "António Costa's Sus Son",
-      base_cost: 130000,
-      cost: 130000,
-      base_sps: 260,
-      sps: 260,
-      description: "What's more sus than AC? AC and his son Boss AC",
-      icon: "images/helpers/AntonioCosta.gif",
-      quantity: 0,
-      sound_path: "sound/helpers/FilhosACosta/",
-      sfx_quantity: 1
-    },
-    {
-      name: "Among Sus",
-      base_cost: 1400000,
-      cost: 1400000,
-      base_sps: 1400,
-      sps: 1400,
-      description: "You can't see them but they're among sus...",
-      icon: "images/helpers/AmongSus.gif",
-      quantity: 0,
-      sound_path: "sound/helpers/AmongSus/",
-      sfx_quantity: 3
-    }
-  ];
+  return JSON.parse(localStorage.getItem("helpers")) || helper_list;
 }
 
 function getVolumeLevel() {
@@ -198,6 +201,40 @@ window.addEventListener("beforeunload", function() {
   updateLocalStorage();
 });
 
+// for updating the helper list when new helpers are added or something is modified
+function checkHelperList() {
+  // situations:
+  // 1 - new buildings are added
+  // 2 - building characteristics are changed
+  // 3 - base cps or cost are changed: requires recalculating total cps and next buy cost
+
+  // part 1
+  let new_len = helper_list.length;
+  let old_len = helpers.length;
+  
+  if (old_len < new_len) {
+    for (let i = old_len; i < new_len; i++) {
+      // to prevent me from being a dumbass and adding shit with the same name, which fucks up the buttons
+      if (!helpers.some(obj => obj["name"] === helper_list.slice(i, i + 1)[0].name)) {
+        helpers.push(helper_list.slice(i, i + 1)[0]);
+      }
+    }
+  }
+
+  // part 2
+  for (let i = 0; i < helpers.length; i++) {
+    if (helpers[i].icon !== helper_list[i].icon) {
+      helpers[i].icon = helper_list[i].icon;
+    }
+    if (helpers[i].sound_path !== helper_list[i].sound_path) {
+      helpers[i].sound_path = helper_list[i].sound_path;
+    }
+    if (helpers[i].sfx_quantity !== helper_list[i].sfx_quantity) {
+      helpers[i].sfx_quantity = helper_list[i].sfx_quantity;
+    }
+    // do part 3 later...
+  }
+}
 
 /*
  * Display functions
