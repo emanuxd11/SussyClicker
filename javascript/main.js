@@ -77,6 +77,186 @@ const helper_list = [
     quantity: 0,
     sound_path: "sound/helpers/AmongSus/",
     sfx_quantity: 3
+  },
+  {
+    name: "new building 1",
+    base_cost: 20000000,
+    cost: 20000000,
+    base_sps: 7800,
+    sps: 7800,
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 2",
+    base_cost: 330000000,
+    cost: 330000000,
+    base_sps: 44000,
+    sps: 44000,
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 3",
+    base_cost: 5.1 * Math.pow(10, 9),
+    cost: 5.1 * Math.pow(10, 9),
+    base_sps: 260000,
+    sps: 260000,
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 4",
+    base_cost: 75 * Math.pow(10, 9),
+    cost: 75 * Math.pow(10, 9),
+    base_sps: 1600000,
+    sps: 1600000,
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 5",
+    base_cost: 1 * Math.pow(10, 12),
+    cost: 1 * Math.pow(10, 12),
+    base_sps: 10000000,
+    sps: 10000000,
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 6",
+    base_cost: 14 * Math.pow(10, 12),
+    cost: 14 * Math.pow(10, 12),
+    base_sps: 65 * Math.pow(10, 6),
+    sps: 65 * Math.pow(10, 6),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 7",
+    base_cost: 170 * Math.pow(10, 12),
+    cost: 170 * Math.pow(10, 12),
+    base_sps: 430 * Math.pow(10, 6),
+    sps: 430 * Math.pow(10, 6),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 8",
+    base_cost: 2.1 * Math.pow(10, 15),
+    cost: 2.1 * Math.pow(10, 15),
+    base_sps: 2.9 * Math.pow(10, 9),
+    sps: 2.9 * Math.pow(10, 9),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 9",
+    base_cost: 26 * Math.pow(10, 15),
+    cost: 26 * Math.pow(10, 15),
+    base_sps: 21 * Math.pow(10, 9),
+    sps: 21 * Math.pow(10, 9),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 10",
+    base_cost: 310 * Math.pow(10, 15),
+    cost: 310 * Math.pow(10, 15),
+    base_sps: 150 * Math.pow(10, 9),
+    sps: 150 * Math.pow(10, 9),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 11",
+    base_cost: 71 * Math.pow(10, 18),
+    cost: 71 * Math.pow(10, 18),
+    base_sps: 1.1 * Math.pow(10, 12),
+    sps: 1.1 * Math.pow(10, 12),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 12",
+    base_cost: 12 * Math.pow(10, 21),
+    cost: 12 * Math.pow(10, 21),
+    base_sps: 8.3 * Math.pow(10, 12),
+    sps: 8.3 * Math.pow(10, 12),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 13",
+    base_cost: 1.9 * Math.pow(10, 24),
+    cost: 1.9 * Math.pow(10, 24),
+    base_sps: 64 * Math.pow(10, 12),
+    sps: 64 * Math.pow(10, 12),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 14",
+    base_cost: 1.9 * Math.pow(10, 24),
+    cost: 1.9 * Math.pow(10, 24),
+    base_sps: 64 * Math.pow(10, 12),
+    sps: 64 * Math.pow(10, 12),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
+  },
+  {
+    name: "new building 15",
+    base_cost: 540 * Math.pow(10, 24),
+    cost: 540 * Math.pow(10, 24),
+    base_sps: 510 * Math.pow(10, 12),
+    sps: 510 * Math.pow(10, 12),
+    description: "some new desc wtv",
+    icon: "images/helpers/new.png",
+    quantity: 0,
+    sound_path: "sound/helpers/new/",
+    sfx_quantity: 0
   }
 ];
 
@@ -84,6 +264,11 @@ let score = getScore();
 let sus_per_second = getSPS();
 let helpers = getHelpers();
 checkHelperList();
+
+// testing the bignumber api
+// biggest number in the game is 999*10^84
+// const bigNumber = new Big('999e84');
+// console.log(formatNumber(bigNumber.toNumber()))
 
 displayScore();
 displaySPS();
@@ -231,6 +416,9 @@ function checkHelperList() {
     }
     if (helpers[i].sfx_quantity !== helper_list[i].sfx_quantity) {
       helpers[i].sfx_quantity = helper_list[i].sfx_quantity;
+    }
+    if (helpers[i].description !== helper_list[i].description) {
+      helpers[i].description = helper_list[i].description;
     }
     // do part 3 later...
   }
