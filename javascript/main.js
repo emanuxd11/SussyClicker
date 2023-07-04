@@ -22,7 +22,7 @@ setInterval(function() {
 // update title with score
 setInterval(function() {
   if (score > 0) {
-    document.title = parseInt(score) + " sus - Sussy Clicker";
+    document.title = formatNumber(parseInt(score)) + " sus - Sussy Clicker";
   }
 }, 5000);
 
@@ -43,8 +43,6 @@ volume_slider.addEventListener("change", function(e) {
   volume_level = e.currentTarget.value / 100;
 
   updateVolumeUI();
-
-  console.log("Volume changed to " + volume_level);
 })
 
 let mute_button = document.getElementById('mute_button');
@@ -58,7 +56,6 @@ function playAudio(path) {
   if (!volume_mute) {
     let audio = new Audio(path);
     audio.volume = volume_level;
-    console.log("Played audio from " + path + " at " + audio.volume + " volume");
     audio.play();
   }
 }
@@ -180,7 +177,6 @@ function getHelpers() {
 }
 
 function getVolumeLevel() {
-  console.log("volume level is " + parseFloat(localStorage.getItem("volume_level")) || 0.5);
   return parseFloat(localStorage.getItem("volume_level")) || 0.5;
 }
 
@@ -194,8 +190,6 @@ function updateLocalStorage() {
   setLocalStorage("helpers", JSON.stringify(helpers));
   setLocalStorage("volume_level", volume_level);
   setLocalStorage("volume_mute", volume_mute);
-
-  console.log("updated local storage");
 }
 
 setInterval(updateLocalStorage, 2 * 60 * 1000);
@@ -210,15 +204,15 @@ window.addEventListener("beforeunload", function() {
  */
 
 function displayScore() {
-  document.getElementById("score").textContent = "Sussy Meter: " + parseInt(score);
+  document.getElementById("score").textContent = "Sussy Meter: " + formatNumber(parseInt(score));
 }
 
 function displaySPS() {
   let stringval = "";
   if (Number.isInteger(parseFloat(sus_per_second.toFixed(1)))) {
-    stringval = "Total sus/s: " + Math.round(sus_per_second);
+    stringval = "Total sus/s: " + formatNumber(Math.round(sus_per_second));
   } else {
-    stringval = "Total sus/s: " + sus_per_second.toFixed(1);
+    stringval = "Total sus/s: " + formatNumber(Math.round(sus_per_second * 10) / 10);
   }
 
   document.getElementById("sps").textContent = stringval;
@@ -238,18 +232,15 @@ function generateHelperList() {
       <button id="${helper.name}" class="buyable_helper">
         <img src="${helper.icon}" alt="${helper.name}">
         <p>${helper.name}</p>
-        <p>Offers: ${helper.sps} sus/s</p>
-        <p>Cost: ${Math.ceil(helper.cost)} sussies</p>
-        <p>Owned: ${helper.quantity}</p>
+        <p>Offers: ${formatNumber(helper.sps)} sus/s</p>
+        <p>Cost: ${formatNumber(Math.ceil(helper.cost))} sussies</p>
+        <p>Owned: ${formatNumber(helper.quantity)}</p>
       </button>`;
 
     helper_list.appendChild(list_item);
 
     document.getElementById(helper.name).addEventListener('click', function() {
       buyHelper(helper);
-
-      console.log(helper.name + " quantity is " + helper.quantity);
-      console.log("current score is " + score);
     });
 
     // add the mystery one in case the next isn't owned
@@ -269,6 +260,30 @@ function generateHelperList() {
       break;
     }
   }
+}
+
+function formatNumber(number) {
+  let suffixes = [
+    "", "", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion",
+    "septillion", "octillion", "nonillion", "decillion", "undecillion", "duodecillion",
+    "tredecillion", "quatturodecillion", "quindecillion", "sexdecillion", "septendecillion",
+    "octodecillion", "novemdecillion", "vigintillion", "duovigintillion", "tresvigintillion",
+    "quattuorvigintillion", "sexavigintillion", "septavigintillion", "octovigintillion",
+    "novigintillion"
+  ];
+  let suffix_index = 0;
+
+  if (number >= 1000000) {
+    while (number >= 1000) {
+      number /= 1000;
+      suffix_index++;
+    }
+    number = Math.round(number * 100) / 100;
+  } else {
+    number = number.toLocaleString();
+  }
+
+  return number + " " + suffixes[suffix_index];
 }
 
 
@@ -304,29 +319,3 @@ function buyHelper(helper) {
     generateHelperList();
   }
 }
-
-
-function formatNumber(number) {
-  var suffixes = ["", "million", "billion", "trillion"];
-  var suffixIndex = 0;
-
-  while (number >= 1000) {
-    number /= 1000;
-    suffixIndex++;
-  }
-
-  // Round to two decimal places
-  number = Math.round(number * 100) / 100;
-
-  // Format thousands with commas
-  if (suffixIndex === 1) {
-    number = number.toLocaleString();
-  }
-
-  return number + " " + suffixes[suffixIndex];
-}
-
-// var number = 1456118000; // 1,456,118,000
-var number = 1000;
-var formattedNumber = formatNumber(number);
-console.log(formattedNumber); // Output: "186.43 million"
