@@ -304,3 +304,29 @@ function buyHelper(helper) {
     generateHelperList();
   }
 }
+
+
+function formatNumber(number) {
+  var suffixes = ["", "million", "billion", "trillion"];
+  var suffixIndex = 0;
+
+  while (number >= 1000) {
+    number /= 1000;
+    suffixIndex++;
+  }
+
+  // Round to two decimal places
+  number = Math.round(number * 100) / 100;
+
+  // Format thousands with commas
+  if (suffixIndex === 1) {
+    number = number.toLocaleString();
+  }
+
+  return number + " " + suffixes[suffixIndex];
+}
+
+// var number = 1456118000; // 1,456,118,000
+var number = 1000;
+var formattedNumber = formatNumber(number);
+console.log(formattedNumber); // Output: "186.43 million"

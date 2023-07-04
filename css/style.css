@@ -9,6 +9,16 @@ h1 {
 #sussy_button {
   background-color: transparent;
   border: none;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+#sussy_button:hover {
+  transform: scale(1.05);
+}
+
+#sussy_button:active {
+  transform: scale(0.9);
 }
 
 #sussy_button img {
