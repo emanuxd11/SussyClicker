@@ -11,25 +11,29 @@
   </head>
 
   <body>
-    <h1>Sussy Clicker</h1>
-    <button id="sussy_button"><img src="images/misc/sussy.png" alt="amogus"></button>
-    <p id="score">Sussy Meter: 0</p>
-    <p id="sps">Total sus/s: 0</p>
-
-    <div id="helpers">
-      <h2>Sussyficationers</h2>
-
-      <ul id="helper_list"></ul>
+    <div class="topnav">
+      <a class="github-link" href="https://github.com/emanuxd11/SussyClicker" target="_blank">
+        <i class="fab fa-github"> GitHub</i>
+      </a>
+      <div id="volume_container">
+        <label for="volume_slider" id="volume_label">Volume</label>
+        <input type="range" id="volume_slider">
+        <button id="mute_button">Mute</button>
+      </div>
     </div>
+    
+    <div id="game_wrapper">
+      <div id="button_stats">
+        <button id="sussy_button"><img src="images/misc/sussy.png" alt="amogus"></button>
+        <p id="score">Sussy Meter: 0</p>
+        <p id="sps">Total sus/s: 0</p>
+      </div>
+  
+      <div id="helpers">
+        <h2>Sussyficationers</h2>
 
-    <div id="volume_container">
-      <label for="volume_slider" id="volume_label">Volume</label>
-      <input type="range" id="volume_slider">
-      <button id="mute_button">Mute</button>
+        <ul id="helper_list"></ul>
+      </div>    
     </div>
-
-    <a class="github-link" href="https://github.com/emanuxd11/SussyClicker" target="_blank">
-      <i class="fab fa-github"> GitHub</i>
-    </a>
   </body>
 </html>

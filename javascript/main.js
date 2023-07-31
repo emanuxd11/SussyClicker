@@ -276,9 +276,9 @@ generateHelperList();
 
 // update score based on sus per second
 setInterval(function() {
-  score += sus_per_second;
+  score += sus_per_second/100;
   displayScore();
-}, 1000);
+}, 10);
 
 // update title with score
 setInterval(function() {
@@ -333,8 +333,8 @@ function updateVolumeUI() {
   let volume_label = document.getElementById("volume_label");
   let mute_button = document.getElementById("mute_button");
 
+  volume_slider.value = volume_level * 100;
   if (volume_mute == false) {
-    volume_slider.value = volume_level * 100;
     volume_label.textContent = "Volume: " + parseInt(volume_level * 100);
     mute_button.textContent = "Mute";
   } else {
@@ -452,14 +452,15 @@ function generateHelperList() {
     const helper = helpers[i];
 
     const list_item = document.createElement("li");
-    
     list_item.innerHTML = `
       <button id="${helper.name}" class="buyable_helper">
-        <img src="${helper.icon}" alt="${helper.name}">
-        <p>${helper.name}</p>
-        <p>Offers: ${formatNumber(helper.sps)} sus/s</p>
-        <p>Cost: ${formatNumber(Math.ceil(helper.cost))} sussies</p>
-        <p>Owned: ${formatNumber(helper.quantity)}</p>
+        <img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
+        <span id="helper_name">${helper.name}</span>
+        <span id="helper_cost">
+          <img src="images/misc/favicon.ico" alt="amogus logo">
+          ${formatNumber(Math.ceil(helper.cost))}
+        </span>
+        <span id="helper_quantity">${formatNumber(helper.quantity)}</span>
       </button>`;
 
     helper_list.appendChild(list_item);
@@ -503,7 +504,7 @@ function formatNumber(number) {
       number /= 1000;
       suffix_index++;
     }
-    number = Math.round(number * 100) / 100;
+    number = (Math.round(number * 1000) / 1000).toFixed(3);
   } else {
     number = number.toLocaleString();
   }
