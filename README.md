@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sussy Clicker</title>
+    <link rel="icon" type="image/x-icon" href="images/misc/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="javascript/main.js" defer></script>
+    <script src='https://cdn.jsdelivr.net/npm/big.js@6.2.1/big.min.js'></script>
+  </head>
+
+  <body>
+    <div class="topnav">
+      <a class="github-link" href="https://github.com/emanuxd11/SussyClicker" target="_blank">
+        <i class="fab fa-github"> GitHub</i>
+      </a>
+      <div id="volume_container">
+        <label for="volume_slider" id="volume_label">Volume</label>
+        <input type="range" id="volume_slider">
+        <button id="mute_button">Mute</button>
+      </div>
+    </div>
+    
+    <div id="game_wrapper">
+      <div id="button_stats">
+        <button id="sussy_button"><img src="images/misc/sussy.png" alt="amogus"></button>
+        <p id="score">Sussy Meter: 0</p>
+        <p id="sps">Total sus/s: 0</p>
+      </div>
+  
+      <div id="helpers">
+        <h2>Sussyficationers</h2>
+
+        <ul id="helper_list"></ul>
+      </div>    
+    </div>
+  </body>
+</html>
