@@ -133,7 +133,7 @@ h1 {
   grid-column: 3;
 
   margin-bottom: 0px;
-  height: calc(100vh - 65px - 26px);
+  height: calc(100vh - 47px - 5px - 40px);
 }
 
 #helpers h2 {
