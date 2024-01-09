@@ -215,12 +215,27 @@ function generateHelperList() {
         </button>
 
         <div class="info-card">
-          <p>Info card content</p>
-          <p>Umas merdas</p>
-          <p>Umas merdas</p>
+          <img src="${helper.icon}" alt="${helper.name}">
+          <h1>${helper.name}</h1>
+          <p>owned: ${helper.quantity}</p>
+          <img src="images/misc/favicon.ico" alt="amogus logo">
+          <p>${formatNumber(parseInt(helper.cost))}</p>
+          <ul class="helper-info-list">
+            <li>
+              <p>each ${helper.name} produces ${helper.sps} sus per second</p>
+            </li>
+            <li>
+              <p>
+                ${helper.quantity} ${formatPlural(helper.name)} producing 
+                ${formatNumber(helper.quantity * helper.sps)} sus per second
+                (${format1Dec(((helper.sps * helper.quantity) / sus_per_second) * 100)}% of total sus/s)
+              </p>
+            </li>
+          </ul>
         </div>
       </div>
     `;
+    // make case where building isn't owned yet
 
     helper_list.appendChild(list_item);
 
@@ -287,30 +302,6 @@ function displayUpgradeList() {
       upgrade_list.appendChild(list_item);
     });
   });
-}
-
-function formatNumber(number) {
-  let suffixes = [
-    "", "", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion",
-    "septillion", "octillion", "nonillion", "decillion", "undecillion", "duodecillion",
-    "tredecillion", "quatturodecillion", "quindecillion", "sexdecillion", "septendecillion",
-    "octodecillion", "novemdecillion", "vigintillion", "duovigintillion", "tresvigintillion",
-    "quattuorvigintillion", "sexavigintillion", "septavigintillion", "octovigintillion",
-    "novigintillion"
-  ];
-  let suffix_index = 0;
-
-  if (number >= 1000000) {
-    while (number >= 1000) {
-      number /= 1000;
-      suffix_index++;
-    }
-    number = (Math.round(number * 1000) / 1000).toFixed(3);
-  } else {
-    number = number.toLocaleString();
-  }
-
-  return number + " " + suffixes[suffix_index];
 }
 
 
