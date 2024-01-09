@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+
     <title>Sussy Clicker</title>
+    
     <link rel="icon" type="image/x-icon" href="images/misc/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <script src="javascript/helpers.js" defer></script>
+    <script src="javascript/upgrades.js" defer></script>
     <script src="javascript/main.js" defer></script>
   </head>
 
@@ -29,11 +33,20 @@
         <p id="sps">Total sus/s: 0</p>
       </div>
   
-      <div id="helpers">
-        <h2>Sussyficationers</h2>
+      <div id="store" class="vert-scrollable">
+        <h2 id="sussyStore">Sussy Store</h2>
+
+        <div id="upgradesWrapper">
+          <a>Buy All Upgrades (not implemented)</a>
+          <div id="upgradeListWrapper">
+            <ul id="upgrades">
+            </ul>
+          </div>
+        </div>
 
         <ul id="helper_list"></ul>
       </div>    
     </div>
+
   </body>
 </html>

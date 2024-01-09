@@ -1,20 +1,23 @@
 // sometimes useful to reset the game while testing
-// localStorage.clear()
+localStorage.clear()
 
 /*
  * Set initial game parameters
  */
 
 const helper_list = fetch_helper_list();
+const upgrade_list = fetch_all_upgrades();
 
 let score = getScore();
 let sus_per_second = getSPS();
 let helpers = getHelpers();
+let upgrades = getUpgrades();
 checkHelperList();
 
 displayScore();
 displaySPS();
 generateHelperList();
+displayUpgradeList();
 
 // update score based on sus per second
 setInterval(function() {
@@ -106,6 +109,10 @@ function getHelpers() {
   return JSON.parse(localStorage.getItem("helpers")) || helper_list;
 }
 
+function getUpgrades() {
+  return JSON.parse(localStorage.getItem("upgrades")) || upgrade_list;
+}
+
 function getVolumeLevel() {
   return parseFloat(localStorage.getItem("volume_level")) || 0.5;
 }
@@ -118,6 +125,7 @@ function updateLocalStorage() {
   setLocalStorage("score", score);
   setLocalStorage("sps", sus_per_second);
   setLocalStorage("helpers", JSON.stringify(helpers));
+  setLocalStorage("upgrades", JSON.stringify(upgrades));
   setLocalStorage("volume_level", volume_level);
   setLocalStorage("volume_mute", volume_mute);
 }
@@ -141,7 +149,7 @@ function checkHelperList() {
   
   if (old_len < new_len) {
     for (let i = old_len; i < new_len; i++) {
-      // to prevent me from being a dumbass and adding shit with the same name, which fucks up the buttons
+      // to prevent my dumbassery of adding shit with the same name, which fucks up the buttons
       if (!helpers.some(obj => obj["name"] === helper_list.slice(i, i + 1)[0].name)) {
         helpers.push(helper_list.slice(i, i + 1)[0]);
       }
@@ -217,17 +225,47 @@ function generateHelperList() {
       list_item.innerHTML = `
         <button id="mistery_helper">
           <img src="images/helpers/mistery.png" alt"mistery helper">
-          <p>Unknown</p>
-          <p>Offers: ? sus/s</p>
-          <p>Cost: ?</p>
-          <p></p>
-        </button>`;
-
+          <span id="helper_name">Unknown</span>
+          <span id="helper_cost">
+            <img src="images/misc/favicon.ico" alt="amogus logo">
+            ???
+          </span>
+          <span id="helper_quantity">???</span>
+        </button>
+      `;
       helper_list.appendChild(list_item);
 
       break;
     }
   }
+}
+
+function displayUpgradeList() {
+  const upgrade_list = document.getElementById("upgrades");
+  upgrade_list.innerHTML = "";
+  
+  upgrades.forEach(upgrade_class => {
+    upgrade_class.forEach(upgrade => {
+      // console.log(upgrade)
+      // console.log(upgrade.owned)
+      if (upgrade.owned) return;
+
+      current_building = helpers.find(helper => helper.name === upgrade.helper_name);
+      if (current_building.quantity < 1 ||
+        current_building.quantity < upgrade.requirement) return;
+      console.log("displaying")
+
+      const list_item = document.createElement("li");
+      list_item.innerHTML = `
+        <li>
+          <img src="${upgrade.icon}">
+        </li>
+      `;
+      list_item.style.border = `3px solid ${upgrade.color}`;
+      list_item.style.boxShadow = `0 0 10px ${upgrade.color}`;
+      upgrade_list.appendChild(list_item);
+    });
+  });
 }
 
 function formatNumber(number) {
@@ -281,6 +319,7 @@ function buyHelper(helper) {
     displayScore();
 
     helper.quantity++;
+    displayUpgradeList();
     updateSingleSPS(helper);
     increaseHelperCost(helper);
     playHelperBuySFX(helper);
