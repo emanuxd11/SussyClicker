@@ -203,15 +203,24 @@ function generateHelperList() {
 
     const list_item = document.createElement("li");
     list_item.innerHTML = `
-      <button id="${helper.name}" class="buyable_helper">
-        <img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
-        <span id="helper_name">${helper.name}</span>
-        <span id="helper_cost">
-          <img src="images/misc/favicon.ico" alt="amogus logo">
-          ${formatNumber(Math.ceil(helper.cost))}
-        </span>
-        <span id="helper_quantity">${formatNumber(helper.quantity)}</span>
-      </button>`;
+      <div style="display: flex">
+        <button id="${helper.name}" class="buyable_helper hover-element">
+          <img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
+          <span id="helper_name">${helper.name}</span>
+          <span id="helper_cost">
+            <img src="images/misc/favicon.ico" alt="amogus logo">
+            ${formatNumber(Math.ceil(helper.cost))}
+          </span>
+          <span id="helper_quantity">${formatNumber(helper.quantity)}</span>
+        </button>
+
+        <div class="info-card">
+          <p>Info card content</p>
+          <p>Umas merdas</p>
+          <p>Umas merdas</p>
+        </div>
+      </div>
+    `;
 
     helper_list.appendChild(list_item);
 
@@ -257,10 +266,22 @@ function displayUpgradeList() {
 
       const list_item = document.createElement("li");
       list_item.innerHTML = `
-        <li>
-          <img src="${upgrade.icon}">
-        </li>
+        <div style="display: flex">
+          <img src="${upgrade.icon}" class="buyable_helper hover-element">
+
+          <div class="info-card">
+            <img src="${upgrade.icon}">
+            <h1>${upgrade.name}</h1>
+            <p>(upgrade)</p>
+            <p>${formatNumber(parseInt(upgrade.cost))}</p>
+            <p>${upgrade.summary}</p>
+            <p>${upgrade.description}</p>
+            <p>Click to Purchase</p>
+          </div>
+        </div>
       `;
+        
+      // </div>
       list_item.style.border = `3px solid ${upgrade.color}`;
       list_item.style.boxShadow = `0 0 10px ${upgrade.color}`;
       upgrade_list.appendChild(list_item);
