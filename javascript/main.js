@@ -8,8 +8,10 @@
 const helper_list = fetch_helper_list();
 const upgrade_list = fetch_all_upgrades();
 
+let sus_per_click = getSusPerClick();
 let score = getScore();
 let sus_per_second = getSPS();
+let game_total_farmed = getGameTotalFarmed();
 let helpers = getHelpers();
 let upgrades = getUpgrades();
 checkHelperList();
@@ -32,109 +34,10 @@ setInterval(function() {
   }
 }, 5000);
 
-
-/*
- * Audio functionality
- * This works ok, would probably want to change the way audio is played,
- * making use of the html <audio> tag. Also make the slider number dynamic.
- * But it's good for now.
- */
-
-let volume_level = getVolumeLevel();
-let volume_mute = getVolumeMute();
-updateVolumeUI();
-
-let volume_slider = document.getElementById('volume_slider');
-volume_slider.addEventListener("change", function(e) {
-  volume_level = e.currentTarget.value / 100;
-
-  updateVolumeUI();
-})
-
-let mute_button = document.getElementById('mute_button');
-mute_button.addEventListener("click", function() {
-  volume_mute = !volume_mute;
-
-  updateVolumeUI();
-})
-
-function playAudio(path) {
-  if (!volume_mute) {
-    let audio = new Audio(path);
-    audio.volume = volume_level;
-    audio.play();
-  }
-}
-
-function playHelperBuySFX(helper) {
-  if (helper.sfx_quantity > 0) {
-    let file_number = Math.floor(Math.random() * helper.sfx_quantity) + 1;
-    playAudio(helper.sound_path + file_number + '.mp3')
-  }
-}
-
-function updateVolumeUI() {
-  let volume_slider = document.getElementById("volume_slider");
-  let volume_label = document.getElementById("volume_label");
-  let mute_button = document.getElementById("mute_button");
-
-  volume_slider.value = volume_level * 100;
-  if (volume_mute == false) {
-    volume_label.textContent = "Volume: " + parseInt(volume_level * 100);
-    mute_button.textContent = "Mute";
-  } else {
-    volume_label.textContent = "Volume: " + "Muted";
-    mute_button.textContent = "Unmute";
-  }
-}
-
-
-/*
- * Handle local storage
- */
-
-function setLocalStorage(name, value) {
-  localStorage.setItem(name, value);
-}
-
-function getScore() {
-  return parseInt(localStorage.getItem("score")) || 0;
-}
-
-function getSPS() {
-  return parseFloat(localStorage.getItem("sps")) || 0;
-}
-
-function getHelpers() {
-  return JSON.parse(localStorage.getItem("helpers")) || helper_list;
-}
-
-function getUpgrades() {
-  return JSON.parse(localStorage.getItem("upgrades")) || upgrade_list;
-}
-
-function getVolumeLevel() {
-  return parseFloat(localStorage.getItem("volume_level")) || 0.5;
-}
-
-function getVolumeMute() {
-  return localStorage.getItem("volume_mute") === "true";
-}
-
-function updateLocalStorage() {
-  setLocalStorage("score", score);
-  setLocalStorage("sps", sus_per_second);
-  setLocalStorage("helpers", JSON.stringify(helpers));
-  setLocalStorage("upgrades", JSON.stringify(upgrades));
-  setLocalStorage("volume_level", volume_level);
-  setLocalStorage("volume_mute", volume_mute);
-}
-
-setInterval(updateLocalStorage, 2 * 60 * 1000);
-
-window.addEventListener("beforeunload", function() {
-  updateLocalStorage();
-});
+// total farmed sus each second
+setInterval(function() {
+  updateTotalFarmed();
+}, 1000);
 
 // for updating the helper list when new helpers are added or something is modified
 function checkHelperList() {
@@ -158,6 +61,9 @@ function checkHelperList() {
 
   // part 2
   for (let i = 0; i < helpers.length; i++) {
+    if (helpers[i].name !== helper_list[i].name) {
+      helpers[i].name = helper_list[i].name;
+    }
     if (helpers[i].icon !== helper_list[i].icon) {
       helpers[i].icon = helper_list[i].icon;
     }
@@ -170,8 +76,57 @@ function checkHelperList() {
     if (helpers[i].description !== helper_list[i].description) {
       helpers[i].description = helper_list[i].description;
     }
+    if (helpers[i].total_farmed == undefined) {
+      helpers[i].total_farmed = helper_list[i].total_farmed;
+    }
+
     // do part 3 later...
   }
+}
+
+// do same thing but for upgrades
+function checkUpgradeList() {
+  // situations:
+  // 1 - new buildings are added
+  // 2 - building characteristics are changed
+  // 3 - base cps or cost are changed: requires recalculating total cps and next buy cost
+
+  // part 1
+  // let new_len = helper_list.length;
+  // let old_len = helpers.length;
+  
+  // if (old_len < new_len) {
+  //   for (let i = old_len; i < new_len; i++) {
+  //     // to prevent my dumbassery of adding shit with the same name, which fucks up the buttons
+  //     if (!helpers.some(obj => obj["name"] === helper_list.slice(i, i + 1)[0].name)) {
+  //       helpers.push(helper_list.slice(i, i + 1)[0]);
+  //     }
+  //   }
+  // }
+
+  // // part 2
+  // for (let i = 0; i < helpers.length; i++) {
+  //   if (helpers[i].name !== helper_list[i].name) {
+  //     helpers[i].name = helper_list[i].name;
+  //   }
+  //   if (helpers[i].icon !== helper_list[i].icon) {
+  //     helpers[i].icon = helper_list[i].icon;
+  //   }
+  //   if (helpers[i].sound_path !== helper_list[i].sound_path) {
+  //     helpers[i].sound_path = helper_list[i].sound_path;
+  //   }
+  //   if (helpers[i].sfx_quantity !== helper_list[i].sfx_quantity) {
+  //     helpers[i].sfx_quantity = helper_list[i].sfx_quantity;
+  //   }
+  //   if (helpers[i].description !== helper_list[i].description) {
+  //     helpers[i].description = helper_list[i].description;
+  //   }
+  //   if (helpers[i].total_farmed == undefined) {
+  //     helpers[i].total_farmed = helper_list[i].total_farmed;
+  //   }
+
+  //   // do part 3 later...
+  // }
 }
 
 /*
@@ -204,7 +159,7 @@ function generateHelperList() {
     const list_item = document.createElement("li");
     list_item.innerHTML = `
       <div style="display: flex">
-        <button id="${helper.name}" class="buyable_helper hover-element">
+        <button id="${helper.name}" class="hover-element">
           <img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
           <span id="helper_name">${helper.name}</span>
           <span id="helper_cost">
@@ -229,6 +184,11 @@ function generateHelperList() {
                 ${helper.quantity} ${formatPlural(helper.name)} producing 
                 ${formatNumber(helper.quantity * helper.sps)} sus per second
                 (${format1Dec(((helper.sps * helper.quantity) / sus_per_second) * 100)}% of total sus/s)
+              </p>
+            </li>
+            <li>
+              <p id="helper-${removeWhiteSpace(helper.name)}-prod">
+                ${helper.name} has produced ${formatNumber(parseInt(helper.total_farmed))} sus so far
               </p>
             </li>
           </ul>
@@ -270,14 +230,11 @@ function displayUpgradeList() {
   
   upgrades.forEach(upgrade_class => {
     upgrade_class.forEach(upgrade => {
-      // console.log(upgrade)
-      // console.log(upgrade.owned)
       if (upgrade.owned) return;
 
       current_building = helpers.find(helper => helper.name === upgrade.helper_name);
       if (current_building.quantity < 1 ||
         current_building.quantity < upgrade.requirement) return;
-      console.log("displaying")
 
       const list_item = document.createElement("li");
       list_item.innerHTML = `
@@ -296,7 +253,6 @@ function displayUpgradeList() {
         </div>
       `;
         
-      // </div>
       list_item.style.border = `3px solid ${upgrade.color}`;
       list_item.style.boxShadow = `0 0 10px ${upgrade.color}`;
       upgrade_list.appendChild(list_item);
@@ -311,7 +267,8 @@ function displayUpgradeList() {
 
 let sussy_button = document.getElementById("sussy_button");
 sussy_button.addEventListener("click", function() {
-  score++;
+  score += sus_per_click;
+  game_total_farmed += sus_per_click;
   displayScore();
   playAudio('sound/general/clickboom.mp3');
 });
@@ -337,4 +294,21 @@ function buyHelper(helper) {
     playHelperBuySFX(helper);
     generateHelperList();
   }
+}
+
+function updateTotalFarmed() {
+  // update each helper
+  for (const helper of helpers) {
+    if (helper.quantity <= 0) {
+      break;
+    }
+    
+    helper.total_farmed += helper.quantity * helper.sps;
+
+    let total_prod_el = document.getElementById(`helper-${removeWhiteSpace(helper.name)}-prod`);
+    total_prod_el.innerHTML = `${helper.name} has produced ${formatNumber(parseInt(helper.total_farmed))} sus so far`;
+  }
+
+  // update total
+  game_total_farmed += sus_per_second;
 }

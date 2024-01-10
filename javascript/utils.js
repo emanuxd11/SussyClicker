@@ -44,3 +44,11 @@ function format1Dec(number) {
 		return result;
 	}
 }
+
+function removeWhiteSpace(str) {
+  return str.replace(/\s/g, '');
+}
+
+function wrapInSpace(str) {
+  return ` ${str} `;
+}

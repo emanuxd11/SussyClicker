@@ -28,6 +28,7 @@ function fetch_sussy_baka_upgrades() {
       sound_path: "sound/helpers/SussyBaka/",
       sfx_quantity: 3,
       color: neonColors['Neon Pink'],
+      verb: "impostered",
     },
     {
       helper_name: "Sussy Baka",
@@ -43,6 +44,7 @@ function fetch_sussy_baka_upgrades() {
       sound_path: "sound/helpers/SussyBaka/",
       sfx_quantity: 3,
       color: neonColors['Atomic Orange'],
+      verb: "impostered",
     },
     {
       helper_name: "Sussy Baka",
@@ -58,6 +60,7 @@ function fetch_sussy_baka_upgrades() {
       sound_path: "sound/helpers/SussyBaka/",
       sfx_quantity: 3,
       color: neonColors['Glowing Red'],
+      verb: "impostered",
     }
   ];
 }
@@ -78,7 +81,8 @@ function fetch_pewdiepie_upgrades() {
       owned: false,
       sound_path: "sound/helpers/PewDiePie/",
       sfx_quantity: 3,
-      color: neonColors['Neon Pink'],
+      color: neonColors['Cyber Cyan'],
+      verb: "slurred on bridges",
     },
     {
       helper_name: "PewDiePie",
@@ -93,7 +97,8 @@ function fetch_pewdiepie_upgrades() {
       owned: false,
       sound_path: "sound/helpers/PewDiePie/",
       sfx_quantity: 3,
-      color: neonColors['Atomic Orange'],
+      color: neonColors['Laser Green'],
+      verb: "slurred on bridges",
     },
     {
       helper_name: "PewDiePie",
@@ -108,7 +113,8 @@ function fetch_pewdiepie_upgrades() {
       owned: false,
       sound_path: "sound/helpers/PewDiePie/",
       sfx_quantity: 3,
-      color: neonColors['Glowing Red'],
+      color: neonColors['Vivid Purple'],
+      verb: "slurred on bridges",
     }
   ];
 }

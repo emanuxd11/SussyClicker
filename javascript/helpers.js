@@ -10,7 +10,8 @@ function fetch_helper_list() {
       icon: "images/helpers/SussyBaka.png",
       quantity: 0,
       sound_path: "sound/helpers/SussyBaka/",
-      sfx_quantity: 3
+      sfx_quantity: 3,
+      total_farmed: 0,
     },
     {
       name: "PewDiePie",
@@ -22,7 +23,8 @@ function fetch_helper_list() {
       icon: "images/helpers/PewDiePie.gif",
       quantity: 0,
       sound_path: "sound/helpers/PewDiePie/",
-      sfx_quantity: 1
+      sfx_quantity: 1,
+      total_farmed: 0,
     },
     {
       name: "John Cena",
@@ -34,7 +36,8 @@ function fetch_helper_list() {
       icon: "images/helpers/JohnCena.png",
       quantity: 0,
       sound_path: "sound/helpers/JohnCena/",
-      sfx_quantity: 2
+      sfx_quantity: 2,
+      total_farmed: 0,
     },
     {
       name: "Turing Machine",
@@ -46,7 +49,8 @@ function fetch_helper_list() {
       icon: "images/helpers/TuringMachine.jpg",
       quantity: 0,
       sound_path: "sound/helpers/TuringMachine/",
-      sfx_quantity: 1
+      sfx_quantity: 1,
+      total_farmed: 0,
     },
     {
       name: "Suspicious Son",
@@ -58,7 +62,8 @@ function fetch_helper_list() {
       icon: "images/helpers/AntonioCosta.gif",
       quantity: 0,
       sound_path: "sound/helpers/FilhosACosta/",
-      sfx_quantity: 1
+      sfx_quantity: 1,
+      total_farmed: 0,
     },
     {
       name: "Among Sus",
@@ -70,10 +75,11 @@ function fetch_helper_list() {
       icon: "images/helpers/AmongSus.gif",
       quantity: 0,
       sound_path: "sound/helpers/AmongSus/",
-      sfx_quantity: 3
+      sfx_quantity: 3,
+      total_farmed: 0,
     },
     {
-      name: "new building 1",
+      name: "NEW BUILDING ONE",
       base_cost: 20000000,
       cost: 20000000,
       base_sps: 7800,
@@ -82,7 +88,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 2",
@@ -94,7 +101,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 3",
@@ -106,7 +114,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 4",
@@ -118,7 +127,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 5",
@@ -130,7 +140,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 6",
@@ -142,7 +153,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 7",
@@ -154,7 +166,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 8",
@@ -166,7 +179,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 9",
@@ -178,7 +192,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 10",
@@ -190,7 +205,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 11",
@@ -202,7 +218,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 12",
@@ -214,7 +231,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 13",
@@ -226,7 +244,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
     {
       name: "new building 14",
@@ -238,19 +257,8 @@ function fetch_helper_list() {
       icon: "images/helpers/new.png",
       quantity: 0,
       sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
+      sfx_quantity: 0,
+      total_farmed: 0,
     },
-    {
-      name: "new building 15",
-      base_cost: 540 * Math.pow(10, 24),
-      cost: 540 * Math.pow(10, 24),
-      base_sps: 510 * Math.pow(10, 12),
-      sps: 510 * Math.pow(10, 12),
-      description: "some new desc wtv",
-      icon: "images/helpers/new.png",
-      quantity: 0,
-      sound_path: "sound/helpers/new/",
-      sfx_quantity: 0
-    }
   ];
 } 
