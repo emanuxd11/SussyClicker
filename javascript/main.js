@@ -162,7 +162,7 @@ function generateHelperList() {
         <button id="${helper.name}" class="hover-element">
           <img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
           <span id="helper_name">${helper.name}</span>
-          <span id="helper_cost">
+          <span class="helper-cost">
             <img src="images/misc/favicon.ico" alt="amogus logo">
             ${formatNumber(Math.ceil(helper.cost))}
           </span>
@@ -170,28 +170,58 @@ function generateHelperList() {
         </button>
 
         <div class="info-card">
-          <img src="${helper.icon}" alt="${helper.name}">
-          <h1>${helper.name}</h1>
-          <p>owned: ${helper.quantity}</p>
-          <img src="images/misc/favicon.ico" alt="amogus logo">
-          <p>${formatNumber(parseInt(helper.cost))}</p>
+          <span class="helper-info-header">
+            <img src="${helper.icon}" alt="${helper.name}" class="info-card-header-icon">
+            <span class="helper-info-name-owned">
+              <h1>${helper.name}</h1>
+              <p class="helper-info-owned">owned: ${helper.quantity}</p>
+            </span>
+            <span class="info-helper-cost helper-cost">
+              <div>
+                <img src="images/misc/favicon.ico" alt="amogus logo">
+                ${formatNumber(Math.ceil(helper.cost))}
+              </div>
+              
+              <span class="time-worth">
+                ${getTimeWorth(sus_per_second, score, helper.cost)}
+              </span>
+            </span>
+          </span>
+
+          <p class="helper-description">
+            <q>${helper.description}</q>
+          </p>
+          
           <ul class="helper-info-list">
             <li>
-              <p>each ${helper.name} produces ${helper.sps} sus per second</p>
+              <p>
+                each ${helper.name} produces 
+                <span class="info-list-highlight">${helper.sps} sus </span>
+                per second
+              </p>
             </li>
             <li>
               <p>
-                ${helper.quantity} ${formatPlural(helper.name)} producing 
-                ${formatNumber(helper.quantity * helper.sps)} sus per second
-                (${format1Dec(((helper.sps * helper.quantity) / sus_per_second) * 100)}% of total sus/s)
+                ${helper.quantity} ${formatPlural(helper.name)} producing
+                <span class="info-list-highlight">${formatNumber(helper.quantity * helper.sps)} sus </span>
+                per second
+                <span class="info-list-highlight">
+                  (${format1Dec(((helper.sps * helper.quantity) / sus_per_second) * 100)}% 
+                </span>
+                of total sus/s)
               </p>
             </li>
             <li>
               <p id="helper-${removeWhiteSpace(helper.name)}-prod">
-                ${helper.name} has produced ${formatNumber(parseInt(helper.total_farmed))} sus so far
+                <span class="info-list-highlight">${formatNumber(parseInt(helper.total_farmed))} sus </span>
+                ${helper.verb} so far
               </p>
             </li>
           </ul>
+
+          <p class="click-to-purchase">
+            Click to purchase.
+          </p>
         </div>
       </div>
     `;
@@ -208,9 +238,9 @@ function generateHelperList() {
       const list_item = document.createElement("li");
       list_item.innerHTML = `
         <button id="mistery_helper">
-          <img src="images/helpers/mistery.png" alt"mistery helper">
+          <img src="images/helpers/mistery.png" alt="mistery helper" id="helper_icon">
           <span id="helper_name">Unknown</span>
-          <span id="helper_cost">
+          <span class="helper-cost">
             <img src="images/misc/favicon.ico" alt="amogus logo">
             ???
           </span>
@@ -239,20 +269,42 @@ function displayUpgradeList() {
       const list_item = document.createElement("li");
       list_item.innerHTML = `
         <div style="display: flex">
-          <img src="${upgrade.icon}" class="buyable_helper hover-element">
+          <img src="${upgrade.icon}" class="buyable_helper hover-element upgrade-square-icon">
 
-          <div class="info-card">
-            <img src="${upgrade.icon}">
-            <h1>${upgrade.name}</h1>
-            <p>(upgrade)</p>
-            <p>${formatNumber(parseInt(upgrade.cost))}</p>
-            <p>${upgrade.summary}</p>
-            <p>${upgrade.description}</p>
-            <p>Click to Purchase</p>
+          <div class="info-card" style="border: 3px solid ${upgrade.color}; box-shadow: 0 0 10px ${upgrade.color}">
+            <span class="upgrade-info-header">
+              <img src="${upgrade.icon}" alt="${upgrade.name}" class="info-card-header-icon">
+              <span class="upgrade-info-name-owned">
+                <h1>${upgrade.name}</h1>
+                <p class="upgrade-info-owned">Upgrade</p>
+              </span>
+              <span class="info-upgrade-cost helper-cost">
+                <div>
+                  <img src="images/misc/favicon.ico" alt="amogus logo">
+                  ${formatNumber(Math.ceil(upgrade.cost))}
+                </div>
+                
+                <span class="time-worth">
+                  ${getTimeWorth(sus_per_second, score, upgrade.cost)}
+                </span>
+              </span>
+            </span>
+
+            <p class="upgrade-summary">
+              ${upgrade.summary}
+            </p>
+            <p class="upgrade-description">
+              <q>${upgrade.description}</q>
+            </p>
+
+            <p class="click-to-purchase">
+              Click to purchase.
+            </p>
+            
           </div>
         </div>
       `;
-        
+      
       list_item.style.border = `3px solid ${upgrade.color}`;
       list_item.style.boxShadow = `0 0 10px ${upgrade.color}`;
       upgrade_list.appendChild(list_item);
@@ -306,9 +358,14 @@ function updateTotalFarmed() {
     helper.total_farmed += helper.quantity * helper.sps;
 
     let total_prod_el = document.getElementById(`helper-${removeWhiteSpace(helper.name)}-prod`);
-    total_prod_el.innerHTML = `${helper.name} has produced ${formatNumber(parseInt(helper.total_farmed))} sus so far`;
+    total_prod_el.innerHTML = `${formatNumber(parseInt(helper.total_farmed))} sus ${helper.verb} so far`;
   }
 
   // update total
   game_total_farmed += sus_per_second;
 }
+
+// do this when showing cards with javascript cause it doesn't make sense to calculate each second for every single one
+// function updateTimeWorth() {
+  
+// }

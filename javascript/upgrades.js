@@ -21,14 +21,14 @@ function fetch_sussy_baka_upgrades() {
       cost: 100,
       requirement: 1,
       upgrade: "normal",
-      summary: "The mouse and Sussy Baka are twice as efficient.",
+      summary: `The mouse and Sussy Baka are <span class="info-list-highlight">twice as efficient</span>.`,
       description: "The Sussy Baka evolves into a Deceptive Imposter, mastering the art of disguise and deceit. This evolution allows them to seamlessly blend in with their surroundings, making it difficult for enemies to discern their true identity.",
       icon: "images/helpers/SussyBaka.png",
       owned: false,
       sound_path: "sound/helpers/SussyBaka/",
       sfx_quantity: 3,
       color: neonColors['Neon Pink'],
-      verb: "impostered",
+      c_filter: true,
     },
     {
       helper_name: "Sussy Baka",
@@ -37,14 +37,14 @@ function fetch_sussy_baka_upgrades() {
       cost: 500,
       requirement: 1,
       upgrade: "normal",
-      summary: "The mouse and Sussy Baka are twice as efficient.",
+      summary: `The mouse and Sussy Baka are <span class="info-list-highlight">twice as efficient</span>.`,
       description: "The Deceptive Imposter further evolves into a Mysterious Saboteur, specializing in sabotage and subterfuge. This evolution grants them advanced knowledge of traps, gadgets, and stealth techniques to gain the upper hand in suspicion battles.",
       icon: "images/helpers/SussyBaka.png",
       owned: false,
       sound_path: "sound/helpers/SussyBaka/",
       sfx_quantity: 3,
       color: neonColors['Atomic Orange'],
-      verb: "impostered",
+      c_filter: true,
     },
     {
       helper_name: "Sussy Baka",
@@ -53,14 +53,14 @@ function fetch_sussy_baka_upgrades() {
       cost: 1e4,
       requirement: 10,
       upgrade: "normal",
-      summary: "The mouse and Sussy Baka are twice as efficient.",
+      summary: `The mouse and Sussy Baka are <span class="info-list-highlight">twice as efficient</span>.`,
       description: "The Shadowy Manipulator is a master of manipulating shadows and manipulating the minds of foes. This evolution grants them unparalleled control over the unseen forces, making them formidable opponents with unmatched sus.",
       icon: "images/helpers/SussyBaka.png",
       owned: false,
       sound_path: "sound/helpers/SussyBaka/",
       sfx_quantity: 3,
       color: neonColors['Glowing Red'],
-      verb: "impostered",
+      c_filter: true,
     }
   ];
 }
@@ -75,14 +75,14 @@ function fetch_pewdiepie_upgrades() {
       cost: 1000,
       requirement: 1,
       upgrade: "normal",
-      summary: "PewDiePie is twice as efficient.",
+      summary: `PewDiePie is <span class="info-list-highlight">twice as efficient</span>.`,
       description: "PewDiePie becomes a skilled Bridge Explorer, utilizing his experience from the infamous bridge incident. This upgrade enhances his ability to navigate and strategize near bridges, gaining advantages in bridge-related encounters.",
       icon: "images/helpers/PewDiePie.gif",
       owned: false,
       sound_path: "sound/helpers/PewDiePie/",
       sfx_quantity: 3,
       color: neonColors['Cyber Cyan'],
-      verb: "slurred on bridges",
+      c_filter: true,
     },
     {
       helper_name: "PewDiePie",
@@ -91,14 +91,14 @@ function fetch_pewdiepie_upgrades() {
       cost: 5000,
       requirement: 5,
       upgrade: "normal",
-      summary: "PewDiePie is twice as efficient.",
+      summary: `PewDiePie is <span class="info-list-highlight">twice as efficient</span>.`,
       description: "The Bridge Explorer advances to Bridge Mastery, achieving a deeper understanding of bridge dynamics. He can turn the tables in bridge-related slur-saying engagements, using the terrain to his advantage.",
       icon: "images/helpers/PewDiePie.gif",
       owned: false,
       sound_path: "sound/helpers/PewDiePie/",
       sfx_quantity: 3,
       color: neonColors['Laser Green'],
-      verb: "slurred on bridges",
+      c_filter: true,
     },
     {
       helper_name: "PewDiePie",
@@ -107,17 +107,20 @@ function fetch_pewdiepie_upgrades() {
       cost: 5*1e5,
       requirement: 25,
       upgrade: "normal",
-      summary: "PewDiePie is twice as efficient.",
+      summary: `PewDiePie is <span class="info-list-highlight">twice as efficient</span>.`,
       description: "The Bridge Master attains the ultimate title of Bridge Conqueror. His bridge prowess reaches its peak, and he can now shape the outcome of battles on bridges like never before. Hopefully won't require any more nefarious slurs.",
       icon: "images/helpers/PewDiePie.gif",
       owned: false,
       sound_path: "sound/helpers/PewDiePie/",
       sfx_quantity: 3,
       color: neonColors['Vivid Purple'],
-      verb: "slurred on bridges",
+      c_filter: true,
     }
   ];
 }
+
+// in sharingan upgrades like mangekyo,susanoo, stuff like that, I want to change the helper's icon, so in "upgrade" I'll add
+// a reference to a function that does this
 
 function fetch_all_upgrades() {
   return [

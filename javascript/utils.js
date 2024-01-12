@@ -33,8 +33,8 @@ function formatNumber(number) {
 }
 
 function format1Dec(number) {
-  if (typeof number !== 'number' || isNaN(number)) {
-    return 'Invalid input';
+  if (typeof number !== 'number' || isNaN(number) || number == undefined) {
+    return 0;
   }
 	
 	let result = number.toFixed(1);
@@ -51,4 +51,44 @@ function removeWhiteSpace(str) {
 
 function wrapInSpace(str) {
   return ` ${str} `;
+}
+
+function getTimeWorth(currentSPS, currentSUS, cost) {
+  if (currentSPS == 0) {
+    return "";
+  }
+
+  if (currentSPS > cost) return "worth <1 second";
+
+  let diff = currentSUS - cost;
+
+  if (diff < 0) {
+    let time = formatTime(Math.abs(diff/currentSPS));
+    return `in ${time}`;
+  } else {
+    let time = formatTime(Math.abs(cost/currentSPS));
+    return `worth ${time}`;
+  }
+}
+
+function formatTime(seconds) {
+  if (seconds < 60) {
+    return `${formatNumber(Math.round(seconds))} second${seconds !== 1 ? 's' : ''}`;
+  }
+  
+  if (seconds < 3600) {
+    const minutes = Math.round(seconds / 60);
+    return `${formatNumber(Math.ceil(minutes)).trim()} minute${minutes !== 1 ? 's' : ''}`;
+  } 
+  
+  if (seconds < 86400) {
+    const hours = Math.floor(seconds / 3600);
+    const remainingMinutes = Math.round((seconds % 3600) / 60);
+    const hoursString = hours > 0 ? `${hours} hour${hours !== 1 ? 's' : ''}` : '';
+    const minutesString = remainingMinutes > 0 ? `and ${formatNumber(Math.ceil(remainingMinutes)).trim()} minute${remainingMinutes !== 1 ? 's' : ''}` : '';
+    return `${hoursString} ${minutesString}`.trim();
+  }
+
+  const days = Math.floor(seconds / 86400);
+  return `${formatNumber(Math.ceil(days)).trim()} day${days !== 1 ? 's' : ''}`;
 }

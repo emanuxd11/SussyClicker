@@ -6,12 +6,13 @@ function fetch_helper_list() {
       cost: 15,
       base_sps: 0.1,
       sps: 0.1,
-      description: "epic sussy baka super susuyssysysysy",
+      description: "epic sussy baka super susssllyyy suslllyy",
       icon: "images/helpers/SussyBaka.png",
       quantity: 0,
       sound_path: "sound/helpers/SussyBaka/",
       sfx_quantity: 3,
       total_farmed: 0,
+      verb: "impostered",
     },
     {
       name: "PewDiePie",
@@ -25,6 +26,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/PewDiePie/",
       sfx_quantity: 1,
       total_farmed: 0,
+      verb: "slurred on bridges",
     },
     {
       name: "John Cena",

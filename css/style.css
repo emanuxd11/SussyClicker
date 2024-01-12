@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=VT323');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
   text-align: center;
@@ -213,7 +214,7 @@ h1 {
   grid-template-rows: 38px 26px;
 }
 
-#helper_list > li img {
+#helper_list li #helper_icon {
   width: 64px;
   height: 64px;
   margin-bottom: 0px;
@@ -221,10 +222,15 @@ h1 {
   grid-row: 1 / 3;
 }
 
-#helper_list > li span {
+#helper_list li > span {
   margin: 0;
   color: #fff;
   font-size: 16px;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+#helper_list li span {
+  color: #fff;
   text-shadow: 1px 1px 2px #000000;
 }
 
@@ -236,7 +242,7 @@ h1 {
   font-size: 30px;
 }
 
-#helper_list > li #helper_cost {
+.helper-cost {
   grid-row: 2;
   grid-column: 2;
   font-size: 18px;
@@ -244,7 +250,7 @@ h1 {
   padding-left: 7px;
 }
 
-#helper_list > li #helper_cost img {
+.helper-cost img {
   width: 12px;
   height: 12px;
 }
@@ -254,6 +260,16 @@ h1 {
   text-align: right;
 }
 
+@keyframes glowing-rgb {
+  0% {
+  background-position: 0 0;
+  }
+
+  100% {
+  background-position: 400% 0;
+  }
+}
+
 .info-card {
   display: none;
   position: absolute;
@@ -261,6 +277,10 @@ h1 {
   padding: 10px;
   border: 1px solid #fff;
   width: 350px;
+
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+  border-radius: 7px;
 }
 
 .hover-element {
@@ -280,6 +300,148 @@ h1 {
   margin-bottom: 20px;
 }
 
+.info-card .helper-info-header,
+.info-card .upgrade-info-header {
+  display: flex;
+  min-height: 0;
+  width: 100%;
+
+  padding-bottom: 12px;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(to right, transparent, #898989, transparent) 1;
+}
+
+.info-card .helper-info-header h1,
+.info-card .upgrade-info-header h1 {
+  text-align: left;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  font-size: 24px;
+  min-width: 0px;
+}
+
+.info-card img.info-card-header-icon {
+  border-radius: 50%;
+  height: 52px;
+  width: 52px;
+}
+
+.info-card .helper-info-name-owned,
+.info-card .upgrade-info-name-owned {
+  min-width: 0px;
+  padding-left: 10px;
+  display: block;
+}
+
+.info-card .helper-info-name-owned .helper-info-owned,
+.info-card .upgrade-info-name-owned .upgrade-info-owned {
+  text-align: left;
+  padding: 1px 3px;
+  margin: 10px 0 0 0;
+  float: left;
+  background-color: #ffffff;
+  color: black;
+  min-width: 0px;
+  display: inline-flex;
+  border-radius: 3px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.info-card span.info-helper-cost,
+.info-card span.info-upgrade-cost {
+  margin: 1px 0 0 0;
+  flex: 1;
+  display: flex;
+  flex-direction: row-reverse;     
+  align-items: right;
+  flex-wrap: wrap;
+  max-height: 20px;
+  max-width: 60%;
+  white-space: nowrap;
+  font-size: 20px;
+}
+
+.info-card .info-helper-cost img,
+.info-card .info-upgrade-cost img {
+  border: 0px;
+  /* padding: 2px 4px; */
+  height: 14px;
+  width: 14px;
+}
+
+.info-card span.time-worth {
+  font-size: 11px;
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  flex-basis: 100%;
+  margin: 2px 0 0 100%;
+}
+
+.info-card ul.helper-info-list {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  text-align: left;
+  padding: 4px 0px 4px 20px;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(to right, transparent, #898989, transparent) 1;
+}
+
+.info-card ul.helper-info-list p:last-child {
+  margin-bottom: 10px;
+}
+
+.info-card ul.helper-info-list p {
+  margin: 10px 0 5px 0;
+  padding: 4px;
+  border-radius: 8px;
+
+  color:rgb(90, 90, 90)0;
+  background-color: #2d2d2d;
+}
+
+.info-card .info-list-highlight {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-weight: bold;
+}
+
+.info-card .helper-description,
+.info-card .upgrade-description {
+  text-align: right;
+  margin: 0;
+  padding: 12px 0 12px 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: rgb(183, 183, 183);
+  font-style: italic;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(to right, transparent, #898989, transparent) 1;
+  padding-right: 7px;
+}
+
+.info-card .upgrade-summary {
+  text-align: left;
+  margin: 0;
+  padding: 12px 0 12px 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: rgb(234, 234, 234);
+}
+
+.info-card .click-to-purchase {
+  margin: 0;
+  padding: 10px 0 0 0px;
+  color: rgb(183, 183, 183);
+}
+
+.info-card > span > img {
+
+}
 
 /* UPGRADES */
 
@@ -307,7 +469,7 @@ h1 {
   height: 100%;
 }
 
-#upgrades li img {
+#upgrades li img.upgrade-square-icon {
   width: 100%;
   height: 100%;
   object-fit: fill;
