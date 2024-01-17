@@ -109,9 +109,30 @@ function formatTime(seconds) {
 
 /* Position cards correctly (so they don't go below the screen and are in the correct height always) */
 
-document.addEventListener('DOMContentLoaded', () => {
+function setInfoCards() {
   const hoverElements = document.querySelectorAll('.hover-element');
 
+  const vPositionCard = (event, element, infoCard) => {
+    const parentDim = element.getBoundingClientRect();
+    const infoCardDim = infoCard.getBoundingClientRect();
+
+    const parentHeight = parentDim.height;
+    const infoCardHeight = infoCardDim.height;
+
+    let newTop;
+
+    if ((event.clientY - 32) + infoCardHeight > window.innerHeight) {
+      newTop = window.innerHeight - infoCardHeight - 10;
+    } else {
+      const mouseOffset = parentHeight / 2 + 10;
+      newTop = event.clientY - mouseOffset;
+    }
+
+    if (parseInt(infoCard.style.top, 10) !== newTop) {
+      return `${newTop}px`;
+    }
+  }
+  
   hoverElements.forEach((element) => {
     const infoCard = element.parentElement.querySelector('.info-card');
     let isHovered = false;
@@ -119,24 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', throttle((event) => {
       if (!isHovered) return;
 
-      const parentDim = element.getBoundingClientRect();
-      const infoCardDim = infoCard.getBoundingClientRect();
-
-      const parentHeight = parentDim.height;
-      const infoCardHeight = infoCardDim.height;
-
-      let newTop;
-
-      if ((event.clientY - 32) + infoCardHeight > window.innerHeight) {
-        newTop = window.innerHeight - infoCardHeight - 10;
-      } else {
-        const mouseOffset = parentHeight / 2 + 10;
-        newTop = event.clientY - mouseOffset;
-      }
-
-      if (parseInt(infoCard.style.top, 10) !== newTop) {
-        infoCard.style.top = `${newTop}px`;
-      }
+      infoCard.style.top = vPositionCard(event, element, infoCard);
     }, 8)); // throttle for ~120fps feel and better efficiency
 
     element.addEventListener('mouseover', () => {
@@ -144,11 +148,16 @@ document.addEventListener('DOMContentLoaded', () => {
       infoCard.style.display = 'block';
       infoCard.style.zIndex = '99';
       infoCard.style.right = '326px';
+      infoCard.style.top = vPositionCard(event, element, infoCard)
+      console.log("showing")
+
     });
 
     element.addEventListener('mouseout', () => {
       isHovered = false;
       infoCard.style.display = 'none';
+
+      console.log("hiding")
     });
   });
-});
+}

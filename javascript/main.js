@@ -196,7 +196,7 @@ function generateHelperList() {
             <li>
               <p>
                 each ${helper.name} produces 
-                <span class="info-list-highlight">${formatNumber(helper.sps)} sus </span>
+                <span class="info-list-highlight">${formatNumber(helper.sps)} sus</span>
                 per second
               </p>
             </li>
@@ -253,6 +253,8 @@ function generateHelperList() {
       break;
     }
   }
+
+  setInfoCards();
 }
 
 function displayUpgradeList() {

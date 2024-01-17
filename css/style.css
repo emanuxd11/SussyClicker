@@ -217,7 +217,7 @@ h1 {
 
 #helper_list > li button:hover {
   transform: scale(1.03);
-  background-color: rgb(101, 101, 101);
+  /* background-color: rgb(101, 101, 101); */
   box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
