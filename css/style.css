@@ -25,6 +25,7 @@ img {
 
 html, body, button {
   font-family: 'VT323';
+  overflow: hidden;
 }
 
 .build-version {
@@ -188,13 +189,7 @@ h1 {
   border-top: 3px solid #00ff00;
   box-shadow: inset 0 0 7px #00ff00;
   transition: all 0.3s;
-  padding: 10px;
-  /* z-index: 1000; */
 }
-
-/* #helper_list li:hover {
-  transform: scale(1.02);
-} */
 
 #helper_list > li:last-child {
   border-bottom: 3px solid #00ff00;
@@ -212,6 +207,18 @@ h1 {
   grid-row-gap: 0px;
   grid-template-columns: 64px auto auto;
   grid-template-rows: 38px 26px;
+
+  margin: 10px;
+  padding: 0;
+
+  transition: all 0.1s ease-out;
+  border-radius: 3px;
+}
+
+#helper_list > li button:hover {
+  transform: scale(1.03);
+  background-color: rgb(101, 101, 101);
+  box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
 #helper_list li #helper_icon {
@@ -260,16 +267,6 @@ h1 {
   text-align: right;
 }
 
-@keyframes glowing-rgb {
-  0% {
-  background-position: 0 0;
-  }
-
-  100% {
-  background-position: 400% 0;
-  }
-}
-
 .info-card {
   display: none;
   position: absolute;
@@ -288,12 +285,12 @@ h1 {
   display: inline-block;
 }
 
-.hover-element:hover + .info-card,
+/* .hover-element:hover + .info-card,
 .info-card:hover {
   display: block;
   z-index: 99999;
   right: 326px;
-}
+} */
 
 .element-container {
   display: flex;

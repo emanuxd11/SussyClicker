@@ -196,7 +196,7 @@ function generateHelperList() {
             <li>
               <p>
                 each ${helper.name} produces 
-                <span class="info-list-highlight">${helper.sps} sus </span>
+                <span class="info-list-highlight">${formatNumber(helper.sps)} sus </span>
                 per second
               </p>
             </li>
@@ -226,7 +226,8 @@ function generateHelperList() {
       </div>
     `;
     // make case where building isn't owned yet
-
+    
+    list_item.classList.add('helper-wrapper');
     helper_list.appendChild(list_item);
 
     document.getElementById(helper.name).addEventListener('click', function() {
@@ -358,7 +359,7 @@ function updateTotalFarmed() {
     helper.total_farmed += helper.quantity * helper.sps;
 
     let total_prod_el = document.getElementById(`helper-${removeWhiteSpace(helper.name)}-prod`);
-    total_prod_el.innerHTML = `${formatNumber(parseInt(helper.total_farmed))} sus ${helper.verb} so far`;
+    total_prod_el.innerHTML = `<span class="info-list-highlight">${formatNumber(parseInt(helper.total_farmed))} sus </span>${helper.verb} so far`;
   }
 
   // update total
