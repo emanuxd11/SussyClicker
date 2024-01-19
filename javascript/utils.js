@@ -149,15 +149,11 @@ function setInfoCards() {
       infoCard.style.zIndex = '99';
       infoCard.style.right = '326px';
       infoCard.style.top = vPositionCard(event, element, infoCard)
-      console.log("showing")
-
     });
 
     element.addEventListener('mouseout', () => {
       isHovered = false;
       infoCard.style.display = 'none';
-
-      console.log("hiding")
     });
   });
 }

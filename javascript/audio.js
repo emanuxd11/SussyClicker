@@ -39,10 +39,10 @@ function playAudio(path) {
   }
 }
 
-function playHelperBuySFX(helper) {
-  if (helper.sfx_quantity > 0) {
-    let file_number = Math.floor(Math.random() * helper.sfx_quantity) + 1;
-    playAudio(helper.sound_path + file_number + '.mp3')
+function playBuySFX(item) {
+  if (item.sfx_quantity > 0) {
+    let file_number = Math.floor(Math.random() * item.sfx_quantity) + 1;
+    playAudio(item.sound_path + file_number + '.mp3')
   }
 }
 

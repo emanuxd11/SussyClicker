@@ -5,21 +5,28 @@
  * Set initial game parameters
  */
 
-const helper_list = fetch_helper_list();
-const upgrade_list = fetch_all_upgrades();
+// these are the default ones aka what it would look like at the start
+// (can be needed if there are updates, when we use them to update the main list)
+const default_helper_list = fetch_helper_list();
+const default_upgrade_list = fetch_all_upgrades();
 
+// these are the actual current game ones
+const helpers = getHelpers();
+const upgrades = getUpgrades();
+
+// game params
 let sus_per_click = getSusPerClick();
 let score = getScore();
 let sus_per_second = getSPS();
 let game_total_farmed = getGameTotalFarmed();
-let helpers = getHelpers();
-let upgrades = getUpgrades();
+
 checkHelperList();
+checkUpgradeList();
 
 displayScore();
 displaySPS();
 generateHelperList();
-displayUpgradeList();
+generateUpgradeList();
 
 // update score based on sus per second
 setInterval(function() {
@@ -47,37 +54,37 @@ function checkHelperList() {
   // 3 - base cps or cost are changed: requires recalculating total cps and next buy cost
 
   // part 1
-  let new_len = helper_list.length;
+  let new_len = default_helper_list.length;
   let old_len = helpers.length;
   
   if (old_len < new_len) {
     for (let i = old_len; i < new_len; i++) {
       // to prevent my dumbassery of adding shit with the same name, which fucks up the buttons
-      if (!helpers.some(obj => obj["name"] === helper_list.slice(i, i + 1)[0].name)) {
-        helpers.push(helper_list.slice(i, i + 1)[0]);
+      if (!helpers.some(obj => obj["name"] === default_helper_list.slice(i, i + 1)[0].name)) {
+        helpers.push(default_helper_list.slice(i, i + 1)[0]);
       }
     }
   }
 
   // part 2
   for (let i = 0; i < helpers.length; i++) {
-    if (helpers[i].name !== helper_list[i].name) {
-      helpers[i].name = helper_list[i].name;
+    if (helpers[i].name !== default_helper_list[i].name) {
+      helpers[i].name = default_helper_list[i].name;
     }
-    if (helpers[i].icon !== helper_list[i].icon) {
-      helpers[i].icon = helper_list[i].icon;
+    if (helpers[i].icon !== default_helper_list[i].icon) {
+      helpers[i].icon = default_helper_list[i].icon;
     }
-    if (helpers[i].sound_path !== helper_list[i].sound_path) {
-      helpers[i].sound_path = helper_list[i].sound_path;
+    if (helpers[i].sound_path !== default_helper_list[i].sound_path) {
+      helpers[i].sound_path = default_helper_list[i].sound_path;
     }
-    if (helpers[i].sfx_quantity !== helper_list[i].sfx_quantity) {
-      helpers[i].sfx_quantity = helper_list[i].sfx_quantity;
+    if (helpers[i].sfx_quantity !== default_helper_list[i].sfx_quantity) {
+      helpers[i].sfx_quantity = default_helper_list[i].sfx_quantity;
     }
-    if (helpers[i].description !== helper_list[i].description) {
-      helpers[i].description = helper_list[i].description;
+    if (helpers[i].description !== default_helper_list[i].description) {
+      helpers[i].description = default_helper_list[i].description;
     }
     if (helpers[i].total_farmed == undefined) {
-      helpers[i].total_farmed = helper_list[i].total_farmed;
+      helpers[i].total_farmed = default_helper_list[i].total_farmed;
     }
 
     // do part 3 later...
@@ -86,47 +93,13 @@ function checkHelperList() {
 
 // do same thing but for upgrades
 function checkUpgradeList() {
-  // situations:
-  // 1 - new buildings are added
-  // 2 - building characteristics are changed
-  // 3 - base cps or cost are changed: requires recalculating total cps and next buy cost
-
-  // part 1
-  // let new_len = helper_list.length;
-  // let old_len = helpers.length;
-  
-  // if (old_len < new_len) {
-  //   for (let i = old_len; i < new_len; i++) {
-  //     // to prevent my dumbassery of adding shit with the same name, which fucks up the buttons
-  //     if (!helpers.some(obj => obj["name"] === helper_list.slice(i, i + 1)[0].name)) {
-  //       helpers.push(helper_list.slice(i, i + 1)[0]);
-  //     }
-  //   }
-  // }
-
-  // // part 2
-  // for (let i = 0; i < helpers.length; i++) {
-  //   if (helpers[i].name !== helper_list[i].name) {
-  //     helpers[i].name = helper_list[i].name;
-  //   }
-  //   if (helpers[i].icon !== helper_list[i].icon) {
-  //     helpers[i].icon = helper_list[i].icon;
-  //   }
-  //   if (helpers[i].sound_path !== helper_list[i].sound_path) {
-  //     helpers[i].sound_path = helper_list[i].sound_path;
-  //   }
-  //   if (helpers[i].sfx_quantity !== helper_list[i].sfx_quantity) {
-  //     helpers[i].sfx_quantity = helper_list[i].sfx_quantity;
-  //   }
-  //   if (helpers[i].description !== helper_list[i].description) {
-  //     helpers[i].description = helper_list[i].description;
-  //   }
-  //   if (helpers[i].total_farmed == undefined) {
-  //     helpers[i].total_farmed = helper_list[i].total_farmed;
-  //   }
-
-  //   // do part 3 later...
-  // }
+  /* get the function references (they're not stored because of json. I guess 
+  I *should* use classes, but I just don't really want to for some reason) */
+  for (let i = 0; i < upgrades.length; i++) {
+    for (let j = 0; j < upgrades[i].length; j++) {
+      upgrades[i][j].action = default_upgrade_list[i][j].action;
+    }
+  }
 }
 
 /*
@@ -149,9 +122,9 @@ function displaySPS() {
 }
 
 function generateHelperList() {
-  const helper_list = document.getElementById("helper_list");
+  const helper_list_div = document.getElementById("helper_list");
 
-  helper_list.innerHTML = "";
+  helper_list_div.innerHTML = "";
 
   for (let i = 0; i < helpers.length; i++) {
     const helper = helpers[i];
@@ -228,7 +201,7 @@ function generateHelperList() {
     // make case where building isn't owned yet
     
     list_item.classList.add('helper-wrapper');
-    helper_list.appendChild(list_item);
+    helper_list_div.appendChild(list_item);
 
     document.getElementById(helper.name).addEventListener('click', function() {
       buyHelper(helper);
@@ -248,7 +221,7 @@ function generateHelperList() {
           <span id="helper_quantity">???</span>
         </button>
       `;
-      helper_list.appendChild(list_item);
+      helper_list_div.appendChild(list_item);
 
       break;
     }
@@ -257,9 +230,9 @@ function generateHelperList() {
   setInfoCards();
 }
 
-function displayUpgradeList() {
-  const upgrade_list = document.getElementById("upgrades");
-  upgrade_list.innerHTML = "";
+function generateUpgradeList() {
+  const default_upgrade_list = document.getElementById("upgrades");
+  default_upgrade_list.innerHTML = "";
   
   upgrades.forEach(upgrade_class => {
     upgrade_class.forEach(upgrade => {
@@ -272,8 +245,8 @@ function displayUpgradeList() {
       const list_item = document.createElement("li");
       list_item.innerHTML = `
         <div style="display: flex">
-          <img src="${upgrade.icon}" class="buyable_helper hover-element upgrade-square-icon">
-
+          <img src="${upgrade.icon}" class="buyable_helper hover-element upgrade-square-icon" id="${upgrade.name}">
+          
           <div class="info-card" style="border: 3px solid ${upgrade.color}; box-shadow: 0 0 10px ${upgrade.color}">
             <span class="upgrade-info-header">
               <img src="${upgrade.icon}" alt="${upgrade.name}" class="info-card-header-icon">
@@ -310,9 +283,18 @@ function displayUpgradeList() {
       
       list_item.style.border = `3px solid ${upgrade.color}`;
       list_item.style.boxShadow = `0 0 10px ${upgrade.color}`;
-      upgrade_list.appendChild(list_item);
+      default_upgrade_list.appendChild(list_item);
+      
+      const upgradeDiv = document.getElementById(`${upgrade.name}`);
+      upgradeDiv.addEventListener('click', () => {
+        buyUpgrade(upgrade);
+        console.log('Upgrade clicked:', upgrade.name);
+      });
+      
     });
   });
+
+  setInfoCards();
 }
 
 
@@ -328,6 +310,15 @@ sussy_button.addEventListener("click", function() {
   playAudio('sound/general/clickboom.mp3');
 });
 
+function calcTotalSPS() {
+  sus_per_second = helpers
+    .filter((helper) => helper.quantity >= 0)
+    .reduce((totalSPS, helper) => totalSPS + helper.sps * helper.quantity, 0);
+
+  displaySPS();
+  console.log("new sus per second: " + sus_per_second)
+}
+
 function updateSingleSPS(helper) {
   sus_per_second += helper.sps;
   displaySPS();
@@ -338,17 +329,40 @@ function increaseHelperCost(helper) {
 }
 
 function buyHelper(helper) {
-  if (score >= helper.cost) {
-    score -= helper.cost;
-    displayScore();
+  if (score < helper.cost) return;
 
-    helper.quantity++;
-    displayUpgradeList();
-    updateSingleSPS(helper);
-    increaseHelperCost(helper);
-    playHelperBuySFX(helper);
-    generateHelperList();
-  }
+  score -= helper.cost;
+  helper.quantity++;
+  updateSingleSPS(helper);
+  increaseHelperCost(helper);
+
+  playBuySFX(helper);
+
+  generateHelperList();
+  generateUpgradeList();
+  displayScore();
+
+  console.log("Bought helper: " + helper.name)
+}
+
+function buyUpgrade(upgrade) {
+  if (score < upgrade.cost || upgrade.owned) return;
+
+  score -= upgrade.cost;
+  upgrade.owned = true;
+  upgrade.action(upgrade);
+  // console.log(upgrade.action)
+  // console.log(upgrade)
+  calcTotalSPS();
+
+  playBuySFX(upgrade);
+
+  generateHelperList();
+  generateUpgradeList();
+  displayScore();
+
+  console.log("Bought upgrade: " + upgrade.name)
+  // console.log("helpers list after buying upgrade: " + helpers)
 }
 
 function updateTotalFarmed() {

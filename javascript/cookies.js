@@ -27,11 +27,11 @@ function getGameTotalFarmed() {
 }
 
 function getHelpers() {
-    return JSON.parse(localStorage.getItem("helpers")) || helper_list;
+    return JSON.parse(localStorage.getItem("helpers")) || default_helper_list;
 }
 
 function getUpgrades() {
-    return JSON.parse(localStorage.getItem("upgrades")) || upgrade_list;
+    return JSON.parse(localStorage.getItem("upgrades")) || default_upgrade_list;
 }
 
 function updateLocalStorage() {
