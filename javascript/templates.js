@@ -5,8 +5,8 @@ function helperLiTemplate(helper) {
 				<img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
 				<span id="helper_name">${helper.name}</span>
 				<span class="helper-cost">
-				<img src="images/misc/favicon.ico" alt="amogus logo">
-				${formatNumber(Math.ceil(helper.cost))}
+					<img src="images/misc/favicon.ico" alt="amogus logo">
+					${formatNumber(Math.ceil(helper.cost))}
 				</span>
 				<span id="helper_quantity">${formatNumber(helper.quantity)}</span>
 			</button>
@@ -71,15 +71,17 @@ function helperLiTemplate(helper) {
 
 function helperLiMysteryTemplate() {
 	return `
-		<button id="mysteryHelper">
-			<img src="images/helpers/mystery.png" alt="mystery helper" id="helper_icon">
-			<span id="helper_name">Unknown</span>
-			<span class="helper-cost">
-				<img src="images/misc/favicon.ico" alt="amogus logo">
-				???
-			</span>
-			<span id="helper_quantity">???</span>
-		</button>
+		<div style="display: flex">
+			<button id="mysteryHelper" class="hover-element">
+				<img id="helper_icon" src="images/helpers/mystery.png" alt="mystery helper">
+				<span id="helper_name">Unknown</span>
+				<span class="helper-cost">
+					<img src="images/misc/favicon.ico" alt="amogus logo">
+					???
+				</span>
+				<span id="helper_quantity">???</span>
+			</button>
+		</div>
 	`;
 }
 
