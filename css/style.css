@@ -440,17 +440,35 @@ h1 {
 
 }
 
+#helperBuyModifier,
+#buyAllUpgrades {
+  padding: 5px;
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+}
+
 /* UPGRADES */
 
 #upgrades {
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next line */
   list-style: none;
-  padding: 10px 0;
+  padding: 2px 0 2px 0;
+  margin: 0;
+  min-height: 62px;
+  height: 62px;
+  overflow: hidden;
+
+}
+
+#upgrades:hover {
+  height: auto;
+  /* padding: 10px 0; */
 }
 
 #upgrades li {
   box-sizing: border-box;
+  margin: 1px auto 1px 1px;
   margin: 1px;
   width: 19.3%;
   height: 60px;

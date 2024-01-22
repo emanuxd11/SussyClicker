@@ -78,7 +78,6 @@ function updateHelperView(helper) {
 		const nextHelperIdx = helpers.findIndex(_helper => _helper.name === helper.name) + 1;
 		if (nextHelperIdx < helpers.length) {
 			nextHelper = helpers[nextHelperIdx];
-			console.log("next helper: " + nextHelper.name)
 
 			// check it the next element already exists 
 			// (since it might be updated because of buying an upgrade and not a new helper)
@@ -88,7 +87,6 @@ function updateHelperView(helper) {
 				const previousMystery = document.getElementById('mysteryHelperWrapper');
 				if (previousMystery) {
 					previousMystery.parentNode.removeChild(previousMystery);
-					console.log("removed mystery helper");
 				}
 
 				// add new helper LIs
@@ -115,7 +113,6 @@ function updateHelperView(helper) {
 			// check if the element already exists in html
 			const upgradeWrapperId = `${removeWhiteSpace(upgrade.name)}Wrapper`;
 			if (document.getElementById(upgradeWrapperId)) {
-				console.log("upgrades can be bought but already exist");
 				continue;
 			}
 
@@ -156,9 +153,15 @@ function createUpgradeView(upgrade, upgrade_list_div) {
 	const upgradeDiv = document.getElementById(div_id);
 	upgradeDiv.addEventListener('click', () => {
 		buyUpgrade(upgrade);
-		console.log('Upgrade clicked:', upgrade.name)
 	});
 
 	const button = document.getElementById(`${removeWhiteSpace(upgrade.name)}BuyButton`);
 	setInfoCard(button, upgrade);
+}
+
+function deleteUpgradeView(upgrade) {
+	const upgrade_li = document.getElementById(`${removeWhiteSpace(upgrade.name)}Wrapper`);
+	if (upgrade_li) {
+		upgrade_li.parentNode.removeChild(upgrade_li);
+	}
 }

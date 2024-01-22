@@ -143,12 +143,8 @@ function buyHelper(helper) {
 
   playBuySFX(helper);
 
-  // generateHelperList();
-  // generateUpgradeList();
   updateHelperView(helper);
   displayScore();
-
-  // console.log("Bought helper: " + helper.name)
 }
 
 function buyUpgrade(upgrade) {
@@ -157,18 +153,14 @@ function buyUpgrade(upgrade) {
   score -= upgrade.cost;
   upgrade.owned = true;
   upgrade.action(upgrade);
-  // console.log(upgrade.action)
-  // console.log(upgrade)
+
   calcTotalSPS();
 
   playBuySFX(upgrade);
 
   updateHelperView(helpers.find(helper => helper.name === upgrade.helper_name));
-  generateUpgradeList();
+	deleteUpgradeView(upgrade);
   displayScore();
-
-  console.log("Bought upgrade: " + upgrade.name)
-  // console.log("helpers list after buying upgrade: " + helpers)
 }
 
 function updateTotalFarmed() {
