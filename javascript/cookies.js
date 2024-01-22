@@ -7,15 +7,15 @@ function setLocalStorage(name, value) {
 }
 
 function getScore() {
-    return parseInt(localStorage.getItem("score")) || 0;
+    return +localStorage.getItem("score") || 0;
 }
 
 function getSPS() {
-    return parseFloat(localStorage.getItem("sps")) || 0;
+    return +localStorage.getItem("sps") || 0;
 }
 
 function getSusPerClick() {
-    return parseFloat(localStorage.getItem("sus_per_click")) || 1;
+    return +localStorage.getItem("sus_per_click") || 1;
 }
 
 function getGameTotalFarmed() {
@@ -23,7 +23,7 @@ function getGameTotalFarmed() {
     // - current sus
     // - sum of the cost of buying the current number of each helper so far
     // this is for integrating with "legacy" pre alpha versions that didn't count the total sus
-    return parseFloat(localStorage.getItem("game_total_farmed")) || 0;
+    return +localStorage.getItem("game_total_farmed") || 0;
 }
 
 function getHelpers() {

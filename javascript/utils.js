@@ -107,53 +107,72 @@ function formatTime(seconds) {
   return `${formatNumber(Math.ceil(days)).trim()} day${days !== 1 ? 's' : ''}`;
 }
 
-/* Position cards correctly (so they don't go below the screen and are in the correct height always) */
 
-function setInfoCards() {
+/*
+ * For setting the info cards.
+ */
+
+function setAllInfoCards() {
   const hoverElements = document.querySelectorAll('.hover-element');
 
-  const vPositionCard = (event, element, infoCard) => {
-    const parentDim = element.getBoundingClientRect();
-    const infoCardDim = infoCard.getBoundingClientRect();
+  hoverElements.forEach((element, index) => {
+    setInfoCard(element, helpers[index]);
 
-    const parentHeight = parentDim.height;
-    const infoCardHeight = infoCardDim.height;
+    console.log(helpers[index].name)
+  });
+}
 
-    let newTop;
+function vPositionCard(event, element, infoCard) {
+  const parentDim = element.getBoundingClientRect();
+  const infoCardDim = infoCard.getBoundingClientRect();
 
-    if ((event.clientY - 32) + infoCardHeight > window.innerHeight) {
-      newTop = window.innerHeight - infoCardHeight - 10;
-    } else {
-      const mouseOffset = parentHeight / 2 + 10;
-      newTop = event.clientY - mouseOffset;
-    }
+  const parentHeight = parentDim.height;
+  const infoCardHeight = infoCardDim.height;
 
-    if (parseInt(infoCard.style.top, 10) !== newTop) {
-      return `${newTop}px`;
-    }
+  let newTop;
+
+  if ((event.clientY - 32) + infoCardHeight > window.innerHeight) {
+    newTop = window.innerHeight - infoCardHeight - 10;
+  } else {
+    const mouseOffset = parentHeight / 2 + 10;
+    newTop = event.clientY - mouseOffset;
   }
-  
-  hoverElements.forEach((element) => {
-    const infoCard = element.parentElement.querySelector('.info-card');
-    let isHovered = false;
 
-    document.addEventListener('mousemove', throttle((event) => {
-      if (!isHovered) return;
+  if (parseInt(infoCard.style.top, 10) !== newTop) {
+    return `${newTop}px`;
+  }
+}
 
-      infoCard.style.top = vPositionCard(event, element, infoCard);
-    }, 8)); // throttle for ~120fps feel and better efficiency
+function setInfoCard(element, helper=undefined) {
+  const infoCard = element.parentElement.querySelector('.info-card');
+  const timeWorth = infoCard.querySelector("time-worth");
+  let worthIntervalId;
+  let isHovered = false;
 
-    element.addEventListener('mouseover', () => {
-      isHovered = true;
-      infoCard.style.display = 'block';
-      infoCard.style.zIndex = '99';
-      infoCard.style.right = '326px';
-      infoCard.style.top = vPositionCard(event, element, infoCard)
-    });
+  document.addEventListener('mousemove', throttle((event) => {
+    if (!isHovered) return;
 
-    element.addEventListener('mouseout', () => {
-      isHovered = false;
-      infoCard.style.display = 'none';
-    });
+    infoCard.style.top = vPositionCard(event, element, infoCard);
+  }, 8)); // throttle for ~120fps feel and better efficiency
+
+  element.addEventListener('mouseover', () => {
+    isHovered = true;
+    infoCard.style.display = 'block';
+    infoCard.style.zIndex = '99';
+    infoCard.style.right = '326px';
+    infoCard.style.top = vPositionCard(event, element, infoCard);
+
+    // update this value every 1s
+    worthIntervalId = setInterval(() => {
+      updateTimeWorth(helper);
+    }, 1000);
+  });
+
+  element.addEventListener('mouseout', () => {
+    isHovered = false;
+    infoCard.style.display = 'none';
+
+    // disable interval when the card is not being shown
+    clearInterval(worthIntervalId);
   });
 }

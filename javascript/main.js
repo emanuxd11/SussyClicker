@@ -37,7 +37,7 @@ setInterval(function() {
 // update title with score
 setInterval(function() {
   if (score > 0) {
-    document.title = formatNumber(parseInt(score)) + " sus - Sussy Clicker";
+    document.title = formatNumber(Math.floor(score)) + " sus - Sussy Clicker";
   }
 }, 5000);
 
@@ -107,7 +107,7 @@ function checkUpgradeList() {
  */
 
 function displayScore() {
-  document.getElementById("score").textContent = "Sussy Meter: " + formatNumber(parseInt(score));
+  document.getElementById("score").textContent = "Sussy Meter: " + formatNumber(Math.floor(score));
 }
 
 function displaySPS() {
@@ -123,111 +123,22 @@ function displaySPS() {
 
 function generateHelperList() {
   const helper_list_div = document.getElementById("helper_list");
-
   helper_list_div.innerHTML = "";
 
   for (let i = 0; i < helpers.length; i++) {
     const helper = helpers[i];
 
-    const list_item = document.createElement("li");
-    list_item.innerHTML = `
-      <div style="display: flex">
-        <button id="${helper.name}" class="hover-element">
-          <img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
-          <span id="helper_name">${helper.name}</span>
-          <span class="helper-cost">
-            <img src="images/misc/favicon.ico" alt="amogus logo">
-            ${formatNumber(Math.ceil(helper.cost))}
-          </span>
-          <span id="helper_quantity">${formatNumber(helper.quantity)}</span>
-        </button>
-
-        <div class="info-card">
-          <span class="helper-info-header">
-            <img src="${helper.icon}" alt="${helper.name}" class="info-card-header-icon">
-            <span class="helper-info-name-owned">
-              <h1>${helper.name}</h1>
-              <p class="helper-info-owned">owned: ${helper.quantity}</p>
-            </span>
-            <span class="info-helper-cost helper-cost">
-              <div>
-                <img src="images/misc/favicon.ico" alt="amogus logo">
-                ${formatNumber(Math.ceil(helper.cost))}
-              </div>
-              
-              <span class="time-worth">
-                ${getTimeWorth(sus_per_second, score, helper.cost)}
-              </span>
-            </span>
-          </span>
-
-          <p class="helper-description">
-            <q>${helper.description}</q>
-          </p>
-          
-          <ul class="helper-info-list">
-            <li>
-              <p>
-                each ${helper.name} produces 
-                <span class="info-list-highlight">${formatNumber(helper.sps)} sus</span>
-                per second
-              </p>
-            </li>
-            <li>
-              <p>
-                ${helper.quantity} ${formatPlural(helper.name)} producing
-                <span class="info-list-highlight">${formatNumber(helper.quantity * helper.sps)} sus </span>
-                per second
-                <span class="info-list-highlight">
-                  (${format1Dec(((helper.sps * helper.quantity) / sus_per_second) * 100)}% 
-                </span>
-                of total sus/s)
-              </p>
-            </li>
-            <li>
-              <p id="helper-${removeWhiteSpace(helper.name)}-prod">
-                <span class="info-list-highlight">${formatNumber(parseInt(helper.total_farmed))} sus </span>
-                ${helper.verb} so far
-              </p>
-            </li>
-          </ul>
-
-          <p class="click-to-purchase">
-            Click to purchase.
-          </p>
-        </div>
-      </div>
-    `;
-    // make case where building isn't owned yet
-    
-    list_item.classList.add('helper-wrapper');
-    helper_list_div.appendChild(list_item);
-
-    document.getElementById(helper.name).addEventListener('click', function() {
-      buyHelper(helper);
-    });
+    // regular helper view
+    createHelperView(helper, helper_list_div);
 
     // add the mystery one in case the next isn't owned
     if (helper.quantity === 0 && i < helpers.length - 1) {
-      const list_item = document.createElement("li");
-      list_item.innerHTML = `
-        <button id="mistery_helper">
-          <img src="images/helpers/mistery.png" alt="mistery helper" id="helper_icon">
-          <span id="helper_name">Unknown</span>
-          <span class="helper-cost">
-            <img src="images/misc/favicon.ico" alt="amogus logo">
-            ???
-          </span>
-          <span id="helper_quantity">???</span>
-        </button>
-      `;
-      helper_list_div.appendChild(list_item);
-
+      createMysteryHelperView(helper_list_div);
       break;
     }
   }
 
-  setInfoCards();
+  setAllInfoCards();
 }
 
 function generateUpgradeList() {
@@ -294,15 +205,72 @@ function generateUpgradeList() {
     });
   });
 
-  setInfoCards();
+  setAllInfoCards();
 }
 
+function createMysteryHelperView(helper_list_div) {
+  const list_item = document.createElement("li");
+  list_item.id = "mysteryHelperWrapper";
+  list_item.innerHTML = helperLiMysteryTemplate();
+  helper_list_div.appendChild(list_item);
+}
+
+function createHelperView(helper, helper_list_div) {
+  const list_item = document.createElement("li");
+  list_item.innerHTML = helperLiTemplate(helper);
+  // TODO: make case where building isn't owned yet
+  
+  list_item.classList.add('helper-wrapper');
+  list_item.id = `${removeWhiteSpace(helper.name)}Wrapper`;
+  helper_list_div.appendChild(list_item);
+
+  document.getElementById(`${removeWhiteSpace(helper.name)}BuyButton`).addEventListener('click', function() {
+    buyHelper(helper);
+  });
+}
+
+function updateHelperView(helper) {
+  const list_item = document.getElementById(`${removeWhiteSpace(helper.name)}Wrapper`);
+  list_item.innerHTML = helperLiTemplate(helper);
+  
+  const button = document.getElementById(`${removeWhiteSpace(helper.name)}BuyButton`);
+
+  button.addEventListener('click', function() {
+    buyHelper(helper);
+  });
+
+  setInfoCard(button, helper);
+
+  // check if it's the first buy (that unlocks a new helper)
+  if (helper.quantity > 1) return;
+  
+  let nextHelper;
+  const nextHelperIdx = helpers.findIndex(_helper => _helper.name === helper.name) + 1;
+  if (nextHelperIdx < helpers.length) {
+    nextHelper = helpers[nextHelperIdx];
+    console.log("next helper: " + nextHelper.name)
+
+    // delete previous mystery helper
+    const previousMystery = document.getElementById('mysteryHelperWrapper');
+    if (previousMystery) {
+      previousMystery.parentNode.removeChild(previousMystery);
+      console.log("removed mystery helper");
+    }
+
+    const helper_list_div = document.getElementById("helper_list");
+    createHelperView(nextHelper, helper_list_div);
+    createMysteryHelperView(helper_list_div);
+  }
+}
+
+// do same thing for the upgrades
+// also need to handle showing new available upgrades and new available helpers
 
 /*
  * Game functionality
  */
 
-let sussy_button = document.getElementById("sussy_button");
+const sussy_button = document.getElementById("sussy_button");
 sussy_button.addEventListener("click", function() {
   score += sus_per_click;
   game_total_farmed += sus_per_click;
@@ -338,8 +306,9 @@ function buyHelper(helper) {
 
   playBuySFX(helper);
 
-  generateHelperList();
-  generateUpgradeList();
+  // generateHelperList();
+  // generateUpgradeList();
+  updateHelperView(helper);
   displayScore();
 
   console.log("Bought helper: " + helper.name)
@@ -374,8 +343,8 @@ function updateTotalFarmed() {
     
     helper.total_farmed += helper.quantity * helper.sps;
 
-    let total_prod_el = document.getElementById(`helper-${removeWhiteSpace(helper.name)}-prod`);
-    total_prod_el.innerHTML = `<span class="info-list-highlight">${formatNumber(parseInt(helper.total_farmed))} sus </span>${helper.verb} so far`;
+    const total_prod_el = document.getElementById(`helper-${removeWhiteSpace(helper.name)}-prod`);
+    total_prod_el.innerHTML = `<span class="info-list-highlight">${formatNumber(helper.total_farmed)} sus </span>${helper.verb} so far`;
   }
 
   // update total
@@ -383,6 +352,7 @@ function updateTotalFarmed() {
 }
 
 // do this when showing cards with javascript cause it doesn't make sense to calculate each second for every single one
-// function updateTimeWorth() {
-  
-// }
+function updateTimeWorth(helper) {
+  const time_worth_el = document.getElementById(`${removeWhiteSpace(helper.name)}Time`);
+  time_worth_el.innerHTML = `${getTimeWorth(sus_per_second, score, helper.cost)}`;
+}
