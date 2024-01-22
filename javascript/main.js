@@ -137,75 +137,6 @@ function generateHelperList() {
       break;
     }
   }
-
-  setAllInfoCards();
-}
-
-function generateUpgradeList() {
-  const default_upgrade_list = document.getElementById("upgrades");
-  default_upgrade_list.innerHTML = "";
-  
-  upgrades.forEach(upgrade_class => {
-    upgrade_class.forEach(upgrade => {
-      if (upgrade.owned) return;
-
-      current_building = helpers.find(helper => helper.name === upgrade.helper_name);
-      if (current_building.quantity < 1 ||
-        current_building.quantity < upgrade.requirement) return;
-
-      const list_item = document.createElement("li");
-      list_item.innerHTML = `
-        <div style="display: flex">
-          <img src="${upgrade.icon}" class="buyable_helper hover-element upgrade-square-icon" id="${upgrade.name}">
-          
-          <div class="info-card" style="border: 3px solid ${upgrade.color}; box-shadow: 0 0 10px ${upgrade.color}">
-            <span class="upgrade-info-header">
-              <img src="${upgrade.icon}" alt="${upgrade.name}" class="info-card-header-icon">
-              <span class="upgrade-info-name-owned">
-                <h1>${upgrade.name}</h1>
-                <p class="upgrade-info-owned">Upgrade</p>
-              </span>
-              <span class="info-upgrade-cost helper-cost">
-                <div>
-                  <img src="images/misc/favicon.ico" alt="amogus logo">
-                  ${formatNumber(Math.ceil(upgrade.cost))}
-                </div>
-                
-                <span class="time-worth">
-                  ${getTimeWorth(sus_per_second, score, upgrade.cost)}
-                </span>
-              </span>
-            </span>
-
-            <p class="upgrade-summary">
-              ${upgrade.summary}
-            </p>
-            <p class="upgrade-description">
-              <q>${upgrade.description}</q>
-            </p>
-
-            <p class="click-to-purchase">
-              Click to purchase.
-            </p>
-            
-          </div>
-        </div>
-      `;
-      
-      list_item.style.border = `3px solid ${upgrade.color}`;
-      list_item.style.boxShadow = `0 0 10px ${upgrade.color}`;
-      default_upgrade_list.appendChild(list_item);
-      
-      const upgradeDiv = document.getElementById(`${upgrade.name}`);
-      upgradeDiv.addEventListener('click', () => {
-        buyUpgrade(upgrade);
-        console.log('Upgrade clicked:', upgrade.name);
-      });
-      
-    });
-  });
-
-  setAllInfoCards();
 }
 
 function createMysteryHelperView(helper_list_div) {
@@ -227,6 +158,9 @@ function createHelperView(helper, helper_list_div) {
   document.getElementById(`${removeWhiteSpace(helper.name)}BuyButton`).addEventListener('click', function() {
     buyHelper(helper);
   });
+
+  const button = document.getElementById(`${removeWhiteSpace(helper.name)}BuyButton`);
+  setInfoCard(button, helper);
 }
 
 function updateHelperView(helper) {
@@ -241,30 +175,77 @@ function updateHelperView(helper) {
 
   setInfoCard(button, helper);
 
+  // (ok this code isn't pretty but it does the trick for now)
   // check if it's the first buy (that unlocks a new helper)
-  if (helper.quantity > 1) return;
-  
-  let nextHelper;
-  const nextHelperIdx = helpers.findIndex(_helper => _helper.name === helper.name) + 1;
-  if (nextHelperIdx < helpers.length) {
-    nextHelper = helpers[nextHelperIdx];
-    console.log("next helper: " + nextHelper.name)
+  if (helper.quantity == 1) {
+    let nextHelper;
+    const nextHelperIdx = helpers.findIndex(_helper => _helper.name === helper.name) + 1;
+    if (nextHelperIdx < helpers.length) {
+      nextHelper = helpers[nextHelperIdx];
+      console.log("next helper: " + nextHelper.name)
 
-    // delete previous mystery helper
-    const previousMystery = document.getElementById('mysteryHelperWrapper');
-    if (previousMystery) {
-      previousMystery.parentNode.removeChild(previousMystery);
-      console.log("removed mystery helper");
+      // check it the next element already exists 
+      // (since it might be updated because of buying an upgrade and not a new helper)
+      if (!document.getElementById(`${removeWhiteSpace(nextHelper.name)}Wrapper`)) {
+
+        // delete previous mystery helper
+        const previousMystery = document.getElementById('mysteryHelperWrapper');
+        if (previousMystery) {
+          previousMystery.parentNode.removeChild(previousMystery);
+          console.log("removed mystery helper");
+        }
+
+        // add new helper LIs
+        const helper_list_div = document.getElementById("helper_list");
+        createHelperView(nextHelper, helper_list_div);
+        createMysteryHelperView(helper_list_div);
+      }
     }
+  }
 
-    const helper_list_div = document.getElementById("helper_list");
-    createHelperView(nextHelper, helper_list_div);
-    createMysteryHelperView(helper_list_div);
+  // update also the upgrade list if there are new upgrade unlocks
+  if (true) {
+    
   }
 }
 
-// do same thing for the upgrades
-// also need to handle showing new available upgrades and new available helpers
+function generateUpgradeList() {
+  const upgrade_list_div = document.getElementById("upgrades");
+  upgrade_list_div.innerHTML = "";
+  
+  upgrades.forEach(upgrade_class => {
+    upgrade_class.forEach(upgrade => {
+      if (upgrade.owned) return;
+
+      current_building = helpers.find(helper => helper.name === upgrade.helper_name);
+      if (current_building.quantity < upgrade.requirement) return;
+
+      createUpgradeView(upgrade, upgrade_list_div);
+    });
+  });
+}
+
+function createUpgradeView(upgrade, upgrade_list_div) {
+	const div_id = `${removeWhiteSpace(upgrade.name)}Wrapper`;
+	const list_item = document.createElement("li");
+	list_item.id = div_id;
+
+	list_item.innerHTML = upgradeLiTemplate(upgrade);
+	
+	list_item.style.border = `3px solid ${upgrade.color}`;
+	list_item.style.boxShadow = `0 0 10px ${upgrade.color}`;
+	upgrade_list_div.appendChild(list_item);
+	
+	const upgradeDiv = document.getElementById(div_id);
+	upgradeDiv.addEventListener('click', () => {
+		buyUpgrade(upgrade);
+		console.log('Upgrade clicked:', upgrade.name)
+	});
+
+	const button = document.getElementById(`${removeWhiteSpace(upgrade.name)}BuyButton`);
+  setInfoCard(button, upgrade);
+}
+
 
 /*
  * Game functionality
@@ -326,7 +307,7 @@ function buyUpgrade(upgrade) {
 
   playBuySFX(upgrade);
 
-  generateHelperList();
+  updateHelperView(helpers.find(helper => helper.name === upgrade.helper_name));
   generateUpgradeList();
   displayScore();
 
@@ -352,7 +333,10 @@ function updateTotalFarmed() {
 }
 
 // do this when showing cards with javascript cause it doesn't make sense to calculate each second for every single one
-function updateTimeWorth(helper) {
-  const time_worth_el = document.getElementById(`${removeWhiteSpace(helper.name)}Time`);
-  time_worth_el.innerHTML = `${getTimeWorth(sus_per_second, score, helper.cost)}`;
+function updateTimeWorth(buyable) {
+  const time_worth_el = document.getElementById(`${removeWhiteSpace(buyable.name)}Time`);
+	if (time_worth_el) {
+		// console.log(`new time worth for ${buyable.name} = ` + getTimeWorth(sus_per_second, score, buyable.cost))
+  	time_worth_el.innerHTML = `${getTimeWorth(sus_per_second, score, buyable.cost)}`;
+	}
 }

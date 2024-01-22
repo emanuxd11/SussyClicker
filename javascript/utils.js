@@ -112,13 +112,12 @@ function formatTime(seconds) {
  * For setting the info cards.
  */
 
+// this one might actually not be needed anymore so I might remove it
 function setAllInfoCards() {
   const hoverElements = document.querySelectorAll('.hover-element');
 
   hoverElements.forEach((element, index) => {
     setInfoCard(element, helpers[index]);
-
-    console.log(helpers[index].name)
   });
 }
 
@@ -162,7 +161,11 @@ function setInfoCard(element, helper=undefined) {
     infoCard.style.right = '326px';
     infoCard.style.top = vPositionCard(event, element, infoCard);
 
-    // update this value every 1s
+		console.log("hovering on " + helper.name)
+
+		// update it immediately
+		updateTimeWorth(helper);
+    // and then update it every 1s
     worthIntervalId = setInterval(() => {
       updateTimeWorth(helper);
     }, 1000);
