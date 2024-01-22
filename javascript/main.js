@@ -94,7 +94,7 @@ function checkHelperList() {
 // do same thing but for upgrades
 function checkUpgradeList() {
   /* get the function references (they're not stored because of json. I guess 
-  I *should* use classes, but I just don't really want to for some reason) */
+  I *should* probably use classes, but I just don't really want to for some reason) */
   for (let i = 0; i < upgrades.length; i++) {
     for (let j = 0; j < upgrades[i].length; j++) {
       upgrades[i][j].action = default_upgrade_list[i][j].action;
@@ -204,9 +204,30 @@ function updateHelperView(helper) {
   }
 
   // update also the upgrade list if there are new upgrade unlocks
-  if (true) {
-    
-  }
+	for (const upgrade_type of upgrades) {
+		for (const upgrade of upgrade_type) {
+			// search for upgrade type that matches the helper class
+			if (upgrade.helper_name !== helper.name) {
+				break;
+			}
+
+			// check if requirements are met
+			if (upgrade.owned || upgrade.requirement > helper.quantity) {
+				continue;
+			}
+
+			// check if the element already exists in html
+			const upgradeWrapperId = `${removeWhiteSpace(upgrade.name)}Wrapper`;
+			if (document.getElementById(upgradeWrapperId)) {
+				console.log("upgrades can be bought but already exist");
+				continue;
+			}
+
+			// if it doesn't exist, create it
+			const upgrade_list_div = document.getElementById("upgrades");
+			createUpgradeView(upgrade, upgrade_list_div);
+		}
+	}
 }
 
 function generateUpgradeList() {
@@ -292,7 +313,7 @@ function buyHelper(helper) {
   updateHelperView(helper);
   displayScore();
 
-  console.log("Bought helper: " + helper.name)
+  // console.log("Bought helper: " + helper.name)
 }
 
 function buyUpgrade(upgrade) {

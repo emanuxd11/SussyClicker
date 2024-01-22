@@ -161,7 +161,7 @@ function setInfoCard(element, helper=undefined) {
     infoCard.style.right = '326px';
     infoCard.style.top = vPositionCard(event, element, infoCard);
 
-		console.log("hovering on " + helper.name)
+		// console.log("hovering on " + helper.name)
 
 		// update it immediately
 		updateTimeWorth(helper);
