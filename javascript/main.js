@@ -17,7 +17,7 @@ const upgrades = getUpgrades();
 // game params
 let sus_per_click = getSusPerClick();
 let score = getScore();
-let sus_per_second = getSPS();
+let sus_per_second; calcTotalSPS(); /* maybe calculating it is just better to ensure it's correct */   /* getSPS(); */
 let game_total_farmed = getGameTotalFarmed();
 
 checkHelperList();
@@ -72,7 +72,8 @@ function checkHelperList() {
       helpers[i].name = default_helper_list[i].name;
     }
     if (helpers[i].icon !== default_helper_list[i].icon) {
-      helpers[i].icon = default_helper_list[i].icon;
+			if (helpers[i].name !== "Mr.Incredible") // get rid of this later when doing proper storage code and define function to calculate correct image 
+      	helpers[i].icon = default_helper_list[i].icon;
     }
     if (helpers[i].sound_path !== default_helper_list[i].sound_path) {
       helpers[i].sound_path = default_helper_list[i].sound_path;
@@ -121,7 +122,6 @@ function calcTotalSPS() {
     .reduce((totalSPS, helper) => totalSPS + helper.sps * helper.quantity, 0);
 
   displaySPS();
-  console.log("new sus per second: " + sus_per_second)
 }
 
 function updateSingleSPS(helper) {
@@ -138,7 +138,10 @@ function buyHelper(helper) {
 
   score -= helper.cost;
   helper.quantity++;
-  updateSingleSPS(helper);
+	// testing this out with calculating total to ensure it's 
+	// always the correctv value (or at least every time a helper is bought)
+  // updateSingleSPS(helper);
+	calcTotalSPS();
   increaseHelperCost(helper);
 
   playBuySFX(helper);

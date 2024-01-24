@@ -6,9 +6,11 @@
     <title>Sussy Clicker</title>
     
     <link rel="icon" type="image/x-icon" href="images/misc/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/info_popup.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <script src="javascript/info_popup.js" defer></script>
     <script src="javascript/utils.js" defer></script>
     <script src="javascript/cookies.js" defer></script>
     <script src="javascript/templates.js" defer></script>
@@ -21,9 +23,10 @@
 
   <body>
     <div class="topnav">
-      <a class="github-link" href="https://github.com/emanuxd11/SussyClicker" target="_blank">
-        <i class="fab fa-github"> GitHub</i>
+      <a id="infoButton">
+        <i class="fas fa-info-circle"> Info</i>
       </a>
+
       <div id="volume_container">
         <label for="volume_slider" id="volume_label">Volume</label>
         <input type="range" id="volume_slider">
@@ -59,6 +62,8 @@
 				</div>
       </div>    
     </div>
+
+    <div id="infoPopup"></div>
 
     <div class="build-version">
       Alpha 1.0

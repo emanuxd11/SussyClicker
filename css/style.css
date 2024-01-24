@@ -44,6 +44,27 @@ html, body, button {
   height: calc(100vh - 47px);
 }
 
+.github-link {
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.2s;
+  border-radius: 5px;
+  outline: none;
+}
+
+.github-link:hover {
+  background-color: #00ff00;
+  color: #000;
+  position: relative;
+
+  border-radius: 5px;
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+  animation: glowing 10s infinite;
+}
+
 .topnav {
   background-color: #111;
   overflow: hidden;

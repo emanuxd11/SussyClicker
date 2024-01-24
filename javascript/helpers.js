@@ -40,19 +40,21 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/JohnCena/",
       sfx_quantity: 2,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
-      name: "Turing Machine",
+      name: "Mr.Incredible",
       base_cost: 12000,
       cost: 12000,
       base_sps: 47,
       sps: 47,
-      description: "A mathematical model of computation developed by Supicious Turing III with the goal of sussyfying the world",
-      icon: "images/helpers/TuringMachine.jpg",
+      description: "A once great man, some would even say incredible, who unfortunately sussied his way into the pits of absolute uncannyness",
+      icon: "images/helpers/MisterIncredible/1.jpg",
       quantity: 0,
-      sound_path: "sound/helpers/TuringMachine/",
+      sound_path: "sound/helpers/MisterIncredible/",
       sfx_quantity: 1,
       total_farmed: 0,
+      verb: "uncannied",
     },
     {
       name: "Suspicious Son",
@@ -66,6 +68,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/FilhosACosta/",
       sfx_quantity: 1,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "Among Sus",
@@ -79,19 +82,21 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/AmongSus/",
       sfx_quantity: 3,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
-      name: "NEW BUILDING ONE",
+      name: "Turing Machine",
       base_cost: 20000000,
       cost: 20000000,
       base_sps: 7800,
       sps: 7800,
-      description: "some new desc wtv",
-      icon: "images/helpers/new.png",
+      description: "A mathematical model of computation developed by Supicious Turing III with the goal of sussyfying the world",
+      icon: "images/helpers/TuringMachine.jpg",
       quantity: 0,
-      sound_path: "sound/helpers/new/",
-      sfx_quantity: 0,
+      sound_path: "sound/helpers/TuringMachine/",
+      sfx_quantity: 1,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 2",
@@ -105,6 +110,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 3",
@@ -118,6 +124,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 4",
@@ -131,6 +138,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 5",
@@ -144,6 +152,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 6",
@@ -157,6 +166,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 7",
@@ -170,6 +180,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 8",
@@ -183,6 +194,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 9",
@@ -196,6 +208,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 10",
@@ -209,6 +222,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 11",
@@ -222,6 +236,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 12",
@@ -235,6 +250,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 13",
@@ -248,6 +264,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
     {
       name: "new building 14",
@@ -261,6 +278,7 @@ function fetch_helper_list() {
       sound_path: "sound/helpers/new/",
       sfx_quantity: 0,
       total_farmed: 0,
+      verb: "define me please",
     },
   ];
 } 

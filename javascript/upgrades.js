@@ -1,37 +1,3 @@
-// NEON COLORS
-const neonColors = {
-  'Electric Blue': '#00ccff',
-  'Laser Green': '#00ff66',
-  'Neon Pink': '#ff33cc',
-  'Atomic Orange': '#ff9900',
-  'Vivid Purple': '#cc00ff',
-  'Fluorescent Yellow': '#ffff00',
-  'Hot Magenta': '#ff0099',
-  'Cyber Cyan': '#00ffff',
-  'Glowing Red': '#ff0000',
-  'Luminous Lime': '#ccff00'
-};
-
-/* definition of upgrade functions */
-function upgrade_default(upgrade) {
-  const helper = helpers.find(helper => helper.name === upgrade.helper_name);
-  helper.sps *= 2;
-}
-
-function upgrade_helper_spc(upgrade) {
-  const helper = helpers.find(helper => helper.name === upgrade.helper_name);
-  helper.sps *= 2;
-  sus_per_click *= 2;
-}
-
-function upgrade_sussy_baka_type2() {
- // todo
-}
-
-function upgrade_change_img(upgrade) {
-  // todo
-}
-
 function fetch_sussy_baka_upgrades() {
   return [
     {
@@ -138,9 +104,120 @@ function fetch_pewdiepie_upgrades() {
   ];
 }
 
+function fetch_mrincredible_upgrades() {
+  return [
+    {
+      helper_name: "Mr.Incredible",
+      name: "find name mistah inc 1",
+      base_cost: 1.2e5,
+      cost: 1.2e5,
+      requirement: 1,
+      action: upgrade_helper_inc_img,
+      summary: `Mr. Incredible is <span class="info-list-highlight">half as canny</span>.`,
+      description: "Come up with description",
+      icon: "images/helpers/MisterIncredible/2.jpg",
+      owned: false,
+      sound_path: "sound/helpers/MisterIncredible/",
+      sfx_quantity: 1,
+      color: neonColors['Fluorescent Yellow'],
+      c_filter: true,
+    },
+    {
+      helper_name: "Mr.Incredible",
+      name: "find name mistah inc 2",
+      base_cost: 6e5,
+      cost: 6e5,
+      requirement: 5,
+      action: upgrade_helper_inc_img,
+      summary: `Mr. Incredible is <span class="info-list-highlight">half as canny</span>.`,
+      description: "Come up with description",
+      icon: "images/helpers/MisterIncredible/3.jpg",
+      owned: false,
+      sound_path: "sound/helpers/MisterIncredible/",
+      sfx_quantity: 1,
+      color: neonColors['Hot Magenta'],
+      c_filter: true,
+    },
+    {
+      helper_name: "Mr.Incredible",
+      name: "find name mistah inc 3",
+      base_cost: 6e6,
+      cost: 6e6,
+      requirement: 25,
+      action: upgrade_helper_inc_img,
+      summary: `Mr. Incredible is <span class="info-list-highlight">half as canny</span>.`,
+      description: "Come up with description",
+      icon: "images/helpers/MisterIncredible/4.jpg",
+      owned: false,
+      sound_path: "sound/helpers/MisterIncredible/",
+      sfx_quantity: 1,
+      color: neonColors['Cyber Cyan'],
+      c_filter: true,
+    }
+  ];
+}
+
 function fetch_all_upgrades() {
   return [
     fetch_sussy_baka_upgrades(),
     fetch_pewdiepie_upgrades(),
+    // fetch someone else brah
+    fetch_mrincredible_upgrades(),
   ]
+}
+
+/* Upgrade function definitions (some are special/different) */
+
+// NEON COLORS
+const neonColors = {
+  'Electric Blue': '#00ccff',
+  'Laser Green': '#00ff66',
+  'Neon Pink': '#ff33cc',
+  'Atomic Orange': '#ff9900',
+  'Vivid Purple': '#cc00ff',
+  'Fluorescent Yellow': '#ffff00',
+  'Hot Magenta': '#ff0099',
+  'Cyber Cyan': '#00ffff',
+  'Glowing Red': '#ff0000',
+  'Luminous Lime': '#ccff00'
+};
+
+/* definition of upgrade functions */
+function upgrade_default(upgrade) {
+  const helper = helpers.find(helper => helper.name === upgrade.helper_name);
+  helper.sps *= 2;
+}
+
+function upgrade_helper_spc(upgrade) {
+  // const helper = helpers.find(helper => helper.name === upgrade.helper_name);
+  // helper.sps *= 2;
+  upgrade_default(upgrade);
+  sus_per_click *= 2;
+}
+
+
+
+function upgrade_helper_inc_img(upgrade) {
+  // repeating this code here since I have to then find the helper anyways
+  const helper = helpers.find(helper => helper.name === upgrade.helper_name);
+  helper.sps *= 2;
+
+  const incrementImageNumber = (imagePath) => {
+    const regex = /(\d+)(?=\.\w+$)/;
+    const match = imagePath.match(regex);
+  
+    if (match) {
+      const currentNumber = parseInt(match[0], 10);
+      const newNumber = currentNumber + 1;
+      return imagePath.replace(regex, newNumber.toString());
+    }
+  
+    return imagePath;
+  };
+
+  helper.icon = incrementImageNumber(helper.icon);
+}
+
+function upgrade_sussy_baka_type2() {
+ // todo
 }
