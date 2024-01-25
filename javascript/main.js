@@ -1,5 +1,5 @@
 // sometimes useful to reset the game while testing
-// localStorage.clear()
+localStorage.clear()
 
 /*
  * Set initial game parameters

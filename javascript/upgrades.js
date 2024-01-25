@@ -118,7 +118,8 @@ function fetch_mrincredible_upgrades() {
       icon: "images/helpers/MisterIncredible/2.jpg",
       owned: false,
       sound_path: "sound/helpers/MisterIncredible/",
-      sfx_quantity: 1,
+      sfx_quantity: 16,
+      sfx_number: 2,
       color: neonColors['Fluorescent Yellow'],
       c_filter: true,
     },
@@ -134,7 +135,8 @@ function fetch_mrincredible_upgrades() {
       icon: "images/helpers/MisterIncredible/3.jpg",
       owned: false,
       sound_path: "sound/helpers/MisterIncredible/",
-      sfx_quantity: 1,
+      sfx_quantity: 16,
+      sfx_number: 3,
       color: neonColors['Hot Magenta'],
       c_filter: true,
     },
@@ -150,7 +152,8 @@ function fetch_mrincredible_upgrades() {
       icon: "images/helpers/MisterIncredible/4.jpg",
       owned: false,
       sound_path: "sound/helpers/MisterIncredible/",
-      sfx_quantity: 1,
+      sfx_quantity: 16,
+      sfx_number: 4,
       color: neonColors['Cyber Cyan'],
       c_filter: true,
     }
@@ -195,7 +198,9 @@ function upgrade_helper_spc(upgrade) {
   sus_per_click *= 2;
 }
 
-
+function upgrade_sussy_baka_type2() {
+  // todo
+}
 
 function upgrade_helper_inc_img(upgrade) {
   // repeating this code here since I have to then find the helper anyways
@@ -216,8 +221,7 @@ function upgrade_helper_inc_img(upgrade) {
   };
 
   helper.icon = incrementImageNumber(helper.icon);
-}
-
-function upgrade_sussy_baka_type2() {
- // todo
+  helper.sfx_number = 
+    helper.sfx_number + 1 > helper.sfx_quantity ? helper.sfx_quantity
+    : helper.sfx_number + 1;
 }

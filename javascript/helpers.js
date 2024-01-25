@@ -52,7 +52,8 @@ function fetch_helper_list() {
       icon: "images/helpers/MisterIncredible/1.jpg",
       quantity: 0,
       sound_path: "sound/helpers/MisterIncredible/",
-      sfx_quantity: 1,
+      sfx_quantity: 16,
+      sfx_number: 1, /* not all helpers have this! */
       total_farmed: 0,
       verb: "uncannied",
     },
