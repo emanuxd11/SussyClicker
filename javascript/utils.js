@@ -23,22 +23,23 @@ function formatPlural(str) {
 }
 
 function formatNumber(number) {
-  let suffixes = [
+  const suffixes = [
     "", "", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion",
     "septillion", "octillion", "nonillion", "decillion", "undecillion", "duodecillion",
     "tredecillion", "quatturodecillion", "quindecillion", "sexdecillion", "septendecillion",
-    "octodecillion", "novemdecillion", "vigintillion", "duovigintillion", "tresvigintillion",
-    "quattuorvigintillion", "sexavigintillion", "septavigintillion", "octovigintillion",
+    "octodecillion", "novemdecillion", "vigintillion", "unvigintillion", "duovigintillion", 
+    "tresvigintillion", "quattuorvigintillion", "sexavigintillion", "septavigintillion", "octovigintillion",
     "novigintillion"
   ];
   let suffix_index = 0;
 
-  if (number >= 1000000) {
-    while (number >= 1000) {
+  // .toPrecision is important because >flõtz<
+  if (Number.parseFloat(number).toPrecision(1) >= 1000000) {
+    while (Number.parseFloat(number).toPrecision(1) >= 1000) {
       number /= 1000;
       suffix_index++;
     }
-    number = (Math.round(number * 1000) / 1000).toFixed(3);
+    number = (Number.parseFloat(number * 1000) / 1000).toFixed(3);
   } else {
     number = number.toLocaleString();
   }
@@ -72,15 +73,15 @@ function getTimeWorth(currentSPS, currentSUS, cost) {
     return "";
   }
 
-  if (currentSPS > cost) return "worth <1 second";
+  if (currentSPS >= cost) return "worth <1 second";
 
   let diff = currentSUS - cost;
 
   if (diff < 0) {
-    let time = formatTime(Math.abs(diff/currentSPS));
+    let time = formatTime(-diff/currentSPS);
     return `in ${time}`;
   } else {
-    let time = formatTime(Math.abs(cost/currentSPS));
+    let time = formatTime(cost/currentSPS);
     return `worth ${time}`;
   }
 }
@@ -105,6 +106,10 @@ function formatTime(seconds) {
 
   const days = Math.floor(seconds / 86400);
   return `${formatNumber(Math.ceil(days)).trim()} day${days !== 1 ? 's' : ''}`;
+}
+
+function helperSPSPercent(helper) {
+  return `${format1Dec(((helper.sps * helper.quantity) / sus_per_second) * 100)}%`;
 }
 
 
@@ -162,6 +167,9 @@ function setInfoCard(element, helper=undefined) {
     infoCard.style.top = vPositionCard(event, element, infoCard);
 
 		// console.log("hovering on " + helper.name)
+    
+    // update helper's SPS percentage when hovering for accuracy
+    updateHelperSPSPercent(helper);
 
 		// update it immediately
 		updateTimeWorth(helper);
@@ -169,6 +177,9 @@ function setInfoCard(element, helper=undefined) {
     worthIntervalId = setInterval(() => {
       updateTimeWorth(helper);
     }, 1000);
+
+    // just to test this function
+    helperBuyCost(helper);
   });
 
   element.addEventListener('mouseout', () => {

@@ -120,7 +120,7 @@ function fetch_mrincredible_upgrades() {
       sound_path: "sound/helpers/MisterIncredible/",
       sfx_quantity: 16,
       sfx_number: 2,
-      color: neonColors['Fluorescent Yellow'],
+      color: neonColors['Hot Magenta'],
       c_filter: true,
     },
     {
@@ -137,7 +137,7 @@ function fetch_mrincredible_upgrades() {
       sound_path: "sound/helpers/MisterIncredible/",
       sfx_quantity: 16,
       sfx_number: 3,
-      color: neonColors['Hot Magenta'],
+      color: neonColors['Cyber Cyan'],
       c_filter: true,
     },
     {
@@ -154,7 +154,7 @@ function fetch_mrincredible_upgrades() {
       sound_path: "sound/helpers/MisterIncredible/",
       sfx_quantity: 16,
       sfx_number: 4,
-      color: neonColors['Cyber Cyan'],
+      color: neonColors['Electric Blue'],
       c_filter: true,
     }
   ];
@@ -221,7 +221,7 @@ function upgrade_helper_inc_img(upgrade) {
   };
 
   helper.icon = incrementImageNumber(helper.icon);
-  helper.sfx_number = 
-    helper.sfx_number + 1 > helper.sfx_quantity ? helper.sfx_quantity
+  helper.sfx_number = helper.sfx_number + 1 > helper.sfx_quantity 
+    ? helper.sfx_quantity
     : helper.sfx_number + 1;
 }

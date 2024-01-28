@@ -44,19 +44,16 @@ function helperLiTemplate(helper) {
 				</li>
 				<li>
 					<p>
-					${helper.quantity} ${formatPlural(helper.name)} producing
-					<span class="info-list-highlight">${formatNumber(helper.quantity * helper.sps)} sus </span>
-					per second
-					<span class="info-list-highlight">
-						(${format1Dec(((helper.sps * helper.quantity) / sus_per_second) * 100)}% 
-					</span>
-					of total sus/s)
+						${helper.quantity} ${formatPlural(helper.name)} producing
+						<span class="info-list-highlight">${formatNumber(helper.quantity * helper.sps)} sus </span>
+						per second (<span class="info-list-highlight" id="${removeWhiteSpace(helper.name)}Percent">${helperSPSPercent(helper)}</span>
+						of total sus/s)
 					</p>
 				</li>
 				<li>
 					<p id="helper-${removeWhiteSpace(helper.name)}-prod">
-					<span class="info-list-highlight">${formatNumber(helper.total_farmed)} sus </span>
-					${helper.verb} so far
+						<span class="info-list-highlight">${formatNumber(helper.total_farmed)} sus </span>
+						${helper.verb} so far
 					</p>
 				</li>
 				</ul>
