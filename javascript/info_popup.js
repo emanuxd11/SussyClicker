@@ -19,8 +19,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 const infoPopup = `
 	<div id="infoContent">
-		<h2>Alpha 1.0</h2>
-		<h4>Added Features:</h4>
+    <h1>WARNING</h1>
+    <p>
+      This version of Sussy Clicker is in very early stages of development! 
+      A lot of features may be unfinished or not implemented at all yet, so don't
+      come in with high expectations.
+    </p>
+    <p>
+      On top of being unfinished, this game is being developed with the sole objective of
+      dematerializing the player's brain cells.
+    </p>
+    <p>
+      Consider yourself warned and play at your own discretion.
+    </p>
+
+		<h2>Alpha 1.0</h1>
+    <h4>Added Features:</h4>
 		<ul>
 			<li>
 				<p>Improved UI</p>
@@ -51,3 +65,4 @@ function loadInfoPopup() {
 	const popup_el = document.getElementById('infoPopup');
 	popup_el.innerHTML = infoPopup;
 }
+

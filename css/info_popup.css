@@ -20,6 +20,8 @@
 #infoPopup {
 	display: none;
 	position: fixed;
+  width: 40vw;
+  height: 90vh;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -31,6 +33,10 @@
 	border: 1px solid #00ff00;
 	box-shadow: 0 0 10px #00ff00, 0 0 10px #00ff00, 0 0 10px #00ff00, 0 0 10px #00ff00;
 	/* animation: glowing 10s infinite; */
+}
+
+#infoPopup h1 {
+  margin: 5px 0 15px 0;
 }
 
 #infoPopup h2 {
