@@ -1,5 +1,5 @@
 // sometimes useful to reset the game while testing
-localStorage.clear()
+// localStorage.clear()
 
 /*
  * Set initial game parameters
@@ -19,7 +19,7 @@ let sus_per_click = getSusPerClick();
 let score = getScore();
 let sus_per_second; calcTotalSPS(); /* maybe calculating it is just better to ensure it's correct */   /* getSPS(); */
 let game_total_farmed = getGameTotalFarmed();
-let store_multiplier = 10; // not saving it on local storage for now (well, technically, neither does Cookie Clicker)
+let store_multiplier = 1; // not saving it on local storage for now (well, technically, neither does Cookie Clicker)
 
 checkHelperList();
 checkUpgradeList();
