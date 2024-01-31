@@ -470,7 +470,58 @@ h1 {
   box-shadow: 0 0 10px #00ff00;
 }
 
+#helperBuyModifier {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-template-rows: auto;
+  gap: 10px;
+  padding: 0px;
+  font-size: 18px;
+  color: rgb(158, 158, 158);
+}
+
+.helper-modifier-option {
+  text-align: center;
+  margin: auto 0 auto 0;
+}
+
+.helper-modifier-option#buySell {
+  grid-column: 1 / span 1;
+}
+
+.helper-modifier-option#buy, 
+.helper-modifier-option#sell {
+  font-size: 14px;
+}
+
+.helper-modifier-option#oneX {
+  grid-column: 2 / span 1;
+}
+
+.helper-modifier-option#tenX {
+  grid-column: 3 / span 1;
+}
+
+.helper-modifier-option#hundredX {
+  grid-column: 4 / span 1;
+}
+
+.helper-modifier-option#All {
+  grid-column: 5 / span 1;
+}
+
+#helperBuyModifier .modifier-opt-highlighted {
+  color: white;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+
 /* UPGRADES */
+
+#buyAllUpgrades {
+  text-align: left;
+  padding-left: 20px;
+}
 
 #upgrades {
   display: flex;
@@ -602,7 +653,7 @@ h1 {
 
   /* WebKit browsers (Chrome, Safari) */
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 40px;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -615,4 +666,8 @@ h1 {
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }
+}
+
+.drop-cap::first-letter {
+  font-size: 1.2em;
 }

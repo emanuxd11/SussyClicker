@@ -1,5 +1,5 @@
 // sometimes useful to reset the game while testing
-// localStorage.clear()
+localStorage.clear()
 
 /*
  * Set initial game parameters
@@ -19,7 +19,7 @@ let sus_per_click = getSusPerClick();
 let score = getScore();
 let sus_per_second; calcTotalSPS(); /* maybe calculating it is just better to ensure it's correct */   /* getSPS(); */
 let game_total_farmed = getGameTotalFarmed();
-let buy_modifier = 1; // not saving it on local storage for now (well, technically, neither does Cookie Clicker)
+let store_multiplier = 10; // not saving it on local storage for now (well, technically, neither does Cookie Clicker)
 
 checkHelperList();
 checkUpgradeList();
@@ -130,38 +130,34 @@ function updateSingleSPS(helper) {
   displaySPS();
 }
 
-function increaseHelperCost(helper) {
-  helper.cost *= 1.15
-}
-
 // this function calculates the cost of buying based on the multiplier (can be ignored if it's 1)
 function helperBuyCost(helper) {
-  // this doesn't calculate if it's just one because then the value would actually be wrong (represent the cost of the next)
-  // also shouldn't handle cases where the buy modifier isn't strictly 1, 10 or 100
-  if (buy_modifier == 1 || buy_modifier != 10 && buy_modifier != 100) {
+  if (store_multiplier == 1 || (store_multiplier != 10 && store_multiplier != 100)) {
     return helper.cost;
   }
 
-  // we start at helper.quantity and go up to the multiplier
-  let res = 0;
-  for (let i = helper.quantity; i <= helper.quantity + buy_modifier; i++) {
-    res += helper.base_cost * 1.15**i / 1.15;
-  }
-  console.log(`Cost of buying the next ${buy_modifier} ` + formatPlural(helper.name) + ": " + formatNumber(Math.ceil(res)) + " sus");
+  const base_cost = helper.base_cost;
+  const quantity = helper.quantity;
+  const multiplier = 1.15;
 
-  return res;
+  // Calculate the cost using a geometric series sum formula
+  const total_cost = base_cost * (Math.pow(multiplier, quantity + store_multiplier) - Math.pow(multiplier, quantity)) / (multiplier - 1);
+
+  return total_cost;
 }
 
-function buyHelper(helper) {
-  if (score < helper.cost) return;
 
-  score -= helper.cost;
-  helper.quantity++;
+function buyHelper(helper) {
+  const price = helperBuyCost(helper); // calculates based on the modifer set by the player
+  if (Number.parseFloat(score) < Number.parseFloat(price)) return;
+
+  score -= price;
+  helper.quantity += store_multiplier;
+  helper.cost = helper.base_cost * (1.15 ** helper.quantity)
 	// testing this out with calculating total to ensure it's 
 	// always the correct value (or at least every time a helper is bought)
   // updateSingleSPS(helper);
 	calcTotalSPS();
-  increaseHelperCost(helper);
 
   playBuySFX(helper);
 
@@ -206,8 +202,13 @@ function updateTotalFarmed() {
 function updateTimeWorth(buyable) {
   const time_worth_el = document.getElementById(`${removeWhiteSpace(buyable.name)}Time`);
 	if (time_worth_el) {
-		// console.log(`new time worth for ${buyable.name} = ` + getTimeWorth(sus_per_second, score, buyable.cost))
-  	time_worth_el.innerHTML = `${getTimeWorth(sus_per_second, score, buyable.cost)}`;
+    if (typeof buyable.quantity !== "undefined") { // shitty fucking way of determining that a buyable is a helper (I really should have used
+      // classes from the start lmao, but on the other hand if I add other buyables that can have 
+      // multiple quantities this becomes 200iq all of a sudden (jk im dum))
+      time_worth_el.innerHTML = `${getTimeWorth(sus_per_second, score, helperBuyCost(buyable))}`;
+    } else {
+      time_worth_el.innerHTML = `${getTimeWorth(sus_per_second, score, buyable.cost)}`;
+    }
 	}
 }
 

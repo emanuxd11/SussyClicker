@@ -73,7 +73,11 @@ function updateHelperView(helper) {
 
 	// (ok this code isn't pretty but it does the trick for now)
 	// check if it's the first buy (that unlocks a new helper)
-	if (helper.quantity == 1) {
+	// UPDATE: this code just became even uglier after adding store_multiplier,
+	// maybe in future update future helpers based on score instead of previous helper,
+	// which would allow potentially leaping forward and skippping some helpers
+	// (which realistically doesn't matter unless the player's cheating with the console)
+	if (helper.quantity == store_multiplier) {
 		let nextHelper;
 		const nextHelperIdx = helpers.findIndex(_helper => _helper.name === helper.name) + 1;
 		if (nextHelperIdx < helpers.length) {

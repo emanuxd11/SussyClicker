@@ -69,6 +69,7 @@ function wrapInSpace(str) {
 }
 
 function getTimeWorth(currentSPS, currentSUS, cost) {
+  // console.log("Getting time worth of " + cost + " sus")
   if (currentSPS == 0) {
     return "";
   }
@@ -149,7 +150,7 @@ function vPositionCard(event, element, infoCard) {
 
 function setInfoCard(element, helper=undefined) {
   const infoCard = element.parentElement.querySelector('.info-card');
-  const timeWorth = infoCard.querySelector("time-worth");
+  // const timeWorth = infoCard.querySelector("time-worth"); // feeling useless, might delete
   let worthIntervalId;
   let isHovered = false;
 

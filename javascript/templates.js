@@ -1,3 +1,9 @@
+function multiplierStringTemplate() {
+	if (store_multiplier == 10) return '10x';
+	if (store_multiplier == 100) return '100x';
+	return '';
+}
+
 function helperLiTemplate(helper) {
 	return `
 		<div style="display: flex">
@@ -5,8 +11,9 @@ function helperLiTemplate(helper) {
 				<img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
 				<span id="helper_name">${helper.name}</span>
 				<span class="helper-cost">
+					${multiplierStringTemplate()}
 					<img src="images/misc/favicon.ico" alt="amogus logo">
-					${formatNumber(Math.ceil(helper.cost))}
+					${formatNumber(Math.ceil(helperBuyCost(helper)))}
 				</span>
 				<span id="helper_quantity">${formatNumber(helper.quantity)}</span>
 			</button>
@@ -21,11 +28,11 @@ function helperLiTemplate(helper) {
 					<span class="info-helper-cost helper-cost">
 						<div>
 							<img src="images/misc/favicon.ico" alt="amogus logo">
-							${formatNumber(Math.ceil(helper.cost))}
+							${formatNumber(Math.ceil(helperBuyCost(helper)))}
 						</div>
 						
 						<span class="time-worth" id="${removeWhiteSpace(helper.name)}Time">
-							${getTimeWorth(sus_per_second, score, helper.cost)}
+							${getTimeWorth(sus_per_second, score, helperBuyCost(helper))}
 						</span>
 					</span>
 				</span>
