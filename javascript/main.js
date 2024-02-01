@@ -19,7 +19,11 @@ let sus_per_click = getSusPerClick();
 let score = getScore();
 let sus_per_second; calcTotalSPS(); /* maybe calculating it is just better to ensure it's correct */   /* getSPS(); */
 let game_total_farmed = getGameTotalFarmed();
+
+// store parameters (not saved between sessions)
 let store_multiplier = 1; // not saving it on local storage for now (well, technically, neither does Cookie Clicker)
+let store_buy = true;
+let store_sell_all = false;
 
 checkHelperList();
 checkUpgradeList();
@@ -116,6 +120,54 @@ sussy_button.addEventListener("click", function() {
   displayScore();
   playAudio('sound/general/clickboom.mp3');
 });
+
+// k, seems to work
+function updateStoreOptions(option) {
+  if (option.classList.contains("store-quantity-modifier")) {
+    document.querySelectorAll(".store-quantity-modifier").forEach(function(el) {
+      el.classList.remove("modifier-opt-selected");
+    });
+
+    switch(option.id) {
+      case "oneX": store_multiplier = 1;
+        break;
+      case "tenX": store_multiplier = 10;
+        break;
+      case "hundredX": store_multiplier = 100;
+        break;
+      case "storeSellAll": store_sell_all = true;
+    }
+  } else if (option.parentNode.id == "buySell") {
+    option.parentNode.querySelectorAll(".modifier-opt-selected").forEach(function(el) {
+      el.classList.remove("modifier-opt-selected");
+    });
+
+    switch(option.id) {
+      case "storeBuy": 
+        store_buy = true;
+        store_sell_all = false;
+        document.getElementById("storeSellAll").hidden = true;
+        break;
+      case "storeSell": 
+        store_buy = false;
+        document.getElementById("storeSellAll").removeAttribute("hidden");
+    } 
+  }
+
+  option.classList.add("modifier-opt-selected");
+  generateHelperList();
+}
+
+function setStoreOptEventListeners() {
+  const store_options = document.querySelectorAll(".helper-modifier-option");
+  
+  store_options.forEach(function(option) {
+    option.addEventListener('click', function() {
+      updateStoreOptions(option);
+    });
+  });
+}
+setStoreOptEventListeners();
 
 function calcTotalSPS() {
   sus_per_second = helpers

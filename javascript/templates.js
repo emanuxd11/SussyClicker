@@ -9,7 +9,7 @@ function helperLiTemplate(helper) {
 		<div style="display: flex">
 			<button id="${removeWhiteSpace(helper.name)}BuyButton" class="hover-element">
 				<img id="helper_icon" src="${helper.icon}" alt="${helper.name}">
-				<span id="helper_name">${helper.name}</span>
+				<span class="helper-name">${helper.name}</span>
 				<span class="helper-cost">
 					${multiplierStringTemplate()}
 					<img src="images/misc/favicon.ico" alt="amogus logo">
@@ -78,7 +78,7 @@ function helperLiMysteryTemplate() {
 		<div style="display: flex">
 			<button id="mysteryHelper" class="hover-element">
 				<img id="helper_icon" src="images/helpers/mystery.png" alt="mystery helper">
-				<span id="helper_name">Unknown</span>
+				<span class="helper-name">Unknown</span>
 				<span class="helper-cost">
 					<img src="images/misc/favicon.ico" alt="amogus logo">
 					???

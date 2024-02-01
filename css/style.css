@@ -12,7 +12,7 @@ body {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; /* this is supposed to be the standard but doesn't work under firefox */
 }
 
 /* can't drag images */
@@ -21,6 +21,7 @@ img {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+  user-select: none; /* this is supposed to be the standard but doesn't work under firefox */
 }
 
 html, body, button {
@@ -263,7 +264,7 @@ h1 {
   text-shadow: 1px 1px 2px #000000;
 }
 
-#helper_list > li #helper_name {
+#helper_list > li .helper-name {
   grid-row: 1;
   grid-column: 2;
   text-align: left;
@@ -273,10 +274,14 @@ h1 {
 
 .helper-cost {
   grid-row: 2;
-  grid-column: 2;
+  grid-column: span 2; /* This spans across two columns */
   font-size: 18px;
   text-align: left;
   padding-left: 7px;
+}
+
+button .helper-cost {
+  padding-top: 5px;
 }
 
 .helper-cost img {
@@ -489,8 +494,8 @@ h1 {
   grid-column: 1 / span 1;
 }
 
-.helper-modifier-option#buy, 
-.helper-modifier-option#sell {
+.helper-modifier-option#storeBuy, 
+.helper-modifier-option#storeSell {
   font-size: 14px;
 }
 
@@ -510,7 +515,13 @@ h1 {
   grid-column: 5 / span 1;
 }
 
-#helperBuyModifier .modifier-opt-highlighted {
+.helper-modifier-option:hover {
+  cursor: pointer;
+  color: white;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+#helperBuyModifier .modifier-opt-selected {
   color: white;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
 }

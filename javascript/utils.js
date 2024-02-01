@@ -191,3 +191,21 @@ function setInfoCard(element, helper=undefined) {
     clearInterval(worthIntervalId);
   });
 }
+
+function adjustHelperNameFontSize() {
+  console.log("here")
+  document.querySelectorAll(".helper-name").forEach(function(name_container) {
+    const name = name_container.innerHTML;
+    if (name.length >= 15) {
+      name_container.style.fontSize = "23px";
+    } else if (name.length >= 14) {
+      name_container.style.fontSize = "25px";
+    } else if (name.length > 12) {
+      name_container.style.fontSize = "27px";
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  adjustHelperNameFontSize()
+});

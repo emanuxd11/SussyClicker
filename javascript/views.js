@@ -45,7 +45,6 @@ function createMysteryHelperView(helper_list_div) {
 function createHelperView(helper, helper_list_div) {
 	const list_item = document.createElement("li");
 	list_item.innerHTML = helperLiTemplate(helper);
-	// TODO: make case where building isn't owned yet
 
 	list_item.classList.add('helper-wrapper');
 	list_item.id = `${removeWhiteSpace(helper.name)}Wrapper`;
@@ -57,6 +56,8 @@ function createHelperView(helper, helper_list_div) {
 
 	const button = document.getElementById(`${removeWhiteSpace(helper.name)}BuyButton`);
 	setInfoCard(button, helper);
+
+	adjustHelperNameFontSize();
 }
 
 function updateHelperView(helper) {
@@ -125,6 +126,8 @@ function updateHelperView(helper) {
 			createUpgradeView(upgrade, upgrade_list_div);
 		}
 	}
+
+	adjustHelperNameFontSize();
 }
 
 function generateUpgradeList() {
