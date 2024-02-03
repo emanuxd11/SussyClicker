@@ -499,15 +499,15 @@ button .helper-cost {
   font-size: 14px;
 }
 
-.helper-modifier-option#oneX {
+.helper-modifier-option#store1x {
   grid-column: 2 / span 1;
 }
 
-.helper-modifier-option#tenX {
+.helper-modifier-option#store10x {
   grid-column: 3 / span 1;
 }
 
-.helper-modifier-option#hundredX {
+.helper-modifier-option#store100x {
   grid-column: 4 / span 1;
 }
 

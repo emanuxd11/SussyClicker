@@ -121,40 +121,39 @@ sussy_button.addEventListener("click", function() {
   playAudio('sound/general/clickboom.mp3');
 });
 
-// k, seems to work
+// seems ok :|
 function updateStoreOptions(option) {
-  if (option.classList.contains("store-quantity-modifier")) {
-    document.querySelectorAll(".store-quantity-modifier").forEach(function(el) {
-      el.classList.remove("modifier-opt-selected");
-    });
-
-    switch(option.id) {
-      case "oneX": store_multiplier = 1;
-        break;
-      case "tenX": store_multiplier = 10;
-        break;
-      case "hundredX": store_multiplier = 100;
-        break;
-      case "storeSellAll": store_sell_all = true;
-    }
-  } else if (option.parentNode.id == "buySell") {
-    option.parentNode.querySelectorAll(".modifier-opt-selected").forEach(function(el) {
-      el.classList.remove("modifier-opt-selected");
-    });
-
-    switch(option.id) {
-      case "storeBuy": 
-        store_buy = true;
-        store_sell_all = false;
-        document.getElementById("storeSellAll").hidden = true;
-        break;
-      case "storeSell": 
-        store_buy = false;
-        document.getElementById("storeSellAll").removeAttribute("hidden");
-    } 
+  let mult_value = parseInt(option.innerHTML);
+  if (!Number.isNaN(mult_value)) {
+    store_multiplier = mult_value;
+    if (store_sell_all) store_sell_all = false;
+  } else if (option.id == "storeSellAll") {
+    store_sell_all = true;
+  } else if (option.id == "storeBuy") {
+    store_sell_all = false;
+    store_buy = true;
+    document.getElementById("storeSellAll").hidden = true;
+  } else if (option.id == "storeSell") {
+    store_buy = false;
+    document.getElementById("storeSellAll").removeAttribute("hidden");
   }
 
-  option.classList.add("modifier-opt-selected");
+  document.querySelectorAll(".modifier-opt-selected").forEach(function(el) {
+    el.classList.remove("modifier-opt-selected");
+  });
+
+  if (store_buy) {
+    document.getElementById("storeBuy").classList.add("modifier-opt-selected");
+  } else {
+    document.getElementById("storeSell").classList.add("modifier-opt-selected");
+  }
+
+  if (!store_buy && store_sell_all) {
+    document.getElementById("storeSellAll").classList.add("modifier-opt-selected");
+  } else {
+    document.getElementById(`store${store_multiplier}x`).classList.add("modifier-opt-selected");
+  }
+
   generateHelperList();
 }
 
@@ -206,9 +205,6 @@ function buyHelper(helper) {
   score -= price;
   helper.quantity += store_multiplier;
   helper.cost = helper.base_cost * (1.15 ** helper.quantity)
-	// testing this out with calculating total to ensure it's 
-	// always the correct value (or at least every time a helper is bought)
-  // updateSingleSPS(helper);
 	calcTotalSPS();
 
   playBuySFX(helper);
