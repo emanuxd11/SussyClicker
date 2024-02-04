@@ -193,7 +193,6 @@ function setInfoCard(element, helper=undefined) {
 }
 
 function adjustHelperNameFontSize() {
-  console.log("here")
   document.querySelectorAll(".helper-name").forEach(function(name_container) {
     const name = name_container.innerHTML;
     if (name.length >= 15) {
@@ -205,7 +204,3 @@ function adjustHelperNameFontSize() {
     }
   });
 }
-
-window.addEventListener('DOMContentLoaded', function() {
-  adjustHelperNameFontSize()
-});

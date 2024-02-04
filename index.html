@@ -12,7 +12,7 @@
 
     <script src="javascript/info_popup.js" defer></script>
     <script src="javascript/utils.js" defer></script>
-    <script src="javascript/cookies.js" defer></script>
+    <script src="javascript/storage.js" defer></script>
     <script src="javascript/templates.js" defer></script>
     <script src="javascript/views.js" defer></script>
     <script src="javascript/audio.js" defer></script>
@@ -31,6 +31,17 @@
         <label for="volume_slider" id="volume_label">Volume</label>
         <input type="range" id="volume_slider">
         <button id="mute_button">Mute</button>
+      </div>
+
+      <div id="gameSavesWrapper">
+        <div id="saveGame">
+          Save Game
+        </div>
+
+        <div id="loadSave">
+          Load Save
+          <input type="file" id="uploadSave">
+        </div>
       </div>
     </div>
     
@@ -58,7 +69,8 @@
           <div id="helperBuyModifier">
             <div id="buySell">
               <div class="helper-modifier-option drop-cap modifier-opt-selected" id="storeBuy">BUY</div>
-              <div class="helper-modifier-option drop-cap" id="storeSell">SELL</div>
+              <div class="helper-modifier-option drop-cap" id="storeSell" title="You have not unlocked selling helpers">SELL</div> 
+              <!-- jk I just haven't implemented lol -->
             </div>
             <div class="helper-modifier-option store-quantity-modifier modifier-opt-selected" id="store1x">1</div>
             <div class="helper-modifier-option store-quantity-modifier" id="store10x">10</div>

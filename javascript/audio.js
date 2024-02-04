@@ -6,11 +6,11 @@
  */
 
 function getVolumeLevel() {
-    return parseFloat(localStorage.getItem("volume_level")) || 0.5;
+  return parseFloat(localStorage.getItem("volume_level")) || 0.5;
 }
 
 function getVolumeMute() {
-    return localStorage.getItem("volume_mute") === "true";
+  return localStorage.getItem("volume_mute") === "true";
 }
 
 let volume_level = getVolumeLevel();

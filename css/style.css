@@ -499,6 +499,11 @@ button .helper-cost {
   font-size: 14px;
 }
 
+.helper-modifier-option#storeSell:hover {
+  cursor: not-allowed;
+  color: rgb(158, 158, 158);
+}
+
 .helper-modifier-option#store1x {
   grid-column: 2 / span 1;
 }
@@ -572,6 +577,13 @@ button .helper-cost {
   width: 100%;
   height: 100%;
   object-fit: fill;
+}
+
+
+/* Game saves */
+
+#gameSavesWrapper {
+  display: flex;
 }
 
 

@@ -121,7 +121,7 @@ sussy_button.addEventListener("click", function() {
   playAudio('sound/general/clickboom.mp3');
 });
 
-// seems ok :|
+// handles the logic and visuals of the store options, not the best code maybe but does the job
 function updateStoreOptions(option) {
   let mult_value = parseInt(option.innerHTML);
   if (!Number.isNaN(mult_value)) {
@@ -161,9 +161,11 @@ function setStoreOptEventListeners() {
   const store_options = document.querySelectorAll(".helper-modifier-option");
   
   store_options.forEach(function(option) {
-    option.addEventListener('click', function() {
-      updateStoreOptions(option);
-    });
+    if (option.id != "storeSell") {
+      option.addEventListener('click', function() {
+        updateStoreOptions(option);
+      });
+    } // locking sell for now, since it's not implemented and it doesn't make sense to implement at the moment
   });
 }
 setStoreOptEventListeners();
