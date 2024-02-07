@@ -13,11 +13,13 @@
 	z-index: 999;
 }
 
-#infoButton {
+#infoButton,
+#optionsButton {
 	cursor:pointer;
 }
 
-#infoPopup {
+#infoPopup, 
+#optionsCard {
 	display: none;
 	position: fixed;
   width: 40vw;
@@ -35,7 +37,13 @@
 	/* animation: glowing 10s infinite; */
 }
 
-#infoPopup h1 {
+#optionsCard {
+	max-height: 90vh;
+	height: auto;
+}
+
+#infoPopup h1,
+#optionsCard h1 {
   margin: 5px 0 15px 0;
 }
 
@@ -68,14 +76,18 @@
 	margin-bottom: 15px;
 }
 
-#closeInfoButton {
+#closeInfoButton,
+#closeOptButton {
 	display: block;
 	/* margin-top: 10px; */
 	cursor: pointer;
 }
 
-#closeInfoButton:hover {
-	display: block;
+#closeInfoButton:hover,
+#closeOptButton:hover,
+#gameSavesWrapper button:hover,
+#gameSavesWrapper label:hover {
+	/* display: block; */
 	cursor: pointer;
 
 	background-color: #00ff00;

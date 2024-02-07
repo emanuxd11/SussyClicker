@@ -66,3 +66,22 @@ function loadInfoPopup() {
 	popup_el.innerHTML = infoPopup;
 }
 
+
+/* for options menu */
+
+document.addEventListener('DOMContentLoaded', function () {
+	const optionsButton = document.getElementById('optionsButton');
+	const optionsPopup = document.getElementById('optionsCard');
+	const closeOptButton = document.getElementById('closeOptButton');
+	const body = document.body;
+
+	optionsButton.addEventListener('click', function () {
+    optionsPopup.style.display = 'block';
+		body.classList.add('popup-open');
+	});
+
+	closeOptButton.addEventListener('click', function () {
+		optionsPopup.style.display = 'none';
+		body.classList.remove('popup-open');
+	});
+});
