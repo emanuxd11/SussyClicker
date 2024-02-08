@@ -56,7 +56,7 @@ function checkHelperList() {
   // situations:
   // 1 - new buildings are added
   // 2 - building characteristics are changed
-  // 3 - base cps or cost are changed: requires recalculating total cps and next buy cost
+  // 3 - base cost is changed: requires recalculating next buy cost
 
   // part 1
   let new_len = default_helper_list.length;

@@ -20,7 +20,6 @@ updateVolumeUI();
 let volume_slider = document.getElementById('volume_slider');
 volume_slider.addEventListener("input", function(e) {
   volume_level = e.currentTarget.value / 100;
-
   updateVolumeUI();
 })
 
