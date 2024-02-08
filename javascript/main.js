@@ -54,9 +54,15 @@ setInterval(function() {
 // for updating the helper list when new helpers are added or something is modified
 function checkHelperList() {
   // situations:
+  // 0 - buildings are removed (list is smaller)
   // 1 - new buildings are added
   // 2 - building characteristics are changed
   // 3 - base cost is changed: requires recalculating next buy cost
+
+  // part 0
+  if (helpers.length > default_helper_list.length) {
+    helpers.splice(default_helper_list.length, helpers.length - default_helper_list.length);
+  }
 
   // part 1
   let new_len = default_helper_list.length;
@@ -72,28 +78,62 @@ function checkHelperList() {
   }
 
   // part 2
-  for (let i = 0; i < helpers.length; i++) {
+  for (let i = 0; i < helpers.length && i < default_helper_list.length; i++) {
     if (helpers[i].name !== default_helper_list[i].name) {
       helpers[i].name = default_helper_list[i].name;
     }
+
+    if (helpers[i].base_cost !== default_helper_list[i].base_cost) {
+      // handle base cost change, which means re-calculating the current cost for every new helper
+    }
+
+    if (helpers[i].base_sps !== default_helper_list[i].base_sps) {
+      calcTotalSPS(); // recalculates the current total sus per second
+    }
+
+    if (helpers[i].description !== default_helper_list[i].description) {
+      helpers[i].description = default_helper_list[i].description;
+    }
+
+    if (!Number.isInteger(helpers[i].quantity)) {
+      if (typeof Math.floor(+helpers[i].quantity) == "number" && Math.floor(+helpers[i].quantity) >= 0) {
+        helpers[i].quantity = Math.floor(+helpers[i].quantity);
+      } else {
+        helpers[i].quantity = 0;
+      }
+    } else if (helpers[i].quantity < 0) {
+      helpers[i].quantity = 0;
+    }
+
+    if (helpers[i].sfx_quantity !== default_helper_list[i].sfx_quantity) {
+      helpers[i].sfx_quantity = default_helper_list[i].sfx_quantity;
+    }
+
+    if (default_helper_list[i].sfx_number !== undefined && helpers[i].sfx_number !== default_helper_list[i].sfx_number) {
+      helpers[i].sfx_number = default_helper_list[i].sfx_number;
+    }
+
+    if (helpers[i].total_farmed == undefined) {
+      // this solution assumes that I've already implemented the calculation of total
+      // sus farmed for older version compatibility
+      helpers[i].total_farmed = (helpers[i].quantity * helpers[i].sps / sus_per_second) * game_total_farmed;
+    }
+
+    if (helpers[i].verb !== default_helper_list[i].verb) {
+      helpers[i].verb = default_helper_list[i].verb;
+    }
+
+
+
+    // handle these 2 later...
     if (helpers[i].icon !== default_helper_list[i].icon) {
 			if (helpers[i].name !== "Mr.Incredible") // get rid of this later when doing proper storage code and define function to calculate correct image 
       	helpers[i].icon = default_helper_list[i].icon;
     }
+
     if (helpers[i].sound_path !== default_helper_list[i].sound_path) {
       helpers[i].sound_path = default_helper_list[i].sound_path;
     }
-    if (helpers[i].sfx_quantity !== default_helper_list[i].sfx_quantity) {
-      helpers[i].sfx_quantity = default_helper_list[i].sfx_quantity;
-    }
-    if (helpers[i].description !== default_helper_list[i].description) {
-      helpers[i].description = default_helper_list[i].description;
-    }
-    if (helpers[i].total_farmed == undefined) {
-      helpers[i].total_farmed = default_helper_list[i].total_farmed;
-    }
-
-    // do part 3 later...
   }
 }
 
