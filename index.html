@@ -34,26 +34,28 @@
 
       <div id="optionsCard">
         <h1>OPTIONS</h1>
+        
+        <div id="optionsContent">
+          <h2>VOLUME</h2>
+          <div id="volume_container">
+            <label for="volume_slider" id="volume_label">Volume</label>
+            <input type="range" id="volume_slider">
+            <button id="mute_button">Mute</button>
+          </div>
 
-        <h2>VOLUME</h2>
-        <div id="volume_container">
-          <label for="volume_slider" id="volume_label">Volume</label>
-          <input type="range" id="volume_slider">
-          <button id="mute_button">Mute</button>
+          <h2>GAME SAVES</h2>
+          <div id="gameSavesWrapper">
+            <button id="saveGame">
+              Export Save
+            </button>
+
+            <button id="loadSave">
+              <label for="uploadSave">Import Save</label>
+              <input type="file" hidden id="uploadSave">
+            </button>
+          </div>
+
         </div>
-
-        <h2>GAME SAVES</h2>
-        <div id="gameSavesWrapper">
-          <button id="saveGame">
-            Export Save
-          </button>
-
-          <button id="loadSave">
-            <label for="uploadSave" class="btn">Import Save</label>
-            <input type="file" hidden id="uploadSave">
-          </button>
-        </div>
-
         <button id="closeOptButton">Close</button>
       </div>
     </div>

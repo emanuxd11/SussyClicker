@@ -18,7 +18,7 @@ let volume_mute = getVolumeMute();
 updateVolumeUI();
 
 let volume_slider = document.getElementById('volume_slider');
-volume_slider.addEventListener("change", function(e) {
+volume_slider.addEventListener("input", function(e) {
   volume_level = e.currentTarget.value / 100;
 
   updateVolumeUI();
@@ -57,10 +57,11 @@ function updateVolumeUI() {
 
   volume_slider.value = volume_level * 100;
   if (volume_mute == false) {
-    volume_label.textContent = "Volume: " + parseInt(volume_level * 100);
+    volume_label.textContent = "Volume: " + parseInt(volume_level * 100) + "%";
     mute_button.textContent = "Mute";
   } else {
     volume_label.textContent = "Volume: " + "Muted";
     mute_button.textContent = "Unmute";
   }
 }
+

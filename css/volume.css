@@ -10,6 +10,7 @@
 
 #volume_slider {
   -webkit-appearance: none;
+  appearance: none;
   width: 40%;
   height: 7px;
   background-color: #fff;
@@ -22,12 +23,13 @@
 #volume_slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background-color: #00ff00;
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border: none;
 }
 
 #volume_slider::-moz-range-thumb {
@@ -36,7 +38,7 @@
   background-color: #00ff00;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border: none;
 }
 
 #mute_button {
@@ -47,9 +49,11 @@
   margin-left: 10px;
   cursor: pointer;
   transition: background-color 0.2s;
+  border-radius: 5px;
 }
 
 #mute_button:hover {
   background-color: #00ff00;
   color: black;
+	box-shadow: 0 0 10px #00ff00;
 }
