@@ -1,5 +1,5 @@
 // sometimes useful to reset the game while testing
-// localStorage.clear()
+localStorage.clear()
 
 /*
  * Set initial game parameters
@@ -62,10 +62,12 @@ function checkHelperList() {
 
   // part -1
   if (!game_total_farmed || game_total_farmed < 0) {
+    const estimate = score ? score : 0;
     for (const helper of helpers) {
-      const total_cost = helper.base_cost * (Math.pow(1.15, helper.quantity) - Math.pow(1.15, 0)) / (1.15 - 1);
-      console.log("Player spent " + total_cost + " on buying " + helper.name)
+      estimate += helper.base_cost * (Math.pow(1.15, helper.quantity) - Math.pow(1.15, 0)) / (1.15 - 1);
     } 
+    game_total_farmed = estimate;
+    console.log("estimated game total farmed is " + estimate +" my brosky")
   }
 
   // part 0
