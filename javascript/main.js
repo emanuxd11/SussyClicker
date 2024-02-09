@@ -1,5 +1,5 @@
 // sometimes useful to reset the game while testing
-// localStorage.clear()
+localStorage.clear()
 
 /*
  * Set initial game parameters
@@ -61,7 +61,7 @@ function checkHelperList() {
   // 3 - base cost is changed: requires recalculating next buy cost
 
   // part -1
-  if (game_total_farmed == undefined || game_total_farmed == null || game_total_farmed < 0) {
+  if (!game_total_farmed || game_total_farmed < 0) {
     let estimate = score != undefined ? score : 0;
     for (const helper of helpers) {
       estimate += helper.base_cost * (Math.pow(1.15, helper.quantity) - Math.pow(1.15, 0)) / (1.15 - 1);
