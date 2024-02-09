@@ -1,5 +1,5 @@
 // sometimes useful to reset the game while testing
-// localStorage.clear()
+localStorage.clear()
 
 /*
  * Set initial game parameters
@@ -54,10 +54,19 @@ setInterval(function() {
 // for updating the helper list when new helpers are added or something is modified
 function checkHelperList() {
   // situations:
+  // -1 - calculate the total farmed from the total cost of onwned buildings
   // 0 - buildings are removed (list is smaller)
   // 1 - new buildings are added
   // 2 - building characteristics are changed
   // 3 - base cost is changed: requires recalculating next buy cost
+
+  // part -1
+  if (!game_total_farmed || game_total_farmed < 0) {
+    for (const helper of helpers) {
+      const total_cost = helper.base_cost * (Math.pow(1.15, helper.quantity) - Math.pow(1.15, 0)) / (1.15 - 1);
+      console.log("Player spent " + total_cost + " on buying " + helper.name)
+    } 
+  }
 
   // part 0
   if (helpers.length > default_helper_list.length) {
