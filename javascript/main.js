@@ -137,7 +137,6 @@ function checkHelperList() {
       helpers[i].verb = default_helper_list[i].verb;
     }
 
-
     if (default_helper_list[i].icon_number !== undefined && helpers[i].icon_number !== default_helper_list[i].icon_number) {
       helpers[i].icon_number = default_helper_list[i].icon_number;
     }
@@ -146,17 +145,19 @@ function checkHelperList() {
       helpers[i].has_dynamic_content = default_helper_list[i].has_dynamic_content;
     }
 
-    // handle these 2 later...
     if (helpers[i].icon !== default_helper_list[i].icon) {
 			if (helpers[i].has_dynamic_content) {
+        helpers[i].icon = default_helper_list[i].icon; // the icon path might be different if it was changed, so we need to make sure the base is the same
         helpers[i].icon_number = calculateHelperOwnedUpgrades(helpers[i]) + 1; // plus one since they technically begin at one (not technically, they really just do begin at 一)
         helpers[i].icon = determineImageNumber(helpers[i].icon, helpers[i].icon_number);
-        // console.log(`owned upgrades for helper ${helpers[i].name}: ${calculateHelperOwnedUpgrades(helpers[i])}`) 
+        console.log(`owned upgrades for helper ${helpers[i].name}: ${calculateHelperOwnedUpgrades(helpers[i])}`) 
+        console.log(`as such, the determined image path for ${helpers[i].name} is ${helpers[i].icon}`)
       } else {
       	helpers[i].icon = default_helper_list[i].icon;
       }
     }
 
+    // do similar as above
     if (helpers[i].sound_path !== default_helper_list[i].sound_path) {
       helpers[i].sound_path = default_helper_list[i].sound_path;
     }
@@ -165,8 +166,7 @@ function checkHelperList() {
 
 // do same thing but for upgrades
 function checkUpgradeList() {
-  /* get the function references (they're not stored because of json. I guess 
-  I *should* probably use classes, but I just don't really want to for some reason) */
+  /* get the function references (they're not stored because of json) */
   for (let i = 0; i < upgrades.length; i++) {
     for (let j = 0; j < upgrades[i].length; j++) {
       upgrades[i][j].action = default_upgrade_list[i][j].action;
