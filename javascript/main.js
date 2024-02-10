@@ -98,7 +98,9 @@ function checkHelperList() {
     }
 
     if (helpers[i].base_cost !== default_helper_list[i].base_cost) {
-      // handle base cost change, which means re-calculating the current cost for every new helper
+      helpers[i].base_cost = default_helper_list[i].base_cost;
+      helpers[i].cost = helpers[i].base_cost * Math.pow(1.15, helpers[i].quantity);
+      console.log(`updated price of ${helpers[i].name}: ${helpers[i].cost}`)
     }
 
     if (helpers[i].base_sps !== default_helper_list[i].base_sps) {
