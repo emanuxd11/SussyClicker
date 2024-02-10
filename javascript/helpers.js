@@ -50,12 +50,15 @@ function fetch_helper_list() {
       sps: 47,
       description: "A once great man, some would even say incredible, who unfortunately sussied his way into the pits of absolute uncannyness",
       icon: "images/helpers/MisterIncredible/1.jpg",
+      icon_number: 1, /* not all helpers have this!!!1!!1!111! */
+      icon_quantity: 15,
       quantity: 0,
       sound_path: "sound/helpers/MisterIncredible/",
-      sfx_quantity: 16,
       sfx_number: 1, /* not all helpers have this! */
+      sfx_quantity: 16,
       total_farmed: 0,
       verb: "uncannied",
+      has_dynamic_content: true,
     },
     {
       name: "Suspicious Son",

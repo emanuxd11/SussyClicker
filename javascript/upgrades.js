@@ -185,6 +185,16 @@ const neonColors = {
   'Luminous Lime': '#ccff00'
 };
 
+/* some upgrade utility functions */
+
+// takes in a helper and returns the amount of owned
+// upgrades for said helper
+function calculateHelperOwnedUpgrades(helper) {
+  return upgrades
+    .find(upgradeSet => upgradeSet[0].helper_name === helper.name)
+    ?.reduce((acc, upgrade) => upgrade.owned ? acc + 1 : acc, 0) || 0;
+}
+
 /* definition of upgrade functions */
 function upgrade_default(upgrade) {
   const helper = helpers.find(helper => helper.name === upgrade.helper_name);
@@ -202,25 +212,24 @@ function upgrade_sussy_baka_type2() {
   // todo
 }
 
+function determineImageNumber(imagePath, newNumber) {
+  const regex = /(\d+)(?=\.\w+$)/;
+  const match = imagePath.match(regex);
+
+  if (match) {
+    return imagePath.replace(regex, newNumber.toString());
+  }
+
+  return imagePath;
+};
+
 function upgrade_helper_inc_img(upgrade) {
   // repeating this code here since I have to then find the helper anyways
   const helper = helpers.find(helper => helper.name === upgrade.helper_name);
   helper.sps *= 2;
 
-  const incrementImageNumber = (imagePath) => {
-    const regex = /(\d+)(?=\.\w+$)/;
-    const match = imagePath.match(regex);
-  
-    if (match) {
-      const currentNumber = parseInt(match[0], 10);
-      const newNumber = currentNumber + 1;
-      return imagePath.replace(regex, newNumber.toString());
-    }
-  
-    return imagePath;
-  };
-
-  helper.icon = incrementImageNumber(helper.icon);
+  helper.icon_number += 1;
+  helper.icon = determineImageNumber(helper.icon, helper.icon_number);
   helper.sfx_number = helper.sfx_number + 1 > helper.sfx_quantity 
     ? helper.sfx_quantity
     : helper.sfx_number + 1;

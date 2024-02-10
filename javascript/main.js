@@ -52,6 +52,7 @@ setInterval(function() {
 }, 1000);
 
 // for updating the helper list when new helpers are added or something is modified
+// THIS **ISN'T** AS BAD AS IT LOOKS, I PROMISE, OK?
 function checkHelperList() {
   // situations:
   // -1 - calculate the total farmed from the total cost of onwned buildings
@@ -61,13 +62,15 @@ function checkHelperList() {
   // 3 - base cost is changed: requires recalculating next buy cost
 
   // part -1
+  // this isn't really precise or pretty but it does do the trick so... can't really get any better than this
+  // unless you have that crystal ball that hiruzen had in the beginning of naruto that was never shown again
+  // in the series for some reason #borutoisntcanon
   if (!game_total_farmed || game_total_farmed < 0) {
     let estimate = score != undefined ? score : 0;
     for (const helper of helpers) {
       estimate += helper.base_cost * (Math.pow(1.15, helper.quantity) - Math.pow(1.15, 0)) / (1.15 - 1);
     } 
     game_total_farmed = estimate;
-    console.log("estimated game total farmed is " + estimate +" my brosky")
   }
 
   // part 0
@@ -135,11 +138,23 @@ function checkHelperList() {
     }
 
 
+    if (default_helper_list[i].icon_number !== undefined && helpers[i].icon_number !== default_helper_list[i].icon_number) {
+      helpers[i].icon_number = default_helper_list[i].icon_number;
+    }
+
+    if (default_helper_list[i].has_dynamic_content !== undefined && helpers[i].has_dynamic_content !== default_helper_list[i].has_dynamic_content) {
+      helpers[i].has_dynamic_content = default_helper_list[i].has_dynamic_content;
+    }
 
     // handle these 2 later...
     if (helpers[i].icon !== default_helper_list[i].icon) {
-			if (helpers[i].name !== "Mr.Incredible") // get rid of this later when doing proper storage code and define function to calculate correct image 
+			if (helpers[i].has_dynamic_content) {
+        helpers[i].icon_number = calculateHelperOwnedUpgrades(helpers[i]) + 1; // plus one since they technically begin at one (not technically, they really just do begin at 一)
+        helpers[i].icon = determineImageNumber(helpers[i].icon, helpers[i].icon_number);
+        // console.log(`owned upgrades for helper ${helpers[i].name}: ${calculateHelperOwnedUpgrades(helpers[i])}`) 
+      } else {
       	helpers[i].icon = default_helper_list[i].icon;
+      }
     }
 
     if (helpers[i].sound_path !== default_helper_list[i].sound_path) {
