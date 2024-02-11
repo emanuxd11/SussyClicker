@@ -87,17 +87,16 @@
 #closeOptButton:hover,
 #gameSavesWrapper button:hover,
 #gameSavesWrapper label:hover {
-	/* display: block; */
-	cursor: pointer;
+  cursor: pointer;
 
-	background-color: #00ff00;
-	color: #000;
-	position: relative;
+  background-color: #00ff00;
+  color: #000;
+  position: relative;
 
-	border: 2px solid #00ff00;
-	border-radius: 5px;
-	box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
-	animation: glowing 10s infinite;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+  animation: glowing 10s infinite;
 }
 
 #optionsContent {

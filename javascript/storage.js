@@ -48,7 +48,7 @@ function updateLocalStorage() {
 setInterval(updateLocalStorage, 2 * 60 * 1000);
 
 window.addEventListener("beforeunload", function() {
-	updateLocalStorage();
+  updateLocalStorage();
 });
 
 
@@ -56,6 +56,8 @@ window.addEventListener("beforeunload", function() {
 
 const save_game_button = document.getElementById("saveGame");
 const upload_save_button = document.getElementById('uploadSave');
+const delete_save_button = document.getElementById('deleteSave');
+
 
 save_game_button.addEventListener("click", downloadLocalStorage);
 
@@ -63,12 +65,17 @@ upload_save_button.addEventListener('change', function() {
   loadJsonFromFile(this);
 });
 
+delete_save_button.addEventListener('click', function() {
+  location.reload();
+  localStorage.clear();
+});
+
 // yes, saves are """encrypted""". I don't care if this isn't actually secure 
 // ofc the player can look at the source code and see the key easily
 // but if they were to do that, they might as well use the console,
 // so at that point it doesn't matter
 function downloadLocalStorage() {
-	updateLocalStorage(); // first of all, make sure it's up to date
+	updateLocalStorage(); // make sure it's up to date before downloading 
 
   const localStorageData = { ...localStorage };
   const jsonData = JSON.stringify(localStorageData, null, 2);
@@ -145,7 +152,7 @@ function isValidSave(jsonData) {
 			return;
 		}
 	});
-	return valid;
+  return valid;
 }
 
 // save files are "encrypted" ( ͠° ͟ʖ ͡°)

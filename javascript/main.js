@@ -125,10 +125,6 @@ function checkHelperList() {
       helpers[i].sfx_quantity = default_helper_list[i].sfx_quantity;
     }
 
-    if (default_helper_list[i].sfx_number !== undefined && helpers[i].sfx_number !== default_helper_list[i].sfx_number) {
-      helpers[i].sfx_number = default_helper_list[i].sfx_number;
-    }
-
     if (helpers[i].total_farmed == undefined) {
       // this solution assumes that I've already implemented the calculation of total
       // sus farmed for older version compatibility
@@ -148,9 +144,9 @@ function checkHelperList() {
     }
 
     if (helpers[i].icon !== default_helper_list[i].icon) {
-			if (helpers[i].has_dynamic_content) {
+      if (helpers[i].has_dynamic_content) {
         helpers[i].icon = default_helper_list[i].icon; // the icon path might be different if it was changed, so we need to make sure the base is the same
-        helpers[i].icon_number = calculateHelperOwnedUpgrades(helpers[i]) + 1; // plus one since they technically begin at one (not technically, they really just do begin at 一)
+        helpers[i].icon_number = calculateHelperOwnedUpgrades(helpers[i]) + 1; // plus one since they technically begin at 1 (not technically, they really just begin at 1)
         helpers[i].icon = determineImageNumber(helpers[i].icon, helpers[i].icon_number);
         console.log(`owned upgrades for helper ${helpers[i].name}: ${calculateHelperOwnedUpgrades(helpers[i])}`) 
         console.log(`as such, the determined image path for ${helpers[i].name} is ${helpers[i].icon}`)
@@ -159,7 +155,14 @@ function checkHelperList() {
       }
     }
 
-    // do similar as above
+    if (default_helper_list[i].sfx_number !== undefined && helpers[i].sfx_number !== default_helper_list[i].sfx_number) {
+      if (helpers[i].has_dynamic_content) {
+        helpers[i].sfx_number = calculateHelperOwnedUpgrades(helpers[i]) + 1;
+      } else {
+        helpers[i].sfx_number = default_helper_list[i].sfx_number;
+      }
+    }
+
     if (helpers[i].sound_path !== default_helper_list[i].sound_path) {
       helpers[i].sound_path = default_helper_list[i].sound_path;
     }
@@ -275,7 +278,7 @@ function buyHelper(helper) {
   score -= price;
   helper.quantity += store_multiplier;
   helper.cost = helper.base_cost * (1.15 ** helper.quantity)
-	calcTotalSPS();
+  calcTotalSPS();
 
   playBuySFX(helper);
 

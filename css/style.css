@@ -582,6 +582,18 @@ button .helper-cost {
   display: block;
 }
 
+#gameSavesWrapper #deleteSave {
+  color: white;
+  background-color: red;
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+#gameSavesWrapper #deleteSave:hover {
+  box-shadow: 0 0 7px red, 0 0 7px red, 0 0 7px red, 0 0 7px red;
+  animation: none;
+}
+
 
 /* other misc stuff */
 
