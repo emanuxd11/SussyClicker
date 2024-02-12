@@ -75,6 +75,10 @@ html, body, button {
   animation: glowing 1.5s infinite;
 }
 
+.topnav i {
+  display: block;
+}
+
 .topnav a {
   float: left;
   color: #fff;

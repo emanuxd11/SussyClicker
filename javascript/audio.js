@@ -44,9 +44,13 @@ function playBuySFX(item) {
   if (item.sfx_number && item.sfx_number <= item.sfx_quantity) {
     playAudio(item.sound_path + item.sfx_number + '.mp3')
   } else {
-  let file_number = Math.floor(Math.random() * item.sfx_quantity) + 1;
+    let file_number = Math.floor(Math.random() * item.sfx_quantity) + 1;
     playAudio(item.sound_path + file_number + '.mp3')
-  }   
+  }
+}
+
+function playBrokeSFX() {
+  playAudio("sound/general/broke.mp3");
 }
 
 function updateVolumeUI() {

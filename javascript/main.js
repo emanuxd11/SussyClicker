@@ -157,7 +157,10 @@ function helperBuyCost(helper) {
 
 function buyHelper(helper) {
   const price = helperBuyCost(helper); // calculates based on the modifer set by the player
-  if (Number.parseFloat(score) < Number.parseFloat(price)) return;
+  if (Number.parseFloat(score) < Number.parseFloat(price)) {
+    playBrokeSFX();
+    return;
+  }
 
   score -= price;
   helper.quantity += store_multiplier;
@@ -171,7 +174,10 @@ function buyHelper(helper) {
 }
 
 function buyUpgrade(upgrade) {
-  if (score < upgrade.cost || upgrade.owned) return;
+  if (score < upgrade.cost || upgrade.owned) {
+    playBrokeSFX();
+    return;
+  }
 
   score -= upgrade.cost;
   upgrade.owned = true;
