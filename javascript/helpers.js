@@ -94,7 +94,7 @@ function fetch_helper_list() {
       cost: 20000000,
       base_sps: 7800,
       sps: 7800,
-      description: "A mathematical model of computation developed by Supicious Turing III with the goal of sussyfying the world",
+      description: "A mathematical model of computation developed by the most suspicious Alan Turing III with the goal of sussyfying the world",
       icon: "images/helpers/TuringMachine.jpg",
       quantity: 0,
       sound_path: "sound/helpers/TuringMachine/",

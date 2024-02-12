@@ -82,6 +82,7 @@ function updateHelperView(helper) {
 		let nextHelper;
 		const nextHelperIdx = helpers.findIndex(_helper => _helper.name === helper.name) + 1;
 		if (nextHelperIdx < helpers.length) {
+      console.log(`next helper idx = ${nextHelperIdx} and helpers.length = ${helpers.length}`)
 			nextHelper = helpers[nextHelperIdx];
 
 			// check it the next element already exists 
@@ -97,7 +98,9 @@ function updateHelperView(helper) {
 				// add new helper LIs
 				const helper_list_div = document.getElementById("helper_list");
 				createHelperView(nextHelper, helper_list_div);
-				createMysteryHelperView(helper_list_div);
+        if (nextHelperIdx < helpers.length - 1) { // only add mistery helper if there's another one after duh
+          createMysteryHelperView(helper_list_div);
+        }
 			}
 		}
 	}
