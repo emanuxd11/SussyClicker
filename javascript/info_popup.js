@@ -9,12 +9,26 @@ document.addEventListener('DOMContentLoaded', function () {
 	infoButton.addEventListener('click', function () {
 		infoPopup.style.display = 'block';
 		body.classList.add('popup-open');
+    // Add the event listener to the document
+    document.addEventListener('keydown', closePopup);
 	});
 
 	closeInfoButton.addEventListener('click', function () {
 		infoPopup.style.display = 'none';
 		body.classList.remove('popup-open');
 	});
+
+  // Define the event listener function
+  function closePopup(e) {
+    if (e.key === "Escape") {
+      infoPopup.style.display = 'none';
+      body.classList.remove('popup-open');
+      console.log("closing info popup.");
+      
+      // Remove the event listener after it's used
+      document.removeEventListener('keydown', closePopup);
+    }
+  }
 });
 
 const infoPopup = `
@@ -78,10 +92,24 @@ document.addEventListener('DOMContentLoaded', function () {
 	optionsButton.addEventListener('click', function () {
     optionsPopup.style.display = 'block';
 		body.classList.add('popup-open');
+    // Add the event listener to the document
+    document.addEventListener('keydown', closePopup);
 	});
 
 	closeOptButton.addEventListener('click', function () {
 		optionsPopup.style.display = 'none';
 		body.classList.remove('popup-open');
 	});
+
+  // Define the event listener function
+  function closePopup (e) {
+    if (e.key === "Escape") {
+      optionsPopup.style.display = 'none';
+      body.classList.remove('popup-open');
+      console.log("closing settins popup.");
+      
+      // Remove the event listener after it's used
+      document.removeEventListener('keydown', closePopup);
+    }
+  }
 });

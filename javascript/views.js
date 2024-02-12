@@ -50,7 +50,7 @@ function createHelperView(helper, helper_list_div) {
 	list_item.id = `${removeWhiteSpace(helper.name)}Wrapper`;
 	helper_list_div.appendChild(list_item);
 
-	document.getElementById(`${removeWhiteSpace(helper.name)}BuyButton`).addEventListener('click', function() {
+  document.getElementById(`${removeWhiteSpace(helper.name)}BuyButton`).addEventListener('click', function() {
 		buyHelper(helper);
 	});
 
