@@ -151,8 +151,6 @@ function checkHelperList() {
         helpers[i].icon = default_helper_list[i].icon; // the icon path might be different if it was changed, so we need to make sure the base is the same
         helpers[i].icon_number = calculateHelperOwnedUpgrades(helpers[i]) + 1; // plus one since they technically begin at 1 (not technically, they really just begin at 1)
         helpers[i].icon = determineImageNumber(helpers[i].icon, helpers[i].icon_number);
-        console.log(`owned upgrades for helper ${helpers[i].name}: ${calculateHelperOwnedUpgrades(helpers[i])}`) 
-        console.log(`as such, the determined image path for ${helpers[i].name} is ${helpers[i].icon}`)
       } else {
       	helpers[i].icon = default_helper_list[i].icon;
       }

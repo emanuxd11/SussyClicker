@@ -3,7 +3,7 @@
  */
 
 function displayScore() {
-	document.getElementById("score").textContent = "Sussy Meter: " + formatNumber(Math.floor(score));
+	document.getElementById("score").textContent = "Sussy Meter: " + formatNumber(Math.floor(display_score));
 }
 
 function displaySPS() {

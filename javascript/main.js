@@ -17,6 +17,7 @@ const upgrades = getUpgrades();
 // game params
 let sus_per_click = getSusPerClick();
 let score = getScore();
+let display_score = score; // this score is for the fast rolling numbers display
 let sus_per_second; calcTotalSPS(); /* maybe calculating it is just better to ensure it's correct */   /* getSPS(); */
 let game_total_farmed = getGameTotalFarmed();
 
@@ -35,9 +36,18 @@ displaySPS();
 generateHelperList();
 generateUpgradeList();
 
-// update score based on sus per second
+// handles the backend of updating the score
+// also resets the display_score to be like the actual score
 setInterval(function() {
-  score += sus_per_second/100;
+  score += sus_per_second;
+  display_score = score;
+}, 1000);
+
+// updates the score display with a faster interval so it looks flashier
+// this interval is so short that it doesn't even run if the tab is minimized
+// so it works out I guess
+setInterval(function() {
+  display_score = display_score + sus_per_second / 100;
   displayScore();
 }, 10);
 
