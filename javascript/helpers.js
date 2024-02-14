@@ -13,6 +13,7 @@ function fetch_helper_list() {
       sfx_quantity: 3,
       total_farmed: 0,
       verb: "impostered",
+      synergy: 0, /* only Sussy Baka for now has this shit (the soossyest in town), it becomes a value (0.1, 5, 10, etc) when certain upgrades are bought */
     },
     {
       name: "PewDiePie",

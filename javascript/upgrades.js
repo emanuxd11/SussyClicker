@@ -47,7 +47,24 @@ function fetch_sussy_baka_upgrades() {
       sfx_quantity: 3,
       color: neonColors['Glowing Red'],
       c_filter: true,
-    }
+    },
+    {
+      helper_name: "Sussy Baka",
+      name: "synergy 1 test",
+      base_cost: 1e5,
+      cost: 1e5,
+      requirement: 25,
+      action: upgrade_helper_synergy,
+      synergy_boost: 0.1,
+      summary: `test for synergy upgrades for sussy ばか`,
+      description: "some bs this is testing synergy upgrades for the sussyest of ばかs",
+      icon: "images/helpers/SussyBaka.png",
+      owned: false,
+      sound_path: "sound/helpers/SussyBaka/",
+      sfx_quantity: 3,
+      color: neonColors['Glowing Red'],
+      c_filter: true,
+    },
   ];
 }
 
@@ -208,8 +225,10 @@ function upgrade_helper_spc(upgrade) {
   sus_per_click *= 2;
 }
 
-function upgrade_sussy_baka_type2() {
-  // todo
+function upgrade_helper_synergy(upgrade) {
+  const sussy_baka = helpers[0]; 
+  sussy_baka.synergy = upgrade.synergy_boost;
+
 }
 
 function determineImageNumber(imagePath, newNumber) {

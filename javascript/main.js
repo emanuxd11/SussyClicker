@@ -126,6 +126,11 @@ function setStoreOptEventListeners() {
 setStoreOptEventListeners();
 
 function calcTotalSPS() {
+  const sussy_baka = helpers[0];
+  sussy_baka.sps += sussy_baka.synergy * helpers
+  .filter(obj => obj.name !== "Sussy Baka") // Filter out objects with name !== "Sussy Baka"
+  .reduce((acc, obj) => acc + obj.quantity, 0); // Sum the quantities
+
   sus_per_second = helpers
     .filter((helper) => helper.quantity >= 0)
     .reduce((totalSPS, helper) => totalSPS + helper.sps * helper.quantity, 0);
