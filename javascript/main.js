@@ -71,8 +71,10 @@ setInterval(function() {
 const sussy_button = document.getElementById("sussy_button");
 sussy_button.addEventListener("click", function() {
   score += sus_per_click;
+  display_score = score;
   game_total_farmed += sus_per_click;
   displayScore();
+  console.log("displaying score")
   playAudio('sound/general/clickboom.mp3');
 });
 
